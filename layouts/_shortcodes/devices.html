@@ -1,0 +1,10 @@
+{{- /* Renders data/devices.toml: a section per device with its codename and facts. Usage: {{< devices >}} */ -}}
+{{- range hugo.Data.devices.devices }}
+<h2 id="{{ .name | urlize }}">{{ .name }}</h2>
+<ul>
+<li><strong>Codename:</strong> <code>{{ .codename }}</code>, for <a href="{{ "/build/#by-hand" | relURL }}">building DiamaneOS</a>.</li>
+{{- range .facts }}
+<li><strong>{{ .label }}:</strong> {{ $.Page.RenderString .text }}</li>
+{{- end }}
+</ul>
+{{- end }}

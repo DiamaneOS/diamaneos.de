@@ -1,0 +1,246 @@
+# Features page data (content/features.md renders it, with a table of contents, through
+# the "features" shortcode).
+#
+# Only what is in DiamaneOS's main branches today and has passed testing on a supported
+# device: an item is added after its phone check, never before. Keep each text to one or
+# two short, plain sentences.
+#
+# status:
+#   "tested"      passed testing on a supported device (our records show a phone check). No tag.
+#   "shipped"     only when the item is in a public release AND has passed testing. No tag.
+#                 A shipped item must also set tested = true and release = "<version>",
+#                 or the build stops (layouts/_partials/feature-status.html).
+# A group with nostatus = true shows no status tags.
+#
+# GrapheneOS's own features are not listed one by one: DiamaneOS has them all except
+# for the known limitations (content/limitations.md, and content/features.md links both).
+
+[[groups]]
+  id = "additions"
+  title = "DiamaneOS additions"
+  [[groups.items]]
+    title = "Moments switch"
+    text = "On phones with a side switch, the switch runs one action you pick: Moments (only chosen apps on Home, Do Not Disturb on), Camera and microphone off, Silent, Airplane mode or Lockdown."
+    status = "tested"
+  [[groups.items]]
+    title = "Camera and microphone off"
+    text = "With this switch action, the kernel blocks the built-in cameras and microphones while the switch is down. No Android setting or app can lift the block. It starts with the first restart after you choose the action. Until then Android's own block applies, also on a locked phone. It is not a hardware kill switch."
+    status = "tested"
+  [[groups.items]]
+    title = "Home search"
+    text = "Finds apps, shortcuts, settings and quick answers on the phone, and sends nothing. It keeps no history. Optional suggestions, off by default, count what you open most from Home. Turning them off deletes the counts."
+    status = "tested"
+  [[groups.items]]
+    title = "Hotspot devices"
+    text = "The Wi-Fi hotspot page lists the connected devices with the name each one gives, its IP and its MAC address. An optional notification tells you when a device joins, with sound for a new one and silently when a known one returns."
+    status = "tested"
+  [[groups.items]]
+    title = "Keyboard privacy"
+    text = "Your dictionary and learned words stay in storage your passphrase unlocks, and old copies are deleted. It never learns from incognito or password fields and has no network access."
+    status = "tested"
+  [[groups.items]]
+    title = "eSIM manager"
+    text = "Download eSIMs with a carrier's QR or activation code, and turn on, turn off, rename or delete them. Off until you turn on eSIM support. It connects only to the eSIM server you confirm. It has no camera access: the camera app reads QR codes."
+    status = "tested"
+  [[groups.items]]
+    title = "Encrypted microSD storage"
+    text = "A microSD card can be formatted for internal storage. It is then encrypted, checked before every use, and nothing on it can run. Apps stay on the phone's own storage. Forgetting the card destroys its key. See the [FAQ](/faq/#microsd)."
+    status = "tested"
+  [[groups.items]]
+    title = "Call volume in 15 steps"
+    text = "Call volume has 15 steps, like media volume, instead of 5."
+    status = "tested"
+  [[groups.items]]
+    title = "Firmware release in Settings"
+    text = "About phone shows which device firmware release the phone runs."
+    status = "tested"
+  [[groups.items]]
+    title = "Tap to wake"
+    text = "On phones whose touch screen supports it, a single tap can wake the screen as well as a double tap. Taps are ignored while the proximity sensor is covered, such as in a pocket."
+    status = "tested"
+  [[groups.items]]
+    title = "Brightness measured on the panel"
+    text = "The brightness slider follows measurements of the phone's own panel: even steps from 2 nits, with colours and gamma that stay correct up to the top. The brightest band is kept for sunlight with adaptive brightness on."
+    status = "tested"
+  [[groups.items]]
+    title = "Clock app"
+    text = "Other apps cannot silence a ringing alarm, an expired timer cannot unlock the lock screen, and Clock data stays out of device-to-device transfers."
+    status = "tested"
+
+[[groups]]
+  id = "privacy"
+  title = "Privacy"
+  [[groups.items]]
+    title = "Private content stays hidden over the lock screen"
+    text = "During a call or a ringing alarm on a locked phone, status bar chips and notification icons no longer show other apps' private content, such as a contact's photo."
+    status = "tested"
+  [[groups.items]]
+    title = "Sensors permission covers vendor sensors"
+    text = "Sensors added by the device maker need the Sensors permission too. Before, an app could read the phone's colour sensor with the permission off."
+    status = "tested"
+  [[groups.items]]
+    title = "Clearer privacy indicators"
+    text = "Location gets its own indicator, the camera lens lights up while the front camera is in use, and the lock screen says which sensor is in use."
+    status = "tested"
+  [[groups.items]]
+    title = "Less location data in logs"
+    text = "The radio log no longer shows your serving cell, and the GPS engine logs only warnings."
+    status = "tested"
+  [[groups.items]]
+    title = "Hardware identifiers hidden"
+    text = "The chip's and storage's serial numbers are readable by root only. The camera's log, which records its modules' serial numbers, is silenced, and the closed Bluetooth code no longer logs the Bluetooth address. Bug reports no longer copy a hardware identifier from the boot settings."
+    status = "tested"
+  [[groups.items]]
+    title = "No wake-on-LAN"
+    text = "The Wi-Fi chip does not wake the phone for wake-on-LAN packets."
+    status = "tested"
+  [[groups.items]]
+    title = "Gallery without network access"
+    text = "The gallery app cannot reach the network: it opens only images and videos on the phone."
+    status = "tested"
+  [[groups.items]]
+    title = "No vendor connections"
+    text = "Network captures overnight, during normal use and during a GPS fix showed no connections from the phone's own software to the chip maker, the device maker or Google."
+    status = "tested"
+
+[[groups]]
+  id = "lock"
+  title = "Screen lock"
+  note = "If the phone's secure area were broken and the storage copied, only the lock would protect the data. See the [known limitations](/limitations/)."
+  [[groups.items]]
+    title = "Passphrase first"
+    text = "Setup recommends a generated passphrase: six words by default, from the EFF word list. A PIN stays possible after you explicitly accept a risk screen in plain language. A long generated PIN counts as strong."
+    status = "tested"
+  [[groups.items]]
+    title = "Help to learn the passphrase"
+    text = "For the first two weeks the phone asks for the new passphrase once a day, and the lock screen says that it is practice and how many days remain."
+    status = "tested"
+  [[groups.items]]
+    title = "Costly lock guesses"
+    text = "Each guess of a PIN or password costs 256 MiB of memory and about a second on the phone. Android, relying on a secure element, uses about half a megabyte. Fingerprint unlocks are not slowed. Applies once a lock is set or changed."
+    status = "tested"
+  [[groups.items]]
+    title = "No lock data on unencrypted storage"
+    text = "Android keeps a copy of the lock's check data on an unencrypted partition, for factory-reset protection. DiamaneOS does not use that protection and no longer writes the copy."
+    status = "tested"
+
+[[groups]]
+  id = "security"
+  title = "Security"
+  [[groups.items]]
+    title = "SELinux locked enforcing"
+    text = "SELinux enforcing turns on early in start-up, and the kernel then locks it: nothing can switch it back to permissive until the next restart."
+    status = "tested"
+  [[groups.items]]
+    title = "No kernel debug filesystem"
+    text = "The kernel's debug filesystem cannot be mounted."
+    status = "tested"
+  [[groups.items]]
+    title = "No flash or dump mode from the system"
+    text = "The running system cannot reboot into Qualcomm's emergency flash mode or dump mode, and panic dumps are off. The hardware keys still reach the flash mode."
+    status = "tested"
+  [[groups.items]]
+    title = "USB debugger off"
+    text = "Qualcomm's embedded USB debugger is turned off and its driver is not shipped."
+    status = "tested"
+  [[groups.items]]
+    title = "Sandboxed Bluetooth"
+    text = "Our own small service runs Qualcomm's closed Bluetooth code in a sandbox that stops the service on any system call outside an allowed list. Unused libraries are gone."
+    status = "tested"
+  [[groups.items]]
+    title = "Sandboxed camera service"
+    text = "The closed camera code runs in a sandbox: no child processes, only local sockets, no memory that is both writable and executable. A call outside its list stops the service."
+    status = "tested"
+  [[groups.items]]
+    title = "Hardware video decoding off for ordinary video"
+    text = "Ordinary video plays on Android's sandboxed software decoders. Where the phone has hardware-protected video, only protected (DRM) video may use the closed hardware decoders by default. Elsewhere none does unless Exploit protection allows all video, from the next restart. If the codec setup is not what start-up allowed, apps get none."
+    status = "tested"
+  [[groups.items]]
+    title = "Guarded modem messaging"
+    text = "Only the phone's own IMS service can use the modem's IMS data channel, lookups are capped per app, and the kernel has no tunnel into the modem's message bus."
+    status = "tested"
+  [[groups.items]]
+    title = "Protected in-call audio settings"
+    text = "Only the phone and Bluetooth system services can change TTY, hearing-aid, HD voice and Bluetooth call settings. Other apps with the audio settings permission cannot."
+    status = "tested"
+  [[groups.items]]
+    title = "TIPC kept local"
+    text = "Qualcomm's mobile data needs the TIPC protocol, which GrapheneOS removes. DiamaneOS builds it without its network and encryption parts, and only two system services may use it."
+    status = "tested"
+  [[groups.items]]
+    title = "Fewer services with root"
+    text = "The boot control service runs as its own user with one capability, and the thermal service as the system user with none, instead of as root."
+    status = "tested"
+  [[groups.items]]
+    title = "Less access to the secure area"
+    text = "Only the services that need the phone's secure area (TEE) can open it, and its device node accepts only the two requests they use. Unused access is removed, including the HDCP module."
+    status = "tested"
+  [[groups.items]]
+    title = "No head-tracker input"
+    text = "The parser for head trackers on paired Bluetooth and USB devices is not shipped, which removes attack surface from untrusted devices. Head trackers do not work."
+    status = "tested"
+
+[[groups]]
+  id = "replaced"
+  title = "Closed code replaced or removed"
+  note = "Closed parts of the stock software that DiamaneOS replaces with open code or drops. The modem firmware, the radio daemon and the IMS app stay closed."
+  [[groups.items]]
+    title = "Data for VoLTE and Wi-Fi calling"
+    text = "Our own Rust service sets up these connections with narrow permissions. It replaces Qualcomm's closed services."
+    status = "tested"
+  [[groups.items]]
+    title = "Call audio"
+    text = "A small open bridge passes call audio settings to the audio system. It cannot route or record audio, or go online."
+    status = "tested"
+  [[groups.items]]
+    title = "Clock keeping"
+    text = "Our own service keeps the time across reboots, in place of Qualcomm's."
+    status = "tested"
+  [[groups.items]]
+    title = "Audio system"
+    text = "Built from the device maker's source code. Music is decoded in Android's sandboxed decoders, not on the closed audio chip, and app effects such as the equalizer use Android's own code. A factory test that apps could reach is removed. A few parts stay closed."
+    status = "tested"
+  [[groups.items]]
+    title = "Power management"
+    text = "An open power service replaces Qualcomm's closed one, which ran with full access. The new one can only set CPU and GPU limits. Touch, app launch, rendering and camera get short performance boosts, and the camera's end early when no longer needed."
+    status = "tested"
+  [[groups.items]]
+    title = "Modem helpers"
+    text = "Open replacements for two closed modem helpers, one of which ran as root. They now run without special rights or network access, and the file server is hardened. Files the modem writes through it now live in normal storage, so a factory reset deletes them."
+    status = "tested"
+  [[groups.items]]
+    title = "IMEIs and hardware addresses"
+    text = "Our own small tool gives the modem its IMEIs and Bluetooth and Wi-Fi their factory addresses. It replaces a closed root service and logs no identifiers."
+    status = "tested"
+  [[groups.items]]
+    title = "Unused services and interfaces"
+    text = "Two closed services nothing needs are off: the display colour service is not installed, and the offline camera service cannot register. Closed GPU code that only the camera used is left out. Leftover permissions and service names for hardware the phone does not have or features DiamaneOS does not ship are gone."
+    status = "tested"
+  [[groups.items]]
+    title = "GPS and location"
+    text = "The GNSS service and Qualcomm's location libraries are built from open source instead of closed builds. Satellite data comes through DiamaneOS's server. They use no other Qualcomm cloud service, Wi-Fi injection or diagnostics."
+    status = "tested"
+
+[[groups]]
+  id = "network"
+  title = "Mobile network"
+  [[groups.items]]
+    title = "Safer Wi-Fi calling sign-up"
+    text = "A carrier's sign-up page can only talk to the phone from the carrier's own address. Retries and refreshes are limited, so failures no longer repeat forever."
+    status = "tested"
+  [[groups.items]]
+    title = "Fewer modem polls"
+    text = "Network state polls to the modem are batched while the phone is idle, to save battery."
+    status = "tested"
+
+[[groups]]
+  id = "performance"
+  title = "Performance and battery"
+  [[groups.items]]
+    title = "Faster app switching"
+    text = "Memory compression uses lz4: apps reopen faster (median 118 instead of 137 ms) at a slightly lower compression ratio."
+    status = "tested"
+  [[groups.items]]
+    title = "Lighter camera preview"
+    text = "The 16:9 camera preview is drawn by the display hardware instead of the GPU, and the screen stays at 60 Hz while the Camera app is open."
+    status = "tested"

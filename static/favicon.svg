@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" role="img" aria-labelledby="title">
+  <title id="title">DiamaneOS</title>
+  <style>#full{display:none}@media (prefers-color-scheme: dark){#one{display:none}#full{display:inline}}</style>
+  <g id="one">
+    <path id="mark" fill="#1d1b19" d="M5 2L8 3L11 1L14 2L14 5L11 4L9 5.333L9 9.333L14 11L14 14L8 12L5 14L2 13L2 10L5 11L7 9.667L7 5.667L5 5Z"/>
+  </g>
+  <g id="full">
+    <path id="bond" fill="#fba700" d="M7 4.167L8 4.5L9 3.833L9 10.833L8 10.5L7 11.167Z"/>
+    <path id="upper-sheet" fill="#ebe8e4" d="M5 2L8 3L11 1L14 2L14 5L11 4L8 6L5 5Z"/>
+    <path id="lower-sheet" fill="#ebe8e4" d="M2 10L5 11L8 9L14 11L14 14L8 12L5 14L2 13Z"/>
+  </g>
+</svg>

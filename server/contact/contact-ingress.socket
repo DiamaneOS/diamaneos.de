@@ -1,0 +1,14 @@
+[Unit]
+Description=Contact HTTP Unix socket
+
+[Socket]
+ListenStream=/run/diamaneos-contact/ingress.sock
+SocketUser=contact-ingress
+SocketGroup=www-data
+SocketMode=0660
+DirectoryMode=0755
+Backlog=8
+RemoveOnStop=yes
+
+[Install]
+WantedBy=sockets.target

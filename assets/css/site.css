@@ -1,0 +1,187 @@
+/* DiamaneOS website: one plain column in the DiamaneOS colours and type.
+ *
+ * Colours are the design's roles for the Sodium seed (#FBA700): Paper in light
+ * mode, Cockpit in dark. Colour only where something is on (a lit lamp). Links
+ * and focus use the accent.
+ */
+
+/* Latin subset of Sofia Sans as WOFF2 (docs/fonts.md). Other characters fall
+ * back to the system font. */
+@font-face {
+  font-family: "Sofia Sans";
+  src: url("/fonts/SofiaSans-latin-wght.woff2") format("woff2");
+  font-weight: 1 1000;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-017F, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --bg: #f6f3ef;
+  --ink: #1d1b19;
+  --muted: #5e5952;
+  --outline: #7c7670;
+  --line: #d1cbc4;
+  --accent: #8a5100;
+  --lamp: #fba700;
+  --code-bg: #ebe8e4;
+  --w-body: 400;
+  --font: "Sofia Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --measure: 40rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #100e0b;
+    --ink: #ebe8e4;
+    --muted: #c0bbb3;
+    --outline: #908b84;
+    --line: #46413b;
+    --accent: #ffb956;
+    --code-bg: #2c2a27;
+    --w-body: 380;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.08rem;
+  line-height: 1.6;
+  font-weight: var(--w-body);
+  letter-spacing: -0.0125em;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2 { margin: 0; font-weight: 560; line-height: 1.2; text-wrap: balance; }
+h1 { font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.5rem); letter-spacing: -0.02em; }
+h2 { font-size: 1.3rem; margin-top: 2.25rem; }
+p { margin: 0; }
+
+a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+main:focus { outline: none; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  letter-spacing: 0;
+  background: var(--code-bg);
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+}
+
+.wrap { max-width: calc(var(--measure) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); }
+
+.skip { position: absolute; left: 0.5rem; top: -3rem; padding: 0.5rem 0.75rem; background: var(--bg); color: var(--ink); }
+.skip:focus { top: 0.5rem; }
+
+.draft-banner { border-bottom: 1px solid var(--line); color: var(--muted); font-size: 0.8rem; padding: 0.35rem 0; }
+
+/* header */
+.site-header { border-bottom: 1px solid var(--line); }
+.header-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1.5rem; padding-top: 1rem; padding-bottom: 1rem; }
+.brand { display: inline-flex; align-items: center; min-height: 44px; }
+.lockup { display: block; height: 24px; width: auto; }
+.lockup .b-sheet, .lockup .b-name, .lockup .b-suffix, .lockup .b-bond { fill: var(--ink); }
+@media (prefers-color-scheme: dark) {
+  .lockup .b-suffix { fill: var(--muted); }
+  .lockup .b-bond { fill: var(--lamp); }
+}
+.nav ul { display: flex; flex-wrap: wrap; gap: 0 1.1rem; margin: 0; padding: 0; list-style: none; }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); text-decoration: none; }
+.nav a:hover, .nav a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.35em; }
+
+/* page */
+main { display: block; padding: 2.5rem 0 3rem; }
+.page-head { margin-bottom: 1.75rem; }
+.lede { margin-top: 0.6rem; color: var(--muted); font-size: 1.15rem; }
+.meta { margin-top: 2.5rem; color: var(--muted); font-size: 0.85rem; }
+
+.prose > * + * { margin-top: 1rem; }
+.prose ul { padding-left: 1.2rem; }
+.prose li + li { margin-top: 0.5rem; }
+.prose li::marker { color: var(--muted); }
+.prose h2 + * { margin-top: 0.75rem; }
+.prose .table-align-left { text-align: left; }
+.prose .table-align-center { text-align: center; white-space: nowrap; }
+.prose .table-align-right { text-align: right; }
+
+/* Technical diagrams retain the reading order without scripts or remote assets. */
+.service-diagram { margin: 1.75rem 0; }
+.service-diagram figcaption { font-weight: 560; }
+.service-flow { margin: 1rem 0; }
+.service-origin { font-weight: 560; }
+.prose .service-destinations { list-style: none; margin: 0.75rem 0 0 0.65rem; padding: 0 0 0 1.2rem; border-left: 1px solid var(--outline); }
+.service-destinations li { position: relative; }
+.service-destinations li::before { content: ""; position: absolute; width: 1.2rem; height: 1px; background: var(--outline); left: -1.2rem; top: 0.85em; }
+.service-destinations strong, .service-destinations span { display: block; }
+.service-destinations span, .diagram-note { color: var(--muted); }
+.diagram-note { font-size: 0.92rem; }
+
+/* Long commands and reference tables stay inside small screens. */
+.prose pre { max-width: 100%; overflow-x: auto; padding: 1rem; background: var(--code-bg); border-radius: 4px; }
+.prose pre code { padding: 0; background: transparent; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.table-scroll { max-width: 100%; overflow-x: auto; }
+.prose th, .prose td { padding: 0.5rem 0.4rem; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: normal; }
+.prose th { white-space: nowrap; }
+
+/* features */
+.feature-group h2 { margin-top: 2.5rem; }
+.group-note { margin-top: 0.4rem; color: var(--muted); }
+.prose .features { list-style: none; padding: 0; margin-top: 1rem; }
+.prose .features li + li { margin-top: 1rem; }
+.feature-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.6rem; }
+.tag { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
+.lamp { display: inline-block; width: 10px; height: 10px; border: 2px solid var(--outline); border-radius: 50%; }
+
+/* contact */
+.contact-form { display: grid; gap: 1.5rem; }
+.contact-field { display: grid; gap: 0.4rem; }
+.contact-field label { font-weight: 560; }
+.contact-field input, .contact-field textarea {
+  width: 100%; min-width: 0; min-height: 48px;
+  padding: 0.6rem 0.75rem; border: 1px solid var(--outline); border-radius: 4px;
+  background: var(--bg); color: var(--ink); caret-color: var(--accent);
+  font: inherit; letter-spacing: inherit;
+}
+.contact-field textarea { resize: vertical; }
+.contact-field input::selection, .contact-field textarea::selection {
+  background: var(--accent); color: var(--bg);
+}
+.field-help { color: var(--muted); font-size: 0.9rem; }
+.contact-form button {
+  justify-self: start; min-height: 48px; padding: 0.6rem 1rem;
+  border: 1px solid var(--accent); border-radius: 4px;
+  background: var(--accent); color: var(--bg); font: inherit; font-weight: 560;
+  cursor: pointer;
+}
+.contact-form button:hover { background: var(--ink); border-color: var(--ink); }
+
+/* footer */
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; padding: 1.5rem 0 2.5rem; }
+.site-footer p + p { margin-top: 0.4rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 0 1.1rem; margin: 0 0 0.75rem; padding: 0; list-style: none; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* table of contents (features) */
+.toc { margin-top: 2rem; padding: 1rem 1.25rem; border: 1px solid var(--line); border-radius: 8px; }
+.toc h2 { margin-top: 0; font-size: 1rem; }
+.toc ol, .toc ul { margin: 0.5rem 0 0; padding-left: 1.3rem; }
+.toc ol ol, .toc ul ul { margin: 0.2rem 0 0.4rem; color: var(--muted); font-size: 0.92rem; }
+.prose .toc li + li { margin-top: 0.2rem; }
+.toc li::marker { color: var(--muted); }
+.feature-group { scroll-margin-top: 1rem; }
+.features li { scroll-margin-top: 1rem; }

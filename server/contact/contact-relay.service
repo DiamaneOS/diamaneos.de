@@ -1,0 +1,44 @@
+[Unit]
+Description=Contact SMTP relay
+
+[Service]
+User=contact-relay
+Group=contact-relay
+ExecStart=/usr/bin/python3 -E -s -B /opt/diamaneos-contact/relay.py --config /etc/diamaneos-contact/relay.json --ingress-user contact-ingress
+LoadCredentialEncrypted=smtp-password:/etc/credstore.encrypted/example-contact-smtp.cred
+Restart=on-failure
+RestartSec=5
+StandardInput=null
+StandardOutput=null
+StandardError=null
+UMask=0077
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+IPAddressDeny=any
+IPAddressAllow=
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectProc=invisible
+ProcSubset=pid
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallErrorNumber=EPERM
+LimitCORE=0
+LimitNOFILE=32
+MemoryMax=64M
+TasksMax=4
+UnsetEnvironment=PYTHONPATH PYTHONHOME SMTP_PASSWORD

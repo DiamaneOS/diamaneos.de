@@ -1,0 +1,19 @@
+{{- /*
+  Links in content. Links to other sites get rel="noreferrer" (the site also
+  sends Referrer-Policy: no-referrer). Links inside the site must point to a
+  page that exists, or the build stops.
+*/ -}}
+{{- $u := urls.Parse .Destination -}}
+{{- if $u.IsAbs -}}
+<a href="{{ .Destination }}" rel="noreferrer">{{ .Text }}</a>
+{{- else if strings.HasPrefix .Destination "/" -}}
+  {{- if not (path.Ext $u.Path) -}}
+    {{- $p := strings.TrimSuffix "/" $u.Path | default "/" -}}
+    {{- if not (site.GetPage $p) -}}
+      {{- errorf "%s: link to missing page %q" .Page.File.Path .Destination -}}
+    {{- end -}}
+  {{- end -}}
+<a href="{{ .Destination | relURL }}">{{ .Text }}</a>
+{{- else -}}
+<a href="{{ .Destination }}">{{ .Text }}</a>
+{{- end -}}

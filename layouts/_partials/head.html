@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{- /* Same policy as the host header (docs/SECURITY-HEADERS.md), as a fallback.
+       A meta policy cannot carry frame-ancestors; the header does. */}}
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'self'">
+<meta name="referrer" content="same-origin">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f3ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#100e0b" media="(prefers-color-scheme: dark)">
+{{- if or site.Params.draftNotice .Params.noindex }}
+<meta name="robots" content="noindex, nofollow">
+{{- end }}
+<title>{{ if .IsHome }}{{ site.Title }}: a privacy and security focused OS{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+<link rel="preload" href="{{ "fonts/SofiaSans-latin-wght.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+{{- $css := resources.Get "css/site.css" | minify | fingerprint "sha384" }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">

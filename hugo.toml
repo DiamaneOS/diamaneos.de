@@ -1,0 +1,95 @@
+# DiamaneOS website.
+# Build: hugo --cleanDestinationDir   Preview: hugo server --disableLiveReload
+
+baseURL = "https://diamaneos.de/"
+locale = "en"
+defaultContentLanguage = "en"
+title = "DiamaneOS"
+
+# Plain HTML pages, a sitemap and robots.txt: no feeds or taxonomies.
+disableKinds = ["taxonomy", "term", "rss"]
+enableRobotsTXT = true
+enableEmoji = false
+enableGitInfo = false
+# No generator meta tag (it names the Hugo version).
+disableHugoGeneratorInject = true
+
+[params]
+  description = "DiamaneOS is a privacy and security focused operating system based on GrapheneOS."
+  # While true, every page shows a "Local draft for review" banner and carries
+  # noindex. Set to false for the published build.
+  draftNotice = false
+  github = "https://github.com/DiamaneOS"
+  grapheneos = "https://grapheneos.org/"
+
+[menus]
+  [[menus.main]]
+    name = "Features"
+    pageRef = "/features"
+    weight = 10
+  [[menus.main]]
+    name = "Limitations"
+    pageRef = "/limitations"
+    weight = 15
+  [[menus.main]]
+    name = "Devices"
+    pageRef = "/devices"
+    weight = 20
+  [[menus.main]]
+    name = "Install"
+    pageRef = "/install"
+    weight = 30
+  [[menus.main]]
+    name = "Docs"
+    pageRef = "/documentation"
+    weight = 35
+  [[menus.main]]
+    name = "FAQ"
+    pageRef = "/faq"
+    weight = 37
+  [[menus.main]]
+    name = "Security"
+    pageRef = "/security"
+    weight = 40
+  [[menus.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 50
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      # No raw HTML in content: layouts and shortcodes own all markup.
+      unsafe = false
+    [markup.goldmark.parser]
+      autoHeadingID = true
+  [markup.highlight]
+    # Syntax highlighting writes inline style attributes, which the CSP blocks.
+    codeFences = false
+
+[outputs]
+  home = ["html"]
+  page = ["html"]
+  section = ["html"]
+
+# Headers for `hugo server`, so the local preview runs under the same policy the
+# host must send (docs/SECURITY-HEADERS.md). Keep the two in step. HSTS is left
+# out here: it does not belong on localhost.
+[server]
+  [[server.headers]]
+    for = "/**"
+    [server.headers.values]
+      Content-Security-Policy = "default-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
+      X-Content-Type-Options = "nosniff"
+      Referrer-Policy = "same-origin"
+      Permissions-Policy = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), hid=(), magnetometer=(), microphone=(), payment=(), serial=(), usb=()"
+      Cross-Origin-Opener-Policy = "same-origin"
+      Cross-Origin-Resource-Policy = "same-origin"
+      Cross-Origin-Embedder-Policy = "require-corp"
+      X-Frame-Options = "DENY"
+  [[server.headers]]
+    for = "/**.svg"
+    [server.headers.values]
+      Content-Security-Policy = "default-src 'none'; style-src 'unsafe-inline'; sandbox"
+      X-Content-Type-Options = "nosniff"
+      Cross-Origin-Resource-Policy = "same-origin"

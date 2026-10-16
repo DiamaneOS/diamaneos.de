@@ -1,0 +1,6 @@
+# Keep public cryptographic artifacts byte-for-byte across checkouts.
+/static/.well-known/security.txt -text
+/static/.well-known/openpgpkey/** -text
+/static/security-public.asc -text
+/static/security-public.pgp -text
+/static/security-fingerprints.txt -text

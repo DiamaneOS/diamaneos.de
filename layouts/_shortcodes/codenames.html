@@ -1,0 +1,6 @@
+{{- /* Lists each supported device with its build codename, from data/devices.toml. Usage: {{< codenames >}} */ -}}
+<ul>
+{{- range hugo.Data.devices.devices }}
+<li>{{ .name }}: <code>{{ .codename }}</code></li>
+{{- end }}
+</ul>

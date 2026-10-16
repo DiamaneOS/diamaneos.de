@@ -1,0 +1,14 @@
+[Unit]
+Description=Contact relay Unix socket
+
+[Socket]
+ListenStream=/run/diamaneos-contact/relay.sock
+SocketUser=contact-relay
+SocketGroup=contact-ingress
+SocketMode=0660
+DirectoryMode=0755
+Backlog=8
+RemoveOnStop=yes
+
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,9 @@
+{
+  "smtp_host": "smtp.example.invalid",
+  "smtp_port": 465,
+  "tls": "ssl",
+  "smtp_username": "example-form-account",
+  "mail_from": "form@example.invalid",
+  "mail_to": "inbox@example.invalid",
+  "subject": "Website contact"
+}

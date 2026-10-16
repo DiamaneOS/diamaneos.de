@@ -1,0 +1,28 @@
+# Supported devices. The only place that names a device: the devices page renders
+# this file through the "devices" shortcode, the build guide lists the codenames
+# through the "codenames" shortcode. Other pages say "supported device" and link to
+# /devices/. Adding a device is one entry here.
+#
+# name      the device's name and its heading on the devices page
+# codename  the build codename, as in `lunch <codename>-cur-user`
+# facts     what to know before installing and for the stock OS, in Markdown.
+#           Around 45 words each, no semicolons.
+
+[[devices]]
+  name = "Fairphone 6"
+  codename = "FP6"
+  [[devices.facts]]
+    label = "Bootloader"
+    text = "must be unlockable. You allow unlocking with the OEM unlocking switch in the stock OS's developer options, as Fairphone's [unlock guide](https://support.fairphone.com/hc/en-us/articles/10492476238865-How-to-unlock-or-lock-your-Fairphone-s-bootloader) describes. Unlocking erases the phone."
+  [[devices.facts]]
+    label = "Bootloader keys"
+    text = "hold the volume down and power buttons together until the bootloader screen (Fastboot Mode) appears. This works with the phone off and restarts a running or stuck phone into it. While the phone restarts on its own, holding volume down is enough."
+  [[devices.facts]]
+    label = "Hardware security"
+    text = "it does not meet GrapheneOS's [device requirements](https://grapheneos.org/faq#future-devices). It has no secure element exposed to Android and no memory tagging. Protected video uses Widevine L3, the software level. See the [known limitations](/limitations/)."
+  [[devices.facts]]
+    label = "Stock OS"
+    text = '''Fairphone's [manual install guide](https://support.fairphone.com/hc/en-us/articles/18896094650513-How-to-manually-install-Android-on-your-Fairphone) links the factory images and their checksums. Its flash script starts Android when it ends. To [lock on the stock OS](/install/#locking-on-the-stock-os), first change `REBOOT_TO_BOOTLOADER="false"` to `"true"` in a copy of the script and run that copy.'''
+  [[devices.facts]]
+    label = "Stock install"
+    text = '''the bootloader can stop while it writes `super.img`, with "Error reading sparse file". Restart the phone into the bootloader. Then switch to fastbootd with `fastboot reboot fastboot` and write the logical partitions from `super.img` one by one.'''

@@ -1,0 +1,46 @@
+[Unit]
+Description=Secretless contact HTTP ingress
+Requires=contact-relay.socket
+After=contact-relay.socket
+
+[Service]
+User=contact-ingress
+Group=contact-ingress
+ExecStart=/usr/bin/python3 -E -s -B /opt/diamaneos-contact/ingress.py --relay-socket /run/diamaneos-contact/relay.sock
+Restart=on-failure
+RestartSec=5
+StandardInput=null
+StandardOutput=null
+StandardError=null
+UMask=0077
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+PrivateNetwork=yes
+RestrictAddressFamilies=AF_UNIX
+IPAddressDeny=any
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+InaccessiblePaths=-/run/credentials -/etc/credstore -/etc/credstore.encrypted
+ProtectProc=invisible
+ProcSubset=pid
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallErrorNumber=EPERM
+LimitCORE=0
+LimitNOFILE=32
+MemoryMax=64M
+TasksMax=4
+UnsetEnvironment=PYTHONPATH PYTHONHOME CREDENTIALS_DIRECTORY SMTP_PASSWORD

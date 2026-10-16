@@ -1,0 +1,22 @@
+{{- /*
+  Inline a DiamaneOS brand SVG from assets/brand/ (unmodified copies from the
+  design repo) with its fixed fills swapped for classes, so the stylesheet can
+  colour it for the light or dark theme. The shapes are not changed.
+
+  Usage: partial "brand-svg.html" (dict "file" "diamaneos-lockup-light.svg" "class" "lockup")
+  The SVG is decorative (aria-hidden); the caller gives the accessible name.
+*/ -}}
+{{- $r := resources.Get (printf "brand/%s" .file) -}}
+{{- if not $r }}{{ errorf "brand-svg: assets/brand/%s not found" .file }}{{ end -}}
+{{- $s := $r.Content -}}
+{{- $s = replaceRE `\s*<title[^>]*>[^<]*</title>` "" $s -}}
+{{- $s = replaceRE ` (width|height)="[^"]*"` "" $s 2 -}}
+{{- /* inline SVG in HTML needs no namespace attribute */ -}}
+{{- $s = replace $s ` xmlns="http://www.w3.org/2000/svg"` "" -}}
+{{- $s = replaceRE ` role="img" aria-labelledby="title"` (printf ` class="%s" aria-hidden="true" focusable="false"` .class) $s 1 -}}
+{{- $s = replaceRE ` id="bond" fill="#[0-9a-fA-F]{6}"` ` class="b-bond"` $s -}}
+{{- $s = replaceRE ` id="(upper|lower)-sheet" fill="#[0-9a-fA-F]{6}"` ` class="b-sheet"` $s -}}
+{{- $s = replaceRE ` id="name" fill="#[0-9a-fA-F]{6}"` ` class="b-name"` $s -}}
+{{- $s = replaceRE ` id="suffix" fill="#[0-9a-fA-F]{6}"` ` class="b-suffix"` $s -}}
+{{- if or (findRE ` id="` $s) (findRE ` fill="` $s) }}{{ errorf "brand-svg: unexpected ids or fills left in %s" .file }}{{ end -}}
+{{- trim $s "\n" | safeHTML -}}

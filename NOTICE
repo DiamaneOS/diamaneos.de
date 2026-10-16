@@ -1,0 +1,27 @@
+DiamaneOS website
+Copyright 2026 DiamaneOS contributors
+
+The website's own code and text are licensed under the Apache License,
+Version 2.0. The full text is in LICENSE. The Apache License does not grant
+use of the DiamaneOS name or mark as trademarks (section 6).
+
+The following material is not covered by that grant and keeps its own terms.
+
+Sofia Sans
+Source: https://github.com/google/fonts/tree/8b0a1d0f5983c89bc2b93f1b5fb55f9e252744b5/ofl/sofiasans
+Bundled file: static/fonts/SofiaSans-latin-wght.woff2
+Copyright 2019 The Sofia Sans Project Authors (https://github.com/lettersoup/Sofia-Sans)
+SIL Open Font License, Version 1.1, with no Reserved Font Name.
+The bundled file is a Modified Version under that licence: a Latin subset of
+SofiaSans[wght].ttf (version 4.101), converted to WOFF2 with fontTools. It is
+distributed under the same licence. The command and hashes are in
+docs/fonts.md. The complete licence is in static/fonts/OFL.txt and is published
+with the site at /fonts/OFL.txt.
+
+DiamaneOS brand files
+See assets/brand/SOURCE.md for their hashes.
+Files: assets/brand/diamaneos-lockup-light.svg, assets/brand/diamaneos-mark-dark.svg,
+static/favicon.svg
+They are original DiamaneOS artwork under Apache-2.0. Use of the DiamaneOS name
+and mark as trademarks is not granted by any licence here. The lockup contains
+glyph outlines generated from Sofia Sans.

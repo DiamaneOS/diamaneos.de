@@ -1,0 +1,15 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Contact: mailto:security@diamaneos.de
+Encryption: https://diamaneos.de/security-public.asc
+Expires: 2027-04-11T23:35:01Z
+Preferred-Languages: en
+Canonical: https://diamaneos.de/.well-known/security.txt
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQR8MsEYTUGHdls2lluuEfz6sReAKQUCas7AJQAKCRCuEfz6sReA
+KULcAPkBeEMgGO0QjRi+heW2zmmqfxlpc8o2v9UA9V2KLXr1HAD/fShGmiu6Jiqc
+cPSTDwod4S6XggEQINep8dogfzLCTwE=
+=h64j
+-----END PGP SIGNATURE-----

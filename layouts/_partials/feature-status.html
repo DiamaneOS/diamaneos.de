@@ -1,0 +1,14 @@
+{{- /*
+  Status check for one feature. The page lists only items tested on a supported
+  device, so no item shows a tag: a missing or other status stops the build. A
+  shipped item must also set tested = true and a release.
+*/ -}}
+{{- $s := .status | default "" -}}
+{{- if eq $s "tested" -}}
+{{- else if eq $s "shipped" -}}
+  {{- if not (and .tested .release) -}}
+    {{- errorf "features: %q is marked shipped without tested = true and a release" .title -}}
+  {{- end -}}
+{{- else -}}
+  {{- errorf "features: %q has unknown status %q (use tested or shipped; untested items are not listed)" .title $s -}}
+{{- end -}}

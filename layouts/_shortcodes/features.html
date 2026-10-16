@@ -1,0 +1,32 @@
+{{- /* Renders data/features.toml: a table of contents, then each group. Usage: {{< features >}} */ -}}
+{{- $groups := hugo.Data.features.groups }}
+<nav class="toc" aria-labelledby="toc-title">
+  <h2 id="toc-title">Contents</h2>
+  <ol>
+    {{- range $groups }}
+    <li><a href="#fg-{{ .id }}">{{ .title | markdownify }}</a>
+      <ol>
+        {{- $g := .id }}
+        {{- range .items }}
+        <li><a href="#f-{{ $g }}-{{ .title | urlize }}">{{ .title | markdownify }}</a></li>
+        {{- end }}
+      </ol>
+    </li>
+    {{- end }}
+  </ol>
+</nav>
+{{- range $groups }}
+{{- $g := . }}
+<section class="feature-group" aria-labelledby="fg-{{ .id }}">
+  <h2 id="fg-{{ .id }}">{{ .title | markdownify }}</h2>
+  {{- with .note }}<p class="group-note">{{ . | markdownify }}</p>{{ end }}
+  <ul class="features">
+    {{- range .items }}
+    <li id="f-{{ $g.id }}-{{ .title | urlize }}">
+      <p class="feature-head"><strong>{{ .title | markdownify }}</strong>{{ if not $g.nostatus }}{{ partial "feature-status.html" . }}{{ end }}</p>
+      <p>{{ .text | markdownify }}</p>
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
