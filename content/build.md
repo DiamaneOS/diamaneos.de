@@ -1,6 +1,6 @@
 ---
 title: "Build DiamaneOS"
-description: "Build DiamaneOS from source: host, dependencies, source, vendor files, user and development builds, checks and installation."
+description: "Build DiamaneOS from source: host, dependencies, source and its signatures, vendor files, user and development builds, checks and installation."
 lede: "Build DiamaneOS from source, check the result and install it."
 ---
 
@@ -59,6 +59,35 @@ repo sync --force-sync -j8
 ```
 
 `--force-sync` lets `repo` replace a project that now comes from another repository at the same path. DiamaneOS rebases its branches onto new GrapheneOS releases. Rebase your own commits onto the new branch tips.
+
+## Verifying the source
+
+DiamaneOS's own commits and its release tags are signed with an SSH key. Its fingerprint is `SHA256:OHUN0l/oDXtrLvDWWH/76gM5yjl7JqCx6KdgO7zB62Y`. The key is registered on GitHub, which marks these commits Verified.
+
+Get the [allowed signers file](/allowed_signers.txt) and look at it:
+
+```sh
+curl --fail --create-dirs -o ~/.ssh/diamaneos_allowed_signers {{< site-url "allowed_signers.txt" >}}
+cat ~/.ssh/diamaneos_allowed_signers
+```
+
+It must hold exactly this line:
+
+```text
+abhinav.jhanwar@proton.me ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIdAD9ESFMA9yAMy7AUMwe++dHPND/7l8TMCdS4ZWTQG
+```
+
+Then check a commit or a release tag in a DiamaneOS repository. Replace `TAG` with the tag's name:
+
+```sh
+git -c gpg.ssh.allowedSignersFile=~/.ssh/diamaneos_allowed_signers verify-commit HEAD
+git -c gpg.ssh.allowedSignersFile=~/.ssh/diamaneos_allowed_signers verify-tag TAG
+```
+
+- A good signature prints `Good "git" signature for abhinav.jhanwar@proton.me` with the fingerprint above, and the command exits with 0.
+- "No principal matched" or any other error means the check failed, even after a line that starts with "Good".
+- To check the manifest of a `repo` checkout, run the commands in `.repo/manifests`.
+- Commits taken from GrapheneOS and AOSP keep their own signatures or have none.
 
 ## Vendor files
 
