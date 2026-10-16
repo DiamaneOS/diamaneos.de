@@ -1,0 +1,6 @@
+{{- /* Renders data/releases/, newest first. The feed (layouts/home.atom.xml) lists the same entries. Usage: {{< releases >}} */ -}}
+{{- range partial "releases.html" . }}
+<h2 id="{{ .version }}">{{ .version }}</h2>
+<p class="release-meta"><time datetime="{{ .time.Format "2006-01-02" }}">{{ .time.Format "2 January 2006" }}</time> · Channels: {{ delimit .channels ", " }}</p>
+{{ $.Page.RenderString (dict "display" "block") .notes }}
+{{- end }}

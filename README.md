@@ -58,6 +58,7 @@ The checked output is the whole site. The host serves it with:
 | `content/` | One Markdown file per page. The home page is `_index.md`. |
 | `data/features.toml` | The Features list. Only features that exist and passed testing on a phone. |
 | `data/devices.toml` | The supported devices with their codenames and facts. The only place that names a device. |
+| `data/releases/` | One TOML file per release. They make the Releases page and the Atom feed at `/releases.xml`. |
 | `layouts/` | Templates, partials, shortcodes and render hooks for links and tables. |
 | `assets/css/site.css` | The only stylesheet, minified and fingerprinted at build time. |
 | `assets/brand/` | Brand SVGs, inlined at build time. Provenance in `assets/brand/SOURCE.md`. |
@@ -70,6 +71,24 @@ The checked output is the whole site. The host serves it with:
 - Markdown cannot contain raw HTML (`unsafe = false`). Use the shortcodes.
 - Write links inside the site as `/page/`. The build stops if one points to a page that does not exist.
 - Links to other sites get `rel="noreferrer"`.
+
+## Adding a release
+
+A release is one new file, `data/releases/VERSION.toml`, named after its version:
+
+```toml
+version = "VERSION"
+date = YYYY-MM-DD
+channels = ["stable", "beta", "alpha"]
+notes = '''
+- What changed, in Markdown lists and paragraphs.
+'''
+```
+
+- `channels` lists the update channels that offer the release.
+- Two releases on one day need a time, such as `YYYY-MM-DDT18:00:00Z`, so feed readers can order them.
+- Each feed entry's id is `https://diamaneos.de/releases/#VERSION`. Never rename or reuse a version.
+- The feed carries the newest 20 releases. The build stops on an entry that does not follow this format.
 
 ## Design
 

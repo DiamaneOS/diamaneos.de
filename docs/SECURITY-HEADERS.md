@@ -1,7 +1,7 @@
 # Hosting and security headers
 
-The site is plain static files: HTML, one stylesheet, one font, one SVG icon, a licence text, `robots.txt` and a
-sitemap. It has no cookies or embedded requests to other hosts. Its contact form posts to the same site (`scripts/check-output.sh` checks
+The site is plain static files: HTML, one stylesheet, one font, one SVG icon, a licence text, `robots.txt`, a
+sitemap, the releases feed and the allowed signers file. It has no cookies or embedded requests to other hosts. Its contact form posts to the same site (`scripts/check-output.sh` checks
 the build).
 
 The only JavaScript is the web installer under `/install/web/`, with its own headers ([below](#the-web-installer)).

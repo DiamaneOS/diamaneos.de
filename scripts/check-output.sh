@@ -11,6 +11,8 @@
 #   - no request to another host: every src, srcset, <link href>, CSS url()
 #     and @import stays on this site
 #   - fonts served only as WOFF2 (the Latin subset in docs/fonts.md)
+#   - the releases feed: Atom with stable entry ids and absolute links, linked
+#     from the releases page
 # Links (<a href>) to other sites are allowed and listed, because following a
 # link is the reader's choice, not a request the page makes.
 #
@@ -115,6 +117,12 @@ grep -rhoE --include='*.html' 'https?://[^"'"'"' <>)]+' "$OUT" | external | sort
 grep -rhoiE --include='*.html' '<a[[:space:]][^>]*href="https?://[^"]*"' "$OUT" | grep -oE 'https?://[^"]+' | external | sort -u >"$tmp/links"
 comm -23 "$tmp/all" "$tmp/links" >"$tmp/m"
 if [ -s "$tmp/m" ]; then bad "URLs to other hosts outside <a href> in HTML:"; show <"$tmp/m"; else ok "every URL to another host in HTML is a plain link"; fi
+
+# 7. The releases feed and its autodiscovery link
+if ! python3 scripts/check-feed.py "$OUT" "$OWN_HOST"; then bad "releases feed failed its checks"; fi
+if grep -q '<link rel="alternate" type="application/atom+xml"[^>]*href="/releases.xml"' "$OUT/releases/index.html"; then
+  ok "the releases page links its feed"
+else bad "the releases page does not link its feed"; fi
 
 echo
 echo "Links to other sites (navigation only, not loaded by the page):"
