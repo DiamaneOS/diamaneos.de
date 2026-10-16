@@ -147,6 +147,9 @@ main { display: block; padding: 2.5rem 0 3rem; }
 .tag { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
 .lamp { display: inline-block; width: 10px; height: 10px; border: 2px solid var(--outline); border-radius: 50%; }
 
+/* releases */
+.release-meta { color: var(--muted); }
+
 /* contact */
 .contact-form { display: grid; gap: 1.5rem; }
 .contact-field { display: grid; gap: 0.4rem; }

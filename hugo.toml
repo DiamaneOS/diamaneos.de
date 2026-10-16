@@ -6,7 +6,7 @@ locale = "en"
 defaultContentLanguage = "en"
 title = "DiamaneOS"
 
-# Plain HTML pages, a sitemap and robots.txt: no feeds or taxonomies.
+# Plain HTML pages, a sitemap, robots.txt and the releases feed. No RSS or taxonomies.
 disableKinds = ["taxonomy", "term", "rss"]
 enableRobotsTXT = true
 enableEmoji = false
@@ -40,6 +40,10 @@ disableHugoGeneratorInject = true
     pageRef = "/install"
     weight = 30
   [[menus.main]]
+    name = "Releases"
+    pageRef = "/releases"
+    weight = 32
+  [[menus.main]]
     name = "Docs"
     pageRef = "/documentation"
     weight = 35
@@ -67,8 +71,15 @@ disableHugoGeneratorInject = true
     # Syntax highlighting writes inline style attributes, which the CSP blocks.
     codeFences = false
 
+# The releases feed: Atom from data/releases/, published as /releases.xml.
+[mediaTypes."application/atom+xml"]
+  suffixes = ["xml"]
+[outputFormats.atom]
+  mediaType = "application/atom+xml"
+  baseName = "releases"
+
 [outputs]
-  home = ["html"]
+  home = ["html", "atom"]
   page = ["html"]
   section = ["html"]
 

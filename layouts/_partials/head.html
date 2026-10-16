@@ -13,6 +13,11 @@
 <title>{{ if .IsHome }}{{ site.Title }}: a privacy and security focused OS{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
 <link rel="canonical" href="{{ .Permalink }}">
+{{- if .Params.feed }}
+{{- with site.Home.OutputFormats.Get "atom" }}
+<link rel="alternate" type="application/atom+xml" title="DiamaneOS releases" href="{{ .RelPermalink }}">
+{{- end }}
+{{- end }}
 <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
 <link rel="preload" href="{{ "fonts/SofiaSans-latin-wght.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
 {{- $css := resources.Get "css/site.css" | minify | fingerprint "sha384" }}

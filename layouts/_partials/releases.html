@@ -1,0 +1,26 @@
+{{- /*
+  Returns the releases in data/releases/, newest first. One TOML file per
+  release, named after its version (README.md, "Adding a release"). The
+  build stops on an entry that does not follow that format.
+*/ -}}
+{{- $known := slice "stable" "beta" "alpha" }}
+{{- $list := slice }}
+{{- range $file, $r := hugo.Data.releases }}
+  {{- $v := $r.version | default "" }}
+  {{- if not (findRE `^[0-9A-Za-z][0-9A-Za-z._-]*$` $v) }}
+    {{- errorf "releases: %s.toml needs a version of letters, digits, dots, dashes or underscores" $file }}
+  {{- end }}
+  {{- if ne $v $file }}
+    {{- errorf "releases: %s.toml holds version %q. Name the file after its version." $file $v }}
+  {{- end }}
+  {{- if not $r.date }}{{ errorf "releases: %s.toml has no date" $file }}{{ end }}
+  {{- if not $r.notes }}{{ errorf "releases: %s.toml has no notes" $file }}{{ end }}
+  {{- if not $r.channels }}{{ errorf "releases: %s.toml names no channel" $file }}{{ end }}
+  {{- range $r.channels }}
+    {{- if not (in $known .) }}{{ errorf "releases: %s.toml names unknown channel %q" $file . }}{{ end }}
+  {{- end }}
+  {{- $channels := slice }}
+  {{- range $known }}{{ if in $r.channels . }}{{ $channels = $channels | append (strings.FirstUpper .) }}{{ end }}{{ end }}
+  {{- $list = $list | append (dict "version" $v "time" (time.AsTime $r.date).UTC "channels" $channels "notes" $r.notes) }}
+{{- end }}
+{{- return sort (sort $list "version" "desc") "time" "desc" }}

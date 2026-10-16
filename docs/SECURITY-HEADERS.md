@@ -1,7 +1,7 @@
 # Hosting and security headers
 
-The site is plain static files: HTML, one stylesheet, one font, one SVG icon, a licence text, `robots.txt` and a
-sitemap. It has no JavaScript, no cookies or embedded requests to other hosts. Its contact form posts to the same site (`scripts/check-output.sh` checks
+The site is plain static files: HTML, one stylesheet, one font, one SVG icon, a licence text, `robots.txt`, a
+sitemap, the releases feed and the allowed signers file. It has no JavaScript, no cookies or embedded requests to other hosts. Its contact form posts to the same site (`scripts/check-output.sh` checks
 the build).
 
 Serve `public/` through nginx with the same-origin contact handler. The nginx example uses no request logs.
