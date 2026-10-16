@@ -13,7 +13,7 @@ ID = "https://diamaneos.de/releases/"
 
 def problems(out, host):
     site = f"https://{host}/"
-    feed = ET.parse(Path(out) / "releases.xml").getroot()
+    feed = ET.parse(Path(out) / "releases.atom").getroot()
     if feed.tag != ATOM + "feed":
         return ["not an Atom feed"]
     found = []
@@ -24,7 +24,7 @@ def problems(out, host):
     if not STAMP.fullmatch(feed.findtext(ATOM + "updated") or ""):
         found.append("feed updated is not an RFC 3339 UTC time")
     links = {link.get("rel"): link.get("href") for link in feed.findall(ATOM + "link")}
-    if links.get("self") != site + "releases.xml" or links.get("alternate") != site + "releases/":
+    if links.get("self") != site + "releases.atom" or links.get("alternate") != site + "releases/":
         found.append("feed self or alternate link wrong")
     ids = []
     for entry in feed.findall(ATOM + "entry"):

@@ -71,9 +71,9 @@ disableHugoGeneratorInject = true
     # Syntax highlighting writes inline style attributes, which the CSP blocks.
     codeFences = false
 
-# The releases feed: Atom from data/releases/, published as /releases.xml.
+# The releases feed: Atom from data/releases/, published as /releases.atom.
 [mediaTypes."application/atom+xml"]
-  suffixes = ["xml"]
+  suffixes = ["atom"]
 [outputFormats.atom]
   mediaType = "application/atom+xml"
   baseName = "releases"
