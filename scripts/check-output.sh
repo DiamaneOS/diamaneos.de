@@ -113,6 +113,9 @@ if [ -s "$tmp/m" ]; then bad "URLs to other hosts outside <a href> in HTML:"; sh
 
 # 7. The releases feed and its autodiscovery link
 if ! python3 scripts/check-feed.py "$OUT" "$OWN_HOST"; then bad "releases feed failed its checks"; fi
+if grep -q 'location = /releases.atom {' server/nginx/website.conf; then
+  ok "the feed has its nginx location with the Atom type"
+else bad "server/nginx/website.conf has no location for the feed"; fi
 if grep -q '<link rel="alternate" type="application/atom+xml"[^>]*href="/releases.atom"' "$OUT/releases/index.html"; then
   ok "the releases page links its feed"
 else bad "the releases page does not link its feed"; fi
