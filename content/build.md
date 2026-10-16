@@ -166,6 +166,7 @@ bash flash-all.sh
 
 - To install from another computer, copy the whole image directory there. On Windows, run `flash-all.bat`.
 - `flash-all.sh` checks the phone and every image first. It then erases the phone, installs the image set and starts DiamaneOS.
+- For the system partitions it restarts the phone into fastbootd, then back into the bootloader. It waits for each restart on its own.
 - It writes the device maker's firmware of the release the vendor files come from. Do not run it on a phone that already runs a newer stock release.
 - Skip the locking steps of the install guide.
 - Never run `fastboot -w` or `fastboot erase`. The script flashes empty images instead.
