@@ -120,8 +120,10 @@ On Windows:
 
 - It checks that the phone is the device the images are for, in the bootloader with both unlocks done.
 - It erases the phone, writes the device maker's firmware and then DiamaneOS.
+- For the system partitions it restarts the phone into fastbootd, then back into the bootloader. It waits for each restart on its own.
 - It installs DiamaneOS's verified boot key and restarts the phone into the bootloader, ready for the lock. fastboot may warn about a partition size of 0 when it writes the key. That is normal.
 - Do not touch the phone or the cable until the script ends.
+- If the script waits for more than a few minutes after a restart, hold the phone's [bootloader keys](/devices/) until the bootloader screen appears. Then run the script again.
 - If the script stops with an error, do not start Android. Keep its full output and [report the problem](/faq/#reporting-problems).
 
 ## Locking the bootloader
