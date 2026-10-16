@@ -5,7 +5,7 @@ lede: "Release notes for DiamaneOS, newest first."
 feed: true
 ---
 
-Each release is listed here and in an [Atom feed](/releases.xml) for feed readers and release tools. Each entry names the update channels that offer it.
+Each release is listed here and in an [Atom feed](/releases.atom) for feed readers and release tools. Each entry names the update channels that offer it.
 
 Release tags are signed. The [build guide](/build/#verifying-the-source) shows how to check them.
 

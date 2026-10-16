@@ -28,7 +28,7 @@ glyph outlines generated from Sofia Sans.
 
 GrapheneOS releases feed
 Source: https://github.com/GrapheneOS/grapheneos.org/blob/b9acc2f331d9f64e822741419ee248f24dd3003e/generate-feed
-File: layouts/home.atom.xml
+File: layouts/home.atom
 The releases feed follows the shape of GrapheneOS's feed generator: the feed's
 id, links, icon and author, entry ids and links from the release anchors on
 the releases page, and the newest 20 entries. The original is under the MIT

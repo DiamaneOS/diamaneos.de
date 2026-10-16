@@ -1,5 +1,5 @@
 {{- /*
-  The releases feed, /releases.xml: the newest 20 entries of data/releases/.
+  The releases feed, /releases.atom: the newest 20 entries of data/releases/.
   Its shape follows GrapheneOS's releases feed (generate-feed, MIT, see NOTICE).
   Ids stay on https://diamaneos.de whatever the baseURL, so they never change.
   Atom needs a feed date even with no entries. 1970 stands in until the first.
