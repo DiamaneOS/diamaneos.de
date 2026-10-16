@@ -58,7 +58,7 @@ The checked output is the whole site. The host serves it with:
 | `content/` | One Markdown file per page. The home page is `_index.md`. |
 | `data/features.toml` | The Features list. Only features that exist and passed testing on a phone. |
 | `data/devices.toml` | The supported devices with their codenames and facts. The only place that names a device. |
-| `data/releases/` | One TOML file per release. They make the Releases page and the Atom feed at `/releases.xml`. |
+| `data/releases/` | One TOML file per release. They make the Releases page and the Atom feed at `/releases.atom`. |
 | `layouts/` | Templates, partials, shortcodes and render hooks for links and tables. |
 | `assets/css/site.css` | The only stylesheet, minified and fingerprinted at build time. |
 | `assets/brand/` | Brand SVGs, inlined at build time. Provenance in `assets/brand/SOURCE.md`. |
