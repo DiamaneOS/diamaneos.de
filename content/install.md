@@ -126,7 +126,7 @@ On Windows:
 
 ## Locking the bootloader
 
-Locking turns on full verified boot with DiamaneOS's key. Lock right after the install, before Android first starts.
+Locking turns on full verified boot with DiamaneOS's key. Lock right after the install, before Android first starts. It takes two locks, in the device maker's order: first the critical partitions, then the bootloader.
 
 - **Finish every lock step before starting Android.** Do them one after another. Android's setup turns OEM unlocking off, and the bootloader can then no longer be locked safely.
 - **Keep verified boot on.** Never install with options that turn it off. Locking without it is pointless.
@@ -140,15 +140,31 @@ fastboot flashing get_unlock_ability
 
 It must report 1. If it reports 0, do not lock. Run `flash-all.sh` again, which ends in the bootloader, and check again.
 
-Then lock:
+Then lock the critical partitions:
+
+```sh
+fastboot flashing lock_critical
+```
+
+Confirm on the phone with the volume and power buttons. The phone erases all data and restarts. Hold its bootloader keys while it restarts, so it comes back to the bootloader. If Android starts, start the phone in the bootloader again before going on.
+
+Check that the critical partitions are locked and that unlocking is still allowed:
+
+```sh
+fastboot oem device-info
+fastboot flashing get_unlock_ability
+```
+
+It must show `Device critical unlocked: false` and report 1. If not, do not lock.
+
+Then lock the bootloader:
 
 ```sh
 fastboot flashing lock
 ```
 
-Confirm on the phone with the volume and power buttons. The phone erases all data and starts DiamaneOS.
+Confirm on the phone again. The phone erases all data and starts DiamaneOS.
 
-- Lock DiamaneOS with `fastboot flashing lock` only. Never use `fastboot flashing lock_critical` with DiamaneOS.
 - From now on, each start shows a yellow warning screen with the ID of the key the OS is signed with. This is expected: DiamaneOS boots with its own key, not the device maker's.
 
 ## Disabling OEM unlocking
@@ -176,8 +192,7 @@ If the bootloader is locked:
 1. In DiamaneOS, turn on developer options under Settings > About phone by tapping **Build number** seven times.
 2. Turn on **OEM unlocking** under Settings > System > Developer options.
 3. Start the phone in the bootloader and run `fastboot flashing unlock`. Confirm on the phone. This erases all data.
-
-The critical partitions are still unlocked from the install.
+4. Run `fastboot flashing unlock_critical` and confirm on the phone again. The stock install writes the firmware on the critical partitions.
 
 ### Installing the stock OS
 
