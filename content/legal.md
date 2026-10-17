@@ -19,7 +19,7 @@ Email: [hello@diamaneos.de](mailto:hello@diamaneos.de)
 
 ## Privacy policy {#privacy}
 
-This notice covers this website, the network services DiamaneOS phones use and contact by mail or the contact form. The attestation service has [its own notice](https://attestation.diamaneos.de/privacy-policy).
+This notice covers this website, the web installer, the network services DiamaneOS phones use and contact by mail or the contact form. The attestation service has [its own notice](https://attestation.diamaneos.de/privacy-policy).
 
 ### Controller
 
@@ -32,6 +32,10 @@ These pages set no cookies, run no scripts and store nothing on your device. Fon
 Each request gives the server your IP address, the request time, the requested page and your browser's headers. The website runs on a server at OVHcloud in Germany.
 
 Links to other websites are plain links. Following one connects your browser to that website, and its own privacy policy applies.
+
+### Web installer
+
+The [web installer](https://install.diamaneos.de) is static files on the same server, with the same request data and no cookies. Its scripts run in your browser, talk to the phone over USB and read any image set you choose on your computer. Its only other requests download a release from releases.diamaneos.de, and their path names the phone model.
 
 ### Phone services
 
@@ -84,9 +88,9 @@ The data is not used for advertising or profiling. There is no automated decisio
 
 | Services | Hosting provider | Server location |
 | --- | :---: | :---: |
-| Website, primary downloads, connectivity checks, time and service relays | [OVHcloud](https://www.ovhcloud.com/de/terms-and-conditions/privacy-policy/) | Germany |
+| Website, web installer, primary downloads, connectivity checks, time and service relays | [OVHcloud](https://www.ovhcloud.com/de/terms-and-conditions/privacy-policy/) | Germany |
 | Optional OS and app download mirror, service status page | ServaRICA | Canada |
-| Staging copies of the website and downloads | netcup | Germany |
+| Staging copies of the website, the web installer and downloads | netcup | Germany |
 | Attestation | [OVHcloud](https://www.ovhcloud.com/de/terms-and-conditions/privacy-policy/) | France |
 
 - Mail to hello@diamaneos.de and contact form messages are received and stored by [mailbox.org](https://mailbox.org/en/data-protection/) in Germany. Service notifications are also sent through it.
