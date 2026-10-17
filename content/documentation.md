@@ -8,6 +8,8 @@ lede: "How DiamaneOS is built and served."
 
 [Build DiamaneOS](/build/) explains how to make user and development builds from source, check them against their build record and install them.
 
+[Public keys](/documentation/keys/) lists the keys that factory images, phones and apps can be checked against.
+
 ## Servers
 
 [Servers and service boundaries](/documentation/servers/) describes the public services, hosting regions, isolation and data handling. It links the configuration source of each service.

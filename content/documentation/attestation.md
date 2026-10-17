@@ -30,6 +30,6 @@ Attestation evaluates the supported security properties reported by the hardware
 
 On some phones the device maker cannot vouch for the first pairing. The person pairing then confirms that they trust how the phone was set up. Every later check is hardware attestation pinned to that first pairing. A factory reset erases Auditor's key, so the phone must be paired again.
 
-An unsupported identity, changed pairing or invalid signature must fail rather than be silently trusted. Check the reported reason and the expected public identity. Do not erase pairing history merely to make an unexpected failure disappear.
+An unsupported identity, changed pairing or invalid signature must fail rather than be silently trusted. Check the reported reason and the expected [public identity](/documentation/keys/#verified-boot-key). Do not erase pairing history merely to make an unexpected failure disappear.
 
 If network checks stop arriving, investigate connectivity and service availability as well as the phone. Preserve the evidence before resetting either side. Report sensitive findings through [Security](/security/), without posting account tokens or private reports publicly.
