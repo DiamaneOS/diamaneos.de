@@ -92,7 +92,7 @@ It must show `Device unlocked: true` and `Device critical unlocked: true`.
 
 Download the factory images for your device only from this project. Unpack them and open a terminal in the directory that holds `flash-all.sh`.
 
-On Linux and macOS, `flash-all.sh` checks every image against the `SHA256SUMS` file before it writes anything.
+The install scripts, `flash-all.sh` and `flash-all.bat`, check every file against the `SHA256SUMS` file before they write anything.
 
 The install writes the device maker's firmware of the stock release DiamaneOS is built on. Its first lines name that release:
 
@@ -100,7 +100,7 @@ The install writes the device maker's firmware of the stock release DiamaneOS is
 head -n 5 flash-all.sh
 ```
 
-Compare it with the build number you noted in the stock OS. If the phone runs a newer stock release, do not install.
+On Windows, open `flash-all.bat` in a text editor instead. Compare the release with the build number you noted in the stock OS. If the phone runs a newer stock release, do not install.
 
 ## Installing DiamaneOS
 
@@ -124,7 +124,14 @@ On Windows:
 - It installs DiamaneOS's verified boot key and restarts the phone into the bootloader, ready for the lock. fastboot may warn about a partition size of 0 when it writes the key. That is normal.
 - Do not touch the phone or the cable until the script ends.
 - If the phone does not come back within a few minutes of a restart, hold its [bootloader keys](/devices/) until the bootloader screen appears. The script then goes on or stops with a message. Run it again only once it has stopped.
-- If the script stops with an error, do not start Android. Keep its full output and [report the problem](/faq/#reporting-problems).
+
+### If the install fails
+
+- **A check failed before the first write.** Nothing on the phone changed. Fix what the message names and run the script again. A file that does not match `SHA256SUMS` is damaged or altered. Download the factory images again.
+- **A write failed or the phone stopped answering.** Do not start Android. Start the phone in the bootloader with its bootloader keys and run the script again. It writes everything again from the start.
+- **It fails at the same place twice.** Try another USB port or cable, without a hub.
+- **Never do these to fix a failed install:** lock the bootloader, run `fastboot -w`, erase partitions or switch slots.
+- If it still fails, keep the script's full output and [report the problem](/faq/#reporting-problems).
 
 ## Locking the bootloader
 
@@ -148,7 +155,9 @@ Then lock the critical partitions:
 fastboot flashing lock_critical
 ```
 
-Confirm on the phone with the volume and power buttons. The phone erases all data and restarts. Hold its bootloader keys while it restarts, so it comes back to the bootloader. If Android starts, start the phone in the bootloader again before going on.
+Confirm on the phone with the volume and power buttons. The phone erases all data and restarts. Hold its bootloader keys while it restarts, so it comes back to the bootloader. Android must not start between the two locks.
+
+If Android starts, do not lock the bootloader. It stays unlocked. To lock, start the phone in the bootloader and run `flash-all.sh` again, which first asks to unlock the critical partitions. Then lock straight after.
 
 Check that the critical partitions are locked and that unlocking is still allowed:
 
@@ -168,6 +177,7 @@ fastboot flashing lock
 Confirm on the phone again. The phone erases all data and starts DiamaneOS.
 
 - From now on, each start shows a yellow warning screen with the ID of the key the OS is signed with. This is expected: DiamaneOS boots with its own key, not the device maker's.
+- An orange warning screen means the bootloader is still unlocked. Start the phone in the bootloader, install again and lock straight after.
 
 ## Disabling OEM unlocking
 
@@ -187,14 +197,20 @@ sha256sum FILE.zip
 
 On macOS, use `shasum -a 256 FILE.zip`. Stop if the checksum differs.
 
+Use the stock release whose firmware the DiamaneOS install wrote, or a newer one. Firmware older than the phone runs can leave it unable to start.
+
 ### Unlocking
 
 If the bootloader is locked:
 
 1. In DiamaneOS, turn on developer options under Settings > About phone by tapping **Build number** seven times.
 2. Turn on **OEM unlocking** under Settings > System > Developer options.
-3. Start the phone in the bootloader and run `fastboot flashing unlock`. Confirm on the phone. This erases all data.
-4. Run `fastboot flashing unlock_critical` and confirm on the phone again. The stock install writes the firmware on the critical partitions.
+3. Turn the phone off and start it in the bootloader. Run `fastboot flashing unlock` and confirm on the phone. This erases all data.
+4. Hold the bootloader keys while the phone restarts, so it comes back to the bootloader. If Android starts, turn the phone off and start it in the bootloader.
+
+A locked DiamaneOS has its critical partitions locked too, and the stock install writes firmware on them. If `fastboot oem device-info` shows `Device critical unlocked: false`, run `fastboot flashing unlock_critical`. Confirm on the phone and come back to the bootloader the same way.
+
+`fastboot oem device-info` must then show `Device unlocked: true` and `Device critical unlocked: true`.
 
 ### Installing the stock OS
 
@@ -218,11 +234,21 @@ Lock only with the stock OS installed, and before Android starts.
    fastboot erase avb_custom_key
    ```
 
-2. Check that `fastboot flashing get_unlock_ability` reports 1. If it reports 0, do not lock.
-3. Lock the critical partitions, then the bootloader, as the device maker's guide does. Confirm each on the phone:
+2. Check that `fastboot getvar current-slot` reports the slot that the device maker's script activated. The script names it in its output. `fastboot oem device-info` must show both unlocks and `Verity mode: true`.
+3. Check that `fastboot flashing get_unlock_ability` reports 1. If it reports 0, do not lock.
+4. Lock the critical partitions and confirm on the phone. Hold the bootloader keys while it restarts, so it comes back to the bootloader without starting Android:
 
    ```sh
    fastboot flashing lock_critical
+   ```
+
+5. Check again that `fastboot flashing get_unlock_ability` reports 1 and that `fastboot oem device-info` shows `Device critical unlocked: false`. If not, do not lock.
+6. Lock the bootloader and confirm on the phone. This erases all data:
+
+   ```sh
    fastboot flashing lock
    ```
-4. Start the stock OS and turn off **OEM unlocking** under Settings > System > Developer options.
+
+7. Start the stock OS. It starts without a warning screen. Then turn off **OEM unlocking** under Settings > System > Developer options.
+
+This is the device maker's order: the critical partitions first, then the bootloader.
