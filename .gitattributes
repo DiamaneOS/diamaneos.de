@@ -4,3 +4,4 @@
 /static/security-public.asc -text
 /static/security-public.pgp -text
 /static/security-fingerprints.txt -text
+/static/keys/** -text

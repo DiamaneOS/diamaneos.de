@@ -14,7 +14,7 @@ Send confidential vulnerability reports to [security@diamaneos.de](mailto:securi
 
 Hugo 0.146 or later. It is tested with Hugo 0.167.0 (extended). On macOS: `brew install hugo`. The site uses no Node.js, theme or Hugo modules.
 
-Build checks also need Python 3 and GnuPG (`gpg`, `gpgv`).
+Build checks also need Python 3, GnuPG (`gpg`, `gpgv`), OpenSSL and `ssh-keygen`.
 
 ## Preview
 
@@ -62,7 +62,7 @@ The checked output is the whole site. The host serves it with:
 | `layouts/` | Templates, partials, shortcodes and render hooks for links and tables. |
 | `assets/css/site.css` | The only stylesheet, minified and fingerprinted at build time. |
 | `assets/brand/` | Brand SVGs, inlined at build time. Provenance in `assets/brand/SOURCE.md`. |
-| `static/` | Copied as is: the favicon, the font subset and its licence, `ads.txt`, `app-ads.txt` and the commit signing key in `allowed_signers.txt`. |
+| `static/` | Copied as is: the favicon, the font subset and its licence, `ads.txt`, `app-ads.txt`, the commit signing key in `allowed_signers.txt` and the public keys in `keys/`. |
 | `static/install/web/`, `installer.sha256` | The web installer, imported from a signed commit with `scripts/import-installer.py INSTALLER_CHECKOUT COMMIT`. Never edited here. |
 | `docs/` | Security headers, the font subset (`fonts.md`), `security.txt` and Web Key Directory notes. |
 

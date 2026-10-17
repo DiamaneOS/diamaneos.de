@@ -98,6 +98,10 @@ An SVG loaded as an image cannot run scripts anyway. `sandbox` and `default-src 
 
 `/releases.atom` is served as `application/atom+xml; charset=utf-8` with `Cross-Origin-Resource-Policy: cross-origin`. Thunderbird fetches feeds from another origin ([bug 1698755](https://bugzilla.mozilla.org/show_bug.cgi?id=1698755)), as GrapheneOS notes for its own feed. Its location in `server/nginx/website.conf` repeats the other headers.
 
+## Public keys
+
+`/keys/` serves only the files its location in `server/nginx/website.conf` lists: `avb_pkmd.bin` as `application/octet-stream`, the others as `text/plain; charset=utf-8`. Any other name there returns 404. Copy the files byte for byte (`.gitattributes`).
+
 ## Not sent
 
 - No `Set-Cookie`. The site has no sessions.
@@ -158,6 +162,7 @@ curl -sI https://diamaneos.de/ | grep -iE 'content-security|strict-transport|ref
 curl -sI https://diamaneos.de/favicon.svg | grep -i content-security
 curl -sI https://diamaneos.de/install/web/ | grep -iE 'content-security|permissions|cache-control'
 curl -sI https://diamaneos.de/releases.atom | grep -iE 'content-type|cross-origin-resource'
+curl -sI https://diamaneos.de/keys/avb_pkmd.bin | grep -i content-type
 curl -sI https://www.diamaneos.de/ | grep -i location
 ```
 

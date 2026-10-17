@@ -88,9 +88,29 @@ It must show `Device unlocked: true` and `Device critical unlocked: true`.
 
 ## Getting the factory images
 
-Download the factory images for your device only from this project. Unpack them and open a terminal in the directory that holds `flash-all.sh`.
+Download the factory images for your device and their signature file, which ends in `.sig`, only from this project.
 
-The install scripts, `flash-all.sh` and `flash-all.bat`, check every file against the `SHA256SUMS` file before they write anything.
+### Verifying the factory images
+
+Check the signature before you unpack the images. First get DiamaneOS's [factory key](/documentation/keys/#factory-images):
+
+```sh
+curl --fail -O {{< site-url "keys/factory.allowed_signers" >}}
+```
+
+Then check the signature. Replace `FILE.zip` with the name of the factory images file:
+
+```sh
+ssh-keygen -Y verify -f factory.allowed_signers -I diamaneos -n "factory images" -s FILE.zip.sig < FILE.zip
+```
+
+- It must print `Good "factory images" signature for diamaneos with ED25519 key SHA256:efhtysP+8Tz5vKgjZT6MEfiK3h3bH2/cjW3w3cg6How`. Stop if it prints anything else.
+- On Windows, run both commands in Command Prompt, not PowerShell.
+- `ssh-keygen` is part of OpenSSH, which macOS and Windows include. On Linux it comes with the OpenSSH client package.
+
+Then unpack the images and open a terminal in the directory that holds `flash-all.sh`. The install scripts, `flash-all.sh` and `flash-all.bat`, check every file against the `SHA256SUMS` file before they write anything.
+
+### Checking the firmware release
 
 The install writes the device maker's firmware of the stock release DiamaneOS is built on. Its first lines name that release:
 
@@ -175,6 +195,7 @@ fastboot flashing lock
 Confirm on the phone again. The phone erases all data and starts DiamaneOS.
 
 - From now on, each start shows a yellow warning screen with the ID of the key the OS is signed with. This is expected: DiamaneOS boots with its own key, not the device maker's.
+- Compare that ID with the [verified boot key ID](/documentation/keys/#verified-boot-key). It must match.
 - An orange warning screen means the bootloader is still unlocked. Start the phone in the bootloader, install again and lock straight after.
 
 ## Disabling OEM unlocking

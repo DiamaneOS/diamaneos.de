@@ -13,6 +13,7 @@
 #   - fonts served only as WOFF2 (the Latin subset in docs/fonts.md)
 #   - the releases feed: Atom with stable entry ids and absolute links, linked
 #     from the releases page
+#   - the public keys in keys/: exact copies, with the IDs the pages print
 # Links (<a href>) to other sites are allowed and listed, because following a
 # link is the reader's choice, not a request the page makes.
 #
@@ -43,6 +44,9 @@ bad() { echo "FAIL  $1"; fail=1; }
 ok() { echo "ok    $1"; }
 if ! python3 scripts/check-security-publication.py "$OUT"; then
   bad "security publication artifacts failed validation"
+fi
+if ! python3 scripts/check-keys.py "$OUT"; then
+  bad "public keys failed validation"
 fi
 # The standard's placeholder declares no authorized advertising sellers.
 for name in ads.txt app-ads.txt; do
