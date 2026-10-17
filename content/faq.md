@@ -14,7 +14,9 @@ The [supported devices](/devices/) page lists the phones DiamaneOS runs on. Chec
 
 After installing DiamaneOS's factory images, this warning means the bootloader was not locked. Lock it before continuing setup: a locked bootloader enforces verified boot with the operating system's key.
 
-Open the [locking section of the install guide](/install/#locking-the-bootloader) on your computer. In the setup wizard, choose **Reboot to bootloader**, connect the phone by USB and follow those steps. They start with a check that tells you whether locking is safe.
+Open the [locking section of the command-line guide](/install/cli/#locking-the-bootloader) on your computer. In the setup wizard, choose **Reboot to bootloader**, connect the phone by USB and follow those steps. They start with a check that tells you whether locking is safe.
+
+The [web installer](/install/web/#locking-the-bootloader) locks only straight after its own install. With it, install again from the bootloader and lock straight after.
 
 Locking erases the phone, as unlocking does, and setup starts again. This keeps someone who changes the lock state from reaching your data.
 

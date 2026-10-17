@@ -157,7 +157,7 @@ These commands sign every build with Android's public test keys. Anyone can sign
 
 ### First install
 
-Follow the [install guide](/install/) up to [unlocking the bootloader](/install/#unlocking-the-bootloader). Then, with the phone in the bootloader:
+Follow the [command-line install guide](/install/cli/) up to [unlocking the bootloader](/install/cli/#unlocking-the-bootloader). Then, with the phone in the bootloader:
 
 ```sh
 cd ~/diamaneos-build/images/latest
