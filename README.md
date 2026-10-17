@@ -2,7 +2,9 @@
 
 The source of [diamaneos.de](https://diamaneos.de/), built with [Hugo](https://gohugo.io/).
 
-The site is plain HTML and CSS. It has no JavaScript, cookies, analytics or third-party content. The font, the icon and the stylesheet are served from the site itself. The contact form posts to the site's own handler.
+The site is plain HTML and CSS. It has no cookies, analytics or third-party content. The font, the icon and the stylesheet are served from the site itself. The contact form posts to the site's own handler.
+
+The only JavaScript is the [web installer](https://github.com/DiamaneOS/installer) at `/install/web/`, as GrapheneOS serves its own. Its files come from a signed installer commit and are checked against `installer.sha256`.
 
 ## Security reports
 
@@ -20,7 +22,9 @@ Build checks also need Python 3 and GnuPG (`gpg`, `gpgv`).
 hugo server --disableLiveReload
 ```
 
-Then open <http://localhost:1313/> and reload by hand after an edit. The preview sends the same security headers as the host (`[server.headers]` in `hugo.toml`), and that policy blocks Hugo's live-reload script. The contact form needs the separate handler in `server/contact/`.
+Then open <http://localhost:1313/> and reload by hand after an edit. The contact form needs the separate handler in `server/contact/`.
+
+The preview sends the same security headers as the host (`[server.headers]` in `hugo.toml`), and that policy blocks Hugo's live-reload script and the web installer. Test the installer with its own `web/serve.py`.
 
 ## Build and check
 
@@ -28,7 +32,9 @@ Then open <http://localhost:1313/> and reload by hand after an edit. The preview
 OUT=/path/to/output scripts/check-output.sh
 ```
 
-This builds the site into `OUT` (default `public/`) and checks the output. It fails on any script, inline style, embedded content, resource from another host, font other than WOFF2, or contact form that differs from its bounded contract. It lists every link to another site. `--no-build` checks an existing output directory.
+This builds the site into `OUT` (default `public/`) and checks the output. It fails on any script outside `install/web/`, inline style, embedded content, resource from another host, font other than WOFF2, or contact form that differs from its bounded contract. `--no-build` checks an existing output directory.
+
+It also fails if a file under `install/web/` differs from `installer.sha256`, or a link between the installer and the site leads nowhere. It lists every link to another site.
 
 For the staging host, build with `hugo --cleanDestinationDir --baseURL https://staging.diamaneos.de/ --destination DIR` and check with `OWN_HOST=staging.diamaneos.de OUT=DIR scripts/check-output.sh --no-build`.
 
@@ -39,6 +45,7 @@ While `draftNotice = true` in `hugo.toml`, every page shows a draft banner and c
 The checked output is the whole site. The host serves it with:
 
 - `server/nginx/website.conf` and `website-headers.conf`: the site, the redirects from other names and the contact proxy, inside an existing hardened nginx setup.
+- `server/nginx/website-installer-*.conf`: the web installer's own headers for `/install/web/`, imported with its files.
 - `docs/SECURITY-HEADERS.md`: the Content-Security-Policy and other headers, HSTS, and how to check them on the host.
 - `server/contact/README.md`: the contact handler and its deployment contract. Generated files contain no mail credentials.
 
@@ -55,6 +62,7 @@ The checked output is the whole site. The host serves it with:
 | `assets/css/site.css` | The only stylesheet, minified and fingerprinted at build time. |
 | `assets/brand/` | Brand SVGs, inlined at build time. Provenance in `assets/brand/SOURCE.md`. |
 | `static/` | Copied as is: the favicon, the font subset and its licence, `ads.txt` and `app-ads.txt`. |
+| `static/install/web/`, `installer.sha256` | The web installer, imported from a signed commit with `scripts/import-installer.py INSTALLER_CHECKOUT COMMIT`. Never edited here. |
 | `docs/` | Security headers, the font subset (`fonts.md`), `security.txt` and Web Key Directory notes. |
 
 ## Writing pages
@@ -65,7 +73,7 @@ The checked output is the whole site. The host serves it with:
 
 ## Design
 
-The site follows the DiamaneOS interface design: Sofia Sans, the colour roles of the Sodium seed `#FBA700` in light and dark, radii of 4, 8 and 12 px, and one plain column. Lamps show colour only where something is on, so nothing on the site is lit. Text contrast is at least 5.8:1 in both themes. Pages have landmarks, a skip link, one `h1` and a visible focus ring, and nothing needs a script.
+The site follows the DiamaneOS interface design: Sofia Sans, the colour roles of the Sodium seed `#FBA700` in light and dark, radii of 4, 8 and 12 px, and one plain column. Lamps show colour only where something is on, so nothing on the site is lit. Text contrast is at least 5.8:1 in both themes. Pages have landmarks, a skip link, one `h1` and a visible focus ring, and nothing but the web installer needs a script.
 
 ## Licence
 

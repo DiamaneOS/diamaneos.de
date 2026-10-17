@@ -27,7 +27,7 @@ The controller is the person named in the [Impressum](#impressum). Send privacy 
 
 ### Website
 
-These pages set no cookies, run no scripts and store nothing on your device. Fonts, images and styles come from this site. There is no analytics, advertising or embedded third-party content. The contact form posts to this site's own handler.
+These pages set no cookies and store nothing on your device. Only the web installer runs scripts. Fonts, images and styles come from this site. There is no analytics, advertising or embedded third-party content. The contact form posts to this site's own handler.
 
 Each request gives the server your IP address, the request time, the requested page and your browser's headers. The website runs on a server at OVHcloud in Germany.
 
@@ -35,7 +35,9 @@ Links to other websites are plain links. Following one connects your browser to 
 
 ### Web installer
 
-The [web installer](https://install.diamaneos.de) is static files on the same server, with the same request data and no cookies. Its scripts run in your browser, talk to the phone over USB and read any image set you choose on your computer. Its only other requests download a release from releases.diamaneos.de, and their path names the phone model.
+The [web installer](/install/web/) is a page of this website, with the same request data and no cookies. Its scripts run in your browser, talk to the phone over USB and read any image set you choose on your computer.
+
+The browser keeps your permission for the phone until you remove it in the browser's site settings. The installer's only other requests download a release from releases.diamaneos.de, and their path names the phone model.
 
 ### Phone services
 

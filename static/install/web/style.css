@@ -1,0 +1,433 @@
+/* The DiamaneOS website's type, colours and spacing (its assets/css/site.css),
+ * with styles for the installer's controls. */
+
+/* The website's Latin subset of Sofia Sans. Other characters fall back to the
+ * system font. */
+@font-face {
+    font-family: "Sofia Sans";
+    src: url("fonts/SofiaSans-latin-wght.woff2") format("woff2");
+    font-weight: 1 1000;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0000-017F, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+    color-scheme: light dark;
+    --bg: #f6f3ef;
+    --ink: #1d1b19;
+    --muted: #5e5952;
+    --outline: #7c7670;
+    --line: #d1cbc4;
+    --accent: #8a5100;
+    --lamp: #fba700;
+    --code-bg: #ebe8e4;
+    --error: #b12c28;
+    --w-body: 400;
+    --font: "Sofia Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --measure: 40rem;
+    --gutter: clamp(1rem, 4vw, 2rem);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #100e0b;
+        --ink: #ebe8e4;
+        --muted: #c0bbb3;
+        --outline: #908b84;
+        --line: #46413b;
+        --accent: #ffb956;
+        --code-bg: #2c2a27;
+        --error: #ffb4aa;
+        --w-body: 380;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    font-weight: var(--w-body);
+    letter-spacing: -0.0125em;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2 {
+    margin: 0;
+    font-weight: 560;
+    line-height: 1.2;
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.5rem);
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: 1.3rem;
+}
+
+p,
+ul,
+ol {
+    margin: 0;
+}
+
+h1 a,
+h2 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a {
+    color: var(--accent);
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
+}
+
+a:hover {
+    text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+main:focus {
+    outline: none;
+}
+
+code,
+pre {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    letter-spacing: 0;
+}
+
+code {
+    padding: 0.1em 0.3em;
+    border-radius: 4px;
+    background: var(--code-bg);
+}
+
+pre {
+    margin: 0;
+    padding: 1rem;
+    border-radius: 4px;
+    background: var(--code-bg);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.wrap {
+    max-width: calc(var(--measure) + 2 * var(--gutter));
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+.skip {
+    position: absolute;
+    left: 0.5rem;
+    top: -3rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg);
+    color: var(--ink);
+}
+
+.skip:focus {
+    top: 0.5rem;
+}
+
+/* header */
+
+.site-header {
+    border-bottom: 1px solid var(--line);
+}
+
+.header-in {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.lockup {
+    display: block;
+    height: 24px;
+    width: auto;
+}
+
+.lockup .b-sheet,
+.lockup .b-name,
+.lockup .b-suffix,
+.lockup .b-bond {
+    fill: var(--ink);
+}
+
+@media (prefers-color-scheme: dark) {
+    .lockup .b-suffix {
+        fill: var(--muted);
+    }
+
+    .lockup .b-bond {
+        fill: var(--lamp);
+    }
+}
+
+.nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav li + li {
+    margin-top: 0;
+}
+
+.nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+}
+
+/* page */
+
+main {
+    display: block;
+    max-width: calc(var(--measure) + 2 * var(--gutter));
+    margin: 0 auto;
+    padding: 2.5rem var(--gutter) 3rem;
+}
+
+main > * + *,
+section > * + *,
+details > * + * {
+    margin-top: 1rem;
+}
+
+main > section,
+main > nav,
+main > details {
+    margin-top: 2.25rem;
+    scroll-margin-top: 1rem;
+}
+
+main > h1 + p {
+    margin-top: 1.25rem;
+}
+
+section > h2 + * {
+    margin-top: 0.75rem;
+}
+
+ul {
+    padding-left: 1.2rem;
+}
+
+li + li {
+    margin-top: 0.5rem;
+}
+
+li::marker {
+    color: var(--muted);
+}
+
+.toc {
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.toc h2 {
+    font-size: 1rem;
+}
+
+.toc ul {
+    margin-top: 0.5rem;
+    padding-left: 1.3rem;
+}
+
+.toc li + li {
+    margin-top: 0.2rem;
+}
+
+/* controls */
+
+button {
+    min-height: 48px;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    background: var(--accent);
+    color: var(--bg);
+    font: inherit;
+    font-weight: 560;
+    letter-spacing: inherit;
+    cursor: pointer;
+}
+
+button:enabled:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+}
+
+button:disabled {
+    background: var(--code-bg);
+    border-color: var(--code-bg);
+    color: var(--muted);
+    cursor: not-allowed;
+}
+
+button.secondary {
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    border-color: var(--outline);
+    background: transparent;
+    color: var(--ink);
+}
+
+button.secondary:enabled:hover {
+    border-color: var(--ink);
+    background: transparent;
+}
+
+button.secondary:disabled {
+    border-color: var(--line);
+    background: transparent;
+}
+
+.choices {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+}
+
+input[type="checkbox"] {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: 0 0.4rem 0 0;
+    vertical-align: -0.15em;
+    accent-color: var(--accent);
+}
+
+progress {
+    width: 100%;
+    max-width: 30rem;
+    height: 0.5rem;
+    margin-top: 0.5rem;
+    border: 0;
+    border-radius: 4px;
+    background: var(--line);
+    appearance: none;
+}
+
+progress::-webkit-progress-bar {
+    border-radius: 4px;
+    background: var(--line);
+}
+
+progress::-webkit-progress-value {
+    border-radius: 4px;
+    background: var(--accent);
+}
+
+progress::-moz-progress-bar {
+    border-radius: 4px;
+    background: var(--accent);
+}
+
+summary {
+    padding: 0.25rem 0;
+    font-size: 1.3rem;
+    font-weight: 560;
+    line-height: 1.2;
+    cursor: pointer;
+}
+
+summary::marker {
+    color: var(--muted);
+}
+
+details p {
+    color: var(--muted);
+}
+
+.error-text {
+    color: var(--error);
+}
+
+/* footer */
+
+.site-footer {
+    padding: 1.5rem 0 2.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+.site-footer p + p {
+    margin-top: 0.4rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.1rem;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-links li + li {
+    margin-top: 0;
+}
+
+.footer-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}

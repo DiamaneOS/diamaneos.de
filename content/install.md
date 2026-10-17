@@ -11,7 +11,7 @@ There are two ways to install DiamaneOS. Both write the same factory images in t
 
 ## Only from this project
 
-DiamaneOS files, the web installer and the install guides come only from diamaneos.de and its subdomains, such as install.diamaneos.de, and from the [DiamaneOS organisation](https://github.com/DiamaneOS) on GitHub. Do not use them from anywhere else.
+DiamaneOS files, the web installer and the install guides come only from diamaneos.de and its subdomains, and from the [DiamaneOS organisation](https://github.com/DiamaneOS) on GitHub. Do not use them from anywhere else.
 
 ## Getting help
 

@@ -29,7 +29,7 @@ These controls reduce attack surface. A virtual server's firewall cannot prevent
 
 ## Website and relays
 
-The website serves static HTML and CSS with local fonts and images. It runs no scripts, analytics or third-party embeds. TLS protects browser connections, and content security policy limits what a page can load or submit.
+The website serves static HTML and CSS with local fonts and images. It runs no analytics or third-party embeds, and only the web installer runs scripts. TLS protects browser connections, and content security policy limits what a page can load or submit.
 
 The contact form has separate ingress and mail workers. Input size, methods and request rates are bounded. The mail worker has a fixed sender, destination and SMTP route. Contact text is not stored as a web-server submission history.
 

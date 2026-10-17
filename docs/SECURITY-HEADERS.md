@@ -1,8 +1,10 @@
 # Hosting and security headers
 
 The site is plain static files: HTML, one stylesheet, one font, one SVG icon, a licence text, `robots.txt` and a
-sitemap. It has no JavaScript, no cookies or embedded requests to other hosts. Its contact form posts to the same site (`scripts/check-output.sh` checks
+sitemap. It has no cookies or embedded requests to other hosts. Its contact form posts to the same site (`scripts/check-output.sh` checks
 the build).
+
+The only JavaScript is the web installer under `/install/web/`, with its own headers ([below](#the-web-installer)).
 
 Serve `public/` through nginx with the same-origin contact handler. The nginx example uses no request logs.
 Use the supplied contact proxy configuration. It drops unrelated incoming headers and limits request size and rate.
@@ -14,7 +16,9 @@ Use the supplied contact proxy configuration. It drops unrelated incoming header
 `hugo.toml` (`[server.headers]`) sends the same security headers during `hugo server`, except HSTS, so the local
 preview runs under the same policy. Keep the two in step.
 
-## Headers on every response
+## Headers on every website response
+
+Everything outside `/install/web/` gets these.
 
 ```text
 Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
@@ -39,6 +43,25 @@ X-Frame-Options: DENY
 Each page also carries the same CSP in a `<meta http-equiv>` tag (without `frame-ancestors`, which a meta tag cannot
 set) and `<meta name="referrer" content="same-origin">`, as a fallback if a header is missing. The header is the real
 control.
+
+## Caching
+
+HTML responses carry `Cache-Control: no-cache`, so browsers revalidate each page and show a new release at once. A
+page that has not changed costs a `304`. Other files keep nginx's `ETag` and `Last-Modified` without `Cache-Control`.
+
+## The web installer
+
+`/install/web/` gets the installer's own headers instead of the website's, from the installer commit in
+`installer.sha256`:
+
+- `website-installer-page.conf` on the page: scripts and workers from this origin, Trusted Types, and connections only
+  to `https://releases.diamaneos.de`. Its Permissions-Policy allows `usb`, `screen-wake-lock` and `clipboard-write` for
+  this origin.
+- `website-installer-general.conf` on its other files, `website-installer-base.conf` on all of them.
+- `Cache-Control: no-cache` on every installer file, except fastboot.js under its versioned path, which is immutable.
+
+The rest of the site sends no `script-src` and `usb=()`. Only the installer page can use the USB permission the browser
+keeps for the origin. `/install/web` without the slash redirects, because the page's links are relative.
 
 ## HSTS, without preload
 
@@ -129,6 +152,7 @@ Certificates and the HTTP-to-HTTPS and domain redirects are left out of the ngin
 ```sh
 curl -sI https://diamaneos.de/ | grep -iE 'content-security|strict-transport|referrer|permissions|cross-origin|x-content|x-frame|server'
 curl -sI https://diamaneos.de/favicon.svg | grep -i content-security
+curl -sI https://diamaneos.de/install/web/ | grep -iE 'content-security|permissions|cache-control'
 curl -sI https://www.diamaneos.de/ | grep -i location
 ```
 

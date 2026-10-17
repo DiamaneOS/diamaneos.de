@@ -1,7 +1,9 @@
 #!/bin/sh
 # Build the site and check what it produces:
-#   - no JavaScript: no <script>, no .js files, no javascript: URLs, no inline
-#     event handlers
+#   - no JavaScript outside install/web/: no <script>, no .js files, no
+#     javascript: URLs. No inline event handlers anywhere.
+#   - install/web/ holds exactly the web installer files of installer.sha256,
+#     and the links between the installer and the site resolve
 #   - nothing the Content-Security-Policy would block: no inline style
 #     attributes or <style> elements in HTML
 #   - no embedded third-party content: no iframe, object, embed or media
@@ -60,12 +62,17 @@ show() { cut -c1-160 | head -n 20 | sed 's/^/        /'; }
 
 echo "Checking $OUT/ ($(find "$OUT" -type f | wc -l | tr -d ' ') files)"
 
-# 1. JavaScript
-if grep -rIniE '<script' "$OUT" >"$tmp/m"; then bad "<script> found:"; show <"$tmp/m"; else ok "no <script> elements"; fi
-if find "$OUT" -type f \( -name '*.js' -o -name '*.mjs' -o -name '*.cjs' \) | grep . >"$tmp/m"; then
-  bad "JavaScript files found:"; show <"$tmp/m"
-else ok "no JavaScript files"; fi
-if grep -rIniE 'javascript:' "$OUT" >"$tmp/m"; then bad "javascript: URL found:"; show <"$tmp/m"; else ok "no javascript: URLs"; fi
+# 1. JavaScript, allowed only for the web installer
+if ! python3 scripts/check-installer.py "$OUT"; then bad "the web installer differs from installer.sha256 or its links"; fi
+if grep -rIniE '<script' "$OUT" | grep -v "^$OUT/install/web/" >"$tmp/m"; then
+  bad "<script> found outside install/web/:"; show <"$tmp/m"
+else ok "no <script> elements outside install/web/"; fi
+if find "$OUT" -path "$OUT/install/web" -prune -o -type f \( -name '*.js' -o -name '*.mjs' -o -name '*.cjs' \) -print | grep . >"$tmp/m"; then
+  bad "JavaScript files found outside install/web/:"; show <"$tmp/m"
+else ok "no JavaScript files outside install/web/"; fi
+if grep -rIniE 'javascript:' "$OUT" | grep -v "^$OUT/install/web/" >"$tmp/m"; then
+  bad "javascript: URL found outside install/web/:"; show <"$tmp/m"
+else ok "no javascript: URLs outside install/web/"; fi
 if grep -rIniE --include='*.html' --include='*.svg' '<[^>]*[[:space:]]on[a-z]+[[:space:]]*=' "$OUT" >"$tmp/m"; then
   bad "inline event handler found:"; show <"$tmp/m"
 else ok "no inline event handlers"; fi
@@ -101,7 +108,7 @@ if [ -s "$tmp/m" ]; then bad "resources loaded from other hosts:"; show <"$tmp/m
 # 5. Fonts: WOFF2 only
 if find "$OUT" -type f \( -iname '*.ttf' -o -iname '*.otf' -o -iname '*.woff' -o -iname '*.eot' \) | grep . >"$tmp/m"; then
   bad "font files other than WOFF2:"; show <"$tmp/m"
-else ok "fonts are WOFF2 only ($(find "$OUT" -type f -iname '*.woff2' | wc -l | tr -d ' ') file)"; fi
+else ok "fonts are WOFF2 only ($(find "$OUT" -type f -iname '*.woff2' | wc -l | tr -d ' ') files)"; fi
 
 # 6. Every URL to another host in HTML must be a link the reader follows
 grep -rhoE --include='*.html' 'https?://[^"'"'"' <>)]+' "$OUT" | external | sort -u >"$tmp/all"
@@ -114,8 +121,9 @@ echo "Links to other sites (navigation only, not loaded by the page):"
 if [ -s "$tmp/links" ]; then sed 's/^/        /' "$tmp/links"; else echo "        none"; fi
 
 echo "URLs to other hosts in other text files (not requests: licence text, XML namespaces):"
-grep -rIoE --exclude='*.html' --exclude='*.css' 'https?://[^"'"'"' <>)]+' "$OUT" |
+grep -rIoE --exclude='*.html' --exclude='*.css' 'https?://[^"'"'"' <>)]+' "$OUT" | grep -v "^$OUT/install/web/" |
   grep -vE ":https?://${OWN_HOST}(/|$)" | sort -u | sed 's/^/        /' || true
+echo "The web installer under install/web/ may connect only to: $(sed -n 's/.*connect-src \([^;]*\);.*/\1/p' server/nginx/website-installer-page.conf)"
 
 echo
 if grep -q 'name="robots" content="noindex' "$OUT/index.html"; then

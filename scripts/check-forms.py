@@ -6,10 +6,12 @@ import sys
 
 
 class Forms(HTMLParser):
-    def __init__(self):
+    def __init__(self, controls_outside=False):
         super().__init__(convert_charrefs=True)
         self.forms = []
         self.current = None
+        # The web installer's buttons and file inputs submit nothing. It may have no form either.
+        self.controls_outside = controls_outside
 
     def handle_starttag(self, tag, attrs):
         if tag == 'form':
@@ -19,6 +21,8 @@ class Forms(HTMLParser):
             self.forms.append(self.current)
         elif tag in {'input', 'textarea', 'button', 'select'}:
             if self.current is None:
+                if self.controls_outside:
+                    return
                 raise ValueError('form control outside the contact form')
             self.current[1].append((tag, attrs))
 
@@ -32,7 +36,7 @@ class Forms(HTMLParser):
 def validate(root):
     count = 0
     for path in sorted(root.rglob('*.html')):
-        value = Forms()
+        value = Forms(path.relative_to(root).as_posix().startswith('install/web/'))
         value.feed(path.read_text(encoding='utf-8'))
         if value.current is not None:
             raise ValueError('unclosed form')
