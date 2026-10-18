@@ -19,8 +19,6 @@ All source code is on GitHub, in the [DiamaneOS organisation](https://github.com
 - Chat and announcements: [DiamaneOS on Matrix](https://matrix.to/#/#diamaneos-space:matrix.org)
 - Code and bug reports: [GitHub](https://github.com/DiamaneOS)
 
-These are the only official channels.
-
 ## Contact {#contact}
 
 Send a message using this form, or email [hello@diamaneos.de](mailto:hello@diamaneos.de). For security problems, see [Security](/security/).
