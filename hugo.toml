@@ -20,6 +20,7 @@ disableHugoGeneratorInject = true
   # noindex. Set to false for the published build.
   draftNotice = false
   github = "https://github.com/DiamaneOS"
+  matrix = "https://matrix.to/#/#diamaneos-space:matrix.org"
   grapheneos = "https://grapheneos.org/"
 
 [menus]
