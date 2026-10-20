@@ -241,7 +241,7 @@ In the bootloader, with the bootloader unlocked:
 fastboot oem reset-rollback
 ```
 
-It clears the stored rollback indexes, so an older stock release can boot locked. The bootloader refuses it while locked.
+It clears the rollback indexes DiamaneOS stored, so the stock OS can boot locked. The bootloader refuses it while locked.
 
 Then install the stock OS with the device maker's own script from the factory image, as its guide describes. If you want to lock the bootloader on the stock OS, the phone must stay in the bootloader after the install. The [notes for your device](/devices/) say how, and what to do if the install stops.
 
