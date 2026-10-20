@@ -1,6 +1,6 @@
 ---
 title: "Build DiamaneOS"
-description: "Build DiamaneOS from source: host, dependencies, source and its signatures, vendor files, user and development builds, checks and installation."
+description: "Build DiamaneOS from source: host, dependencies, source and its signatures, vendor files, user and development builds, checks, installation and signing with your own keys."
 lede: "Build DiamaneOS from source, check the result and install it."
 ---
 
@@ -35,16 +35,16 @@ This is the only step that needs `sudo`. Everything else runs as your own user. 
 Make a directory for the source, then initialise it from the [manifest repository](https://github.com/DiamaneOS/platform_manifest.git) and sync it:
 
 ```sh
-mkdir -p ~/diamaneos-build/src
-cd ~/diamaneos-build/src
+mkdir -p ~/diamaneos
+cd ~/diamaneos
 repo init -u https://github.com/DiamaneOS/platform_manifest.git -b android17
 repo sync -j8
 ```
 
 - The [DiamaneOS manifest](https://github.com/DiamaneOS/platform_manifest/tree/android17) takes GrapheneOS and AOSP projects at the exact commits of the GrapheneOS release it is based on. It adds the device projects and the DiamaneOS forks.
 - The build tools come with the source at `tools/diamaneos`. Run them from there, so the tools match the source.
-- The tools use the directory above the checkout as their workspace. Images, logs and build state go to `~/diamaneos-build`.
-- Run the commands below from the `src` directory.
+- Any directory works. Images, logs and build state go next to it, to `~/diamaneos-build` here. `--workspace DIR` puts them somewhere else.
+- Run the commands below from the source directory.
 
 ### Smaller download
 
@@ -91,13 +91,18 @@ git -c gpg.ssh.allowedSignersFile=~/.ssh/diamaneos_allowed_signers verify-tag TA
 
 ## Vendor files
 
+Replace `<codename>` with your device's codename:
+
+{{< codenames >}}
+
 ```sh
-tools/diamaneos/bin/diamaneos build vendor
+tools/diamaneos/bin/diamaneos build vendor <codename>
 ```
 
 - It downloads the device maker's factory package from its official host and checks its size and SHA-256.
 - It takes the vendor files the source selects out of that package and checks each one against its recipe.
 - `--factory-zip FILE` uses a copy you already have. The copy must have the same size and SHA-256.
+- It installs them in the source, ready for `lunch` and `m`, and prints those commands.
 - Run again, it makes the vendor files only when their recipe changed.
 - GrapheneOS's vendor extraction for Pixel phones does not apply.
 
@@ -122,12 +127,10 @@ tools/diamaneos/bin/diamaneos build all
 
 ### By hand
 
-The plain Android build works too. Replace `<codename>` with your device's codename:
-
-{{< codenames >}}
+The plain Android build works too:
 
 ```sh
-tools/diamaneos/bin/diamaneos build vendor
+tools/diamaneos/bin/diamaneos build vendor <codename>
 source build/envsetup.sh
 lunch <codename>-cur-user
 m target-files-package otatools-package
@@ -182,7 +185,7 @@ tools/diamaneos/bin/diamaneos build all --variant user \
 
 ## Installing your build
 
-These commands sign every build with Android's public test keys. Anyone can sign images with them. Keep the bootloader unlocked while such a build is installed, and never lock it.
+These commands sign every build with Android's public test keys. Anyone can sign images with them. Keep the bootloader unlocked while such a build is installed, and never lock it. To lock the phone, [sign the build with your own keys](#signing-with-your-own-keys) first.
 
 ### First install
 
@@ -216,6 +219,128 @@ fastboot oem device-info >> phone.txt 2>&1
 tools/diamaneos/bin/diamaneos flash-steps --since ~/diamaneos-build/images/PREVIOUS --phone phone.txt
 ```
 
+## Signing with your own keys
+
+Sign a build with keys of your own to lock the phone with them. The steps follow [GrapheneOS's build guide](https://grapheneos.org/build). Run them from the source directory, after `build all` or `build package`.
+
+### Generating keys
+
+Generate the keys once and keep them. Another key set needs a new install, which erases the phone. Replace `<codename>` with your device's codename and `YourName` with a name for the certificates:
+
+```sh
+DEVICE=<codename>
+CN=YourName
+mkdir -p keys/$DEVICE && cd keys/$DEVICE
+for role in releasekey platform shared media networkstack bluetooth sdk_sandbox gmscompat_lib nfc; do
+  ../../development/tools/make_key "$role" "/CN=$CN/"
+done
+openssl genrsa 4096 | openssl pkcs8 -topk8 -scrypt -out avb.pem
+../../external/avb/avbtool.py extract_public_key --key avb.pem --output avb_pkmd.bin
+ssh-keygen -t ed25519 -f id_ed25519
+cd ../..
+```
+
+- Give every key the same passphrase. `script/decrypt-keys` expects that.
+- `avb_pkmd.bin` is your verified boot key. Its ID is its SHA-256, from `sha256sum keys/$DEVICE/avb_pkmd.bin`.
+- `id_ed25519` signs the build's check report and the factory images.
+
+### Signing a build
+
+Name the build and a directory for the signed files:
+
+```sh
+IMAGES=$(readlink -f ~/diamaneos-build/images/latest)
+REPORT=$IMAGES.verify.json
+SIGN=~/diamaneos-signing/$(basename "$IMAGES")
+mkdir -p "$SIGN"
+```
+
+Write the inventory of your public keys and sign the check report:
+
+```sh
+tools/diamaneos/bin/diamaneos signing inventory --key-dir keys/$DEVICE --identity "$CN" \
+  --target-files "$IMAGES/target-files.zip" --output "$SIGN/trust"
+ssh-keygen -Y sign -n diamaneos-build-verification -f keys/$DEVICE/id_ed25519 "$REPORT"
+```
+
+Prepare the signing plan:
+
+```sh
+tools/diamaneos/bin/diamaneos signing prepare \
+  --build-record "$IMAGES/build.json" --verification-report "$REPORT" \
+  --verification-signature "$REPORT.sig" --target-files "$IMAGES/target-files.zip" \
+  --resolved-manifest "$IMAGES/resolved-manifest.xml" --otatools "$IMAGES/otatools.zip" \
+  --source-root "$PWD" --keys "$SIGN/trust/inventory.json" \
+  --scratch "$SIGN/scratch" --output "$SIGN/plan.json"
+```
+
+Sign the build and make its full update package, with the keys decrypted in memory:
+
+```sh
+unzip -q "$IMAGES/otatools.zip" -d "$SIGN/otatools"
+KEY_DIR=$(mktemp -d /dev/shm/keys.XXXXXXXXXX)
+cp keys/$DEVICE/* "$KEY_DIR" && script/decrypt-keys "$KEY_DIR"
+tools/diamaneos/bin/diamaneos signing command --plan "$SIGN/plan.json" \
+  --target-files "$IMAGES/target-files.zip" --signed-target-files "$SIGN/target-files.zip" \
+  --signer "$SIGN/otatools/bin/sign_target_files_apks" --key-dir "$KEY_DIR" \
+  --source-root "$PWD" --ota "$SIGN/$DEVICE-ota_update.zip" > "$SIGN/sign.sh"
+PATH="$SIGN/otatools/bin:$PWD/prebuilts/build-tools/linux-x86/bin:$PWD/prebuilts/build-tools/path/linux-x86:$PWD/prebuilts/jdk/jdk21/linux-x86/bin:$PATH" \
+  sh -e "$SIGN/sign.sh"
+rm -rf "$KEY_DIR"
+```
+
+- `signing command` only prints the signing commands. Read `sign.sh` before you run it.
+- It refuses a plan, source or target files that changed since `signing prepare`.
+
+Make the factory images and sign them:
+
+```sh
+tools/diamaneos/bin/diamaneos signing factory --plan "$SIGN/plan.json" \
+  --build-record "$IMAGES/build.json" --verification-report "$REPORT" \
+  --verification-signature "$REPORT.sig" --target-files "$IMAGES/target-files.zip" \
+  --resolved-manifest "$IMAGES/resolved-manifest.xml" --signed-target-files "$SIGN/target-files.zip" \
+  --otatools "$IMAGES/otatools.zip" --source-root "$PWD" --keys "$SIGN/trust/inventory.json" \
+  --scratch "$SIGN/scratch" --images-archive "$SIGN/images.zip" --output "$SIGN/$DEVICE-factory.zip"
+ssh-keygen -Y sign -n "factory images" -f keys/$DEVICE/id_ed25519 "$SIGN/$DEVICE-factory.zip"
+```
+
+- The `build.json` of the factory images records the signing as `own-keys`.
+- A build of changed source lists its changes there too.
+
+### Installing and locking
+
+Start with the bootloader unlocked, as for the [first install](#first-install). Then unpack the factory images and run their install script:
+
+```sh
+unzip -q "$SIGN/$DEVICE-factory.zip" -d "$SIGN/factory"
+cd "$SIGN"/factory/*/
+bash flash-all.sh
+```
+
+- It installs the images and your verified boot key, then stops in the bootloader.
+- Lock straight away, as the install guide's [locking steps](/install/cli/#locking-the-bootloader) describe.
+- From then on the warning screen at each start shows the ID of your key. It must match the SHA-256 of your `avb_pkmd.bin`.
+
+### Updating a build of your own
+
+Builds of your own have no Updater. It comes only with DiamaneOS's official builds. To update, build the newer source and sign it with the same keys. Then install its full update package from recovery, as on GrapheneOS:
+
+1. Start the phone in recovery from the bootloader menu and choose "Apply update from ADB".
+2. Send the update package:
+
+   ```sh
+   adb sideload "$SIGN/$DEVICE-ota_update.zip"
+   ```
+
+- Recovery installs only update packages signed with your `releasekey`.
+- The phone keeps its data.
+
+An update server of your own is a source change, as on GrapheneOS:
+
+- `packages/apps/Settings/download-policy/client/de/diamaneos/downloads/DownloadPolicy.java` builds the update addresses in `url()`.
+- `packages/apps/Updater/res/xml/network_security_config.xml` names the server domains and their TLS pins.
+- `vendor/diamaneos/product.mk` adds the Updater only when `DIAMANEOS_OFFICIAL_BUILD` is `true`.
+
 ## Troubleshooting
 
 - A failed step names its log in `~/diamaneos-build/logs/`. Fix the cause and run the same command again.
@@ -226,3 +351,4 @@ tools/diamaneos/bin/diamaneos flash-steps --since ~/diamaneos-build/images/PREVI
 
 - The [build quickstart](https://github.com/DiamaneOS/diamaneos-tools/blob/main/docs/BUILDING.md) has the same steps in short.
 - The [build reference](https://github.com/DiamaneOS/diamaneos-tools/blob/main/docs/BUILD.md) describes each step, its checks and its records.
+- The [signing reference](https://github.com/DiamaneOS/diamaneos-tools/blob/main/docs/SIGNING.md) describes each signing command and its checks.
