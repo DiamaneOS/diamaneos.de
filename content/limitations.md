@@ -22,6 +22,10 @@ lede: "What does not work, or is not verified, on the supported devices."
 - **Flash mode by hardware keys.** Someone holding the phone can start Qualcomm's emergency download mode (EDL) with the keys. Using it needs a signed tool.
 - **No head trackers.** Head trackers on paired Bluetooth and USB devices do not work, because their parser is not shipped.
 
+## Camera
+
+- **Night and Portrait photos take time to save.** The camera app processes them on the phone, about 15 seconds per photo. You can take more photos meanwhile.
+
 ## Updates
 
 - **Behind GrapheneOS.** DiamaneOS follows one GrapheneOS release at a time. The [source manifest](https://github.com/DiamaneOS/platform_manifest/tree/android17) names it.
@@ -30,3 +34,4 @@ lede: "What does not work, or is not verified, on the supported devices."
 
 - **Emergency calls tested only in simulation.** No call to an emergency number has been made.
 - **No microphone in emergency calls with the Moments switch down.** With the switch action Camera and microphone off, the kernel keeps the built-in microphones off during an emergency call too. Sliding the switch up turns them back on.
+- **Wi-Fi calling needs a restart after a clean install.** On the first start, Wi-Fi calling and VoLTE can stay unavailable. The phone then offers a restart, which brings them up.
