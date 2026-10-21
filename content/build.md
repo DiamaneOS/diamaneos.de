@@ -25,7 +25,7 @@ The build checks the host before each step, including the free disk space the st
 sudo apt update
 sudo apt install git git-lfs repo python3 python3-jsonschema gnupg openssh-client \
   rsync zip unzip diffutils fontconfig fonts-dejavu-core gperf libc6-dev-i386 \
-  lib32gcc-s1 hostname ca-certificates util-linux kmod binutils openssl make perl
+  lib32gcc-s1 hostname ca-certificates util-linux kmod binutils openssl make perl curl
 ```
 
 This is the only step that needs `sudo`. Everything else runs as your own user. The build environment file for each device in the tools' [config](https://github.com/DiamaneOS/diamaneos-tools/tree/main/config) records the tested package versions.
