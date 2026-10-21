@@ -48,7 +48,7 @@ repo sync -j8
 
 ### Smaller download
 
-Add `--depth=1` to `repo init`, sync with `repo sync -c --no-tags -j8` and pass `--shallow` to the first `build all`. The checkout then has no history. This saves roughly half of the download and disk space. Moving to a newer release later downloads more.
+Add `--depth=1` to `repo init` and sync with `repo sync -c --no-tags -j8`. With `build all`, pass `--shallow` the first time. The checkout then has no history. This saves roughly half of the download and disk space. Moving to a newer release later downloads more.
 
 ### Updating the source
 
@@ -102,13 +102,25 @@ tools/diamaneos/bin/diamaneos build vendor <codename>
 - It downloads the device maker's factory package from its official host and checks its size and SHA-256.
 - It takes the vendor files the source selects out of that package and checks each one against its recipe.
 - `--factory-zip FILE` uses a copy you already have. The copy must have the same size and SHA-256.
-- It installs them in the source and prints the `lunch` and `m target-files-package otatools-package` commands to run next. A plain `m` leaves out what `build package` needs.
+- It installs them in the source and prints the commands to run next.
 - Run again, it makes the vendor files only when their recipe changed.
 - GrapheneOS's vendor extraction for Pixel phones does not apply.
 
-`build all` runs this step itself.
-
 ## Building a user build
+
+After the vendor files:
+
+```sh
+source build/envsetup.sh
+lunch <codename>-cur-user
+m target-files-package otatools-package
+tools/diamaneos/bin/diamaneos build package
+```
+
+- `m target-files-package otatools-package` builds the images, the target-files archive and the host tools. A plain `m` builds the images only.
+- `build package` checks that `out/` holds a build of this source with these vendor files, writes the image set and checks it.
+- It runs its tools from the build's own `otatools.zip`.
+- `build.json` marks the set as built by hand.
 
 ### In one command
 
@@ -116,40 +128,17 @@ tools/diamaneos/bin/diamaneos build vendor <codename>
 tools/diamaneos/bin/diamaneos build all
 ```
 
-- It syncs the source, makes the vendor files, compiles, packages the images and checks them. `user` is the default variant.
-- Only the source sync and the factory package download use the network. Compilation runs without network access.
-- If the host cannot compile without network access, the build stops. `--allow-network` builds anyway and records that in `build.json`.
-- Each long command prints a log file to follow with `tail -f`.
-- After a stop, run the same command again. Finished steps are skipped.
-- `--dry-run` shows what is left and changes nothing. `--from vendor` builds again without syncing.
-- At the end it prints the image directory, such as `~/diamaneos-build/images/20261003-user-3f9a1c2b7d`. `~/diamaneos-build/images/latest` points to the newest one.
+- It runs the source sync, the vendor files, the Android build and the packaging, then checks the images. `user` is the default variant.
+- Compilation runs without network access. If the host cannot do that, the build stops. `--allow-network` builds anyway and records it in `build.json`.
+- After a stop, run the same command again. Finished steps are skipped. `--dry-run` shows what is left.
+- At the end it prints the image directory, such as `~/diamaneos-build/images/20261003-user-3f9a1c2b7d`.
 - Leave out `--official`. It adds the Updater with DiamaneOS's update server, for the project's own builds.
-
-### By hand
-
-The plain Android build works too:
-
-```sh
-tools/diamaneos/bin/diamaneos build vendor <codename>
-source build/envsetup.sh
-lunch <codename>-cur-user
-m target-files-package otatools-package
-tools/diamaneos/bin/diamaneos build package
-```
-
-- `build package` checks that `out/` holds a build of this source with these vendor files. It then writes the image set and checks it.
-- `build.json` marks such a set as built by hand and not reproducible.
-- A plain `m` builds the images only. `build package` also needs the target-files and otatools packages.
 
 ## Development builds
 
-```sh
-tools/diamaneos/bin/diamaneos build all --variant userdebug
-```
+Run `lunch <codename>-cur-userdebug` instead, or `build all --variant userdebug`.
 
 - `userdebug` adds root debugging over adb. Use it for development only.
-- Give `build all` the same `--variant` each time. Another variant builds Android again.
-- By hand, run `lunch <codename>-cur-userdebug` instead.
 - The variant changes debugging, not signing. Neither variant is a signed release.
 
 ## Checking a build
