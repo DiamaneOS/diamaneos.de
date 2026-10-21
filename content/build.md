@@ -122,7 +122,9 @@ tools/diamaneos/bin/diamaneos build package
 - It runs its tools from the build's own `otatools.zip`.
 - `build.json` marks the set as built by hand.
 
-### In one command
+### Or all steps in one command
+
+Instead of the vendor files and the build by hand, one command can do everything. It replaces those steps and does not follow them.
 
 ```sh
 tools/diamaneos/bin/diamaneos build all
