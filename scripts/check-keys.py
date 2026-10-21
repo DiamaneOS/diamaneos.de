@@ -39,6 +39,7 @@ def check(output):
         require(b"PRIVATE" not in data, f"Private material: {name}")
     page = (ROOT / "content/documentation/keys.md").read_text()
     install = (ROOT / "content/install/cli.md").read_text()
+    chooser = (ROOT / "content/install.md").read_text()
 
     # avb_pkmd.bin is the PEM key in AVB's binary form: bit length, n0inv, modulus, r^2 mod n.
     avb = (keys / "avb_pkmd.bin").read_bytes()
@@ -49,7 +50,8 @@ def check(output):
     require(int.from_bytes(avb[8:8 + size], "big") == modulus, "avb_pkmd.bin and avb.pub.pem differ")
     require((n0inv * modulus) % 2**32 == 2**32 - 1, "avb_pkmd.bin has a wrong n0inv")
     require(int.from_bytes(avb[8 + size:], "big") == pow(2, 2 * bits, modulus), "avb_pkmd.bin has a wrong r^2")
-    require(hashlib.sha256(avb).hexdigest() in page, "The page lacks the verified boot key ID")
+    avb_id = hashlib.sha256(avb).hexdigest()
+    require(all(avb_id in text for text in (page, install, chooser)), "A page lacks the verified boot key ID")
 
     signers = (keys / "factory.allowed_signers").read_text()
     require(re.fullmatch(r"diamaneos ssh-ed25519 [A-Za-z0-9+/=]+\n", signers), "factory.allowed_signers is not one Ed25519 line")

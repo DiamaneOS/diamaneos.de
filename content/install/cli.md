@@ -194,8 +194,13 @@ fastboot flashing lock
 
 Confirm on the phone again. The phone erases all data and starts DiamaneOS.
 
-- From now on, each start shows a yellow warning screen with the ID of the key the OS is signed with. This is expected: DiamaneOS boots with its own key, not the device maker's.
-- Compare that ID with the [verified boot key ID](/documentation/keys/#verified-boot-key). It must match.
+From now on, each start shows a yellow warning screen with the ID of the key the OS is signed with. This is expected: DiamaneOS boots with its own key, not the device maker's. The ID must match DiamaneOS's [verified boot key ID](/documentation/keys/#verified-boot-key):
+
+```text
+5c4c94ba54e9f4fe81dcfd77e9b919204f0a493593a2677b50498cbcb6cd8f8d
+```
+
+- Another ID means the phone runs an OS signed with another key.
 - An orange warning screen means the bootloader is still unlocked. Start the phone in the bootloader, install again and lock straight after.
 
 ## Disabling OEM unlocking
