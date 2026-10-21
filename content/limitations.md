@@ -24,7 +24,7 @@ lede: "What does not work, or is not verified, on the supported devices."
 
 ## Camera
 
-- **Night and Portrait photos take time to save.** The camera app processes them on the phone, about 15 seconds per photo. You can take more photos meanwhile.
+- **Night and Portrait photos are finished after the shot.** Taking the photo is instant. The camera app then processes it on the phone, and it appears in the gallery about 15 seconds later. You can keep taking photos meanwhile.
 
 ## Updates
 
