@@ -83,6 +83,14 @@ The box appears once an eSIM has been added since DiamaneOS was last installed. 
 
 A duress PIN or password always erases every eSIM, even one added before DiamaneOS was installed and even while eSIM support is off.
 
+## Why do Bluetooth and Wi-Fi stay on in airplane mode? {#airplane-mode}
+
+Airplane mode turns off the mobile network, Bluetooth and Wi-Fi. If you turn Bluetooth or Wi-Fi back on while airplane mode is on, the phone remembers that and leaves it on the next time you turn on airplane mode.
+
+Bluetooth also stays on while headphones or another media device are connected.
+
+To have airplane mode turn them off again, turn on airplane mode and then turn off Bluetooth or Wi-Fi. The phone remembers that too.
+
 ## Where should problems be reported? {#reporting-problems}
 
 Send sensitive security reports to [security@diamaneos.de](mailto:security@diamaneos.de). Use the [issue tracker](https://github.com/DiamaneOS/issue-tracker/issues) for ordinary bugs, and [hello@diamaneos.de](mailto:hello@diamaneos.de) or the [contact form](/about/#contact) for general questions. Keep account tokens, private keys and identifying diagnostic data out of public reports.
