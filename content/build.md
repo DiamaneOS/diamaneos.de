@@ -328,8 +328,8 @@ Builds of your own have no Updater. It comes only with DiamaneOS's official buil
 
 An update server of your own is a source change, as on GrapheneOS:
 
-- `packages/apps/Settings/download-policy/client/de/diamaneos/downloads/DownloadPolicy.java` builds the update addresses in `url()`.
-- `packages/apps/Updater/res/xml/network_security_config.xml` names the server domains and their TLS pins.
+- `vendor/diamaneos/download-policy/client/de/diamaneos/downloads/DownloadPolicy.java` builds the update addresses in `url()`.
+- `vendor/diamaneos/overlay/DiamaneOSUpdaterOverlay/res/xml/network_security_config.xml` names the server domains and their TLS pins.
 - `vendor/diamaneos/product.mk` adds the Updater only when `DIAMANEOS_OFFICIAL_BUILD` is `true`.
 
 ## Troubleshooting
