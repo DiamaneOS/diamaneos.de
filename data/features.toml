@@ -66,6 +66,14 @@
     title = "Clock app"
     text = "Other apps cannot silence a ringing alarm, an expired timer cannot unlock the lock screen, and Clock data stays out of device-to-device transfers."
     status = "tested"
+  [[groups.items]]
+    title = "Photo formats"
+    text = "Take photos as JPEG, JPEG and RAW, or RAW alone. RAW photos are saved as DNG files."
+    status = "tested"
+  [[groups.items]]
+    title = "Night and Portrait"
+    text = "On phones whose camera offers no Night or Portrait mode of its own, the camera app provides them, processed on the phone without network access. A Portrait photo's blur can be changed or turned off later, also from the gallery."
+    status = "tested"
 
 [[groups]]
   id = "privacy"
