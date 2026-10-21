@@ -1,0 +1,23 @@
+# Release day: rename this file to the release number and set version and date.
+version = "YYYYMMDDNN"
+date = 2026-10-21
+channels = ["stable", "beta", "alpha"]
+notes = '''
+DiamaneOS is a privacy and security focused operating system based on GrapheneOS, for the [supported devices](/devices/). This is its first release.
+
+It has every [GrapheneOS feature](https://grapheneos.org/features) except for the [known limitations](/limitations/). It adds:
+
+- **Moments switch.** On phones with a side switch, the switch runs one action you pick, such as Camera and microphone off, which the kernel enforces.
+- **Passphrase first.** Setup recommends a generated passphrase, and each lock guess costs 256 MiB of memory and about a second.
+- **eSIM manager** and **encrypted microSD storage**.
+- **Camera.** Photos as JPEG and RAW, and Night and Portrait processed on the phone.
+- **Closed code replaced.** Open code takes over from closed services for VoLTE and Wi-Fi calling data, call audio, power management, the modem helpers and GPS.
+- **No vendor connections.** Network captures showed no connections from the phone's own software to the chip maker, the device maker or Google.
+- **Hardening**, such as hidden hardware identifiers, SELinux locked enforcing and sandboxed camera and Bluetooth services.
+
+The [features page](/features/) lists every change.
+
+Every update channel offers this release: Stable, Beta and Alpha.
+
+To install, follow the [install guide](/install/). It shows how to [check the factory images](/install/cli/#verifying-the-factory-images) and the [verified boot key ID](/documentation/keys/#verified-boot-key).
+'''
