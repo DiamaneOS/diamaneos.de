@@ -102,7 +102,7 @@ tools/diamaneos/bin/diamaneos build vendor <codename>
 - It downloads the device maker's factory package from its official host and checks its size and SHA-256.
 - It takes the vendor files the source selects out of that package and checks each one against its recipe.
 - `--factory-zip FILE` uses a copy you already have. The copy must have the same size and SHA-256.
-- It installs them in the source and prints the `lunch` and `m` commands to run next, as in "By hand" below. A plain `m` leaves out what `build package` needs.
+- It installs them in the source and prints the `lunch` and `m target-files-package otatools-package` commands to run next. A plain `m` leaves out what `build package` needs.
 - Run again, it makes the vendor files only when their recipe changed.
 - GrapheneOS's vendor extraction for Pixel phones does not apply.
 
@@ -133,7 +133,7 @@ The plain Android build works too:
 tools/diamaneos/bin/diamaneos build vendor <codename>
 source build/envsetup.sh
 lunch <codename>-cur-user
-m droid superimage target-files-package otatools-package build_super_image avbtool make_f2fs apksigner validate_target_files check_target_files_vintf
+m target-files-package otatools-package
 tools/diamaneos/bin/diamaneos build package
 ```
 
