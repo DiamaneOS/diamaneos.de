@@ -86,7 +86,8 @@ git -c gpg.ssh.allowedSignersFile=~/.ssh/diamaneos_allowed_signers verify-tag TA
 
 - A good signature prints `Good "git" signature for abhinav.jhanwar@proton.me` with the fingerprint above, and the command exits with 0.
 - "No principal matched" or any other error means the check failed, even after a line that starts with "Good".
-- To check the manifest of a `repo` checkout, run the commands in `.repo/manifests`.
+- Run them in a DiamaneOS project of the checkout, such as `tools/diamaneos`. For the manifest, run them in `.repo/manifests`.
+- The smaller download fetches no tags. Fetch the tag first with `git fetch --depth=1 diamaneos tag TAG`, or with `origin` instead of `diamaneos` in `.repo/manifests`.
 - Commits taken from GrapheneOS and AOSP keep their own signatures or have none.
 
 ## Vendor files
