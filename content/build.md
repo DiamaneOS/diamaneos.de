@@ -114,11 +114,14 @@ After the vendor files:
 ```sh
 source build/envsetup.sh
 lunch <codename>-cur-user
-m target-files-package otatools-package
+m droid target-files-package otatools-package
 tools/diamaneos/bin/diamaneos build package
 ```
 
-- `m target-files-package otatools-package` builds the images, the target-files archive and the host tools. A plain `m` builds the images only.
+- `m droid target-files-package otatools-package` builds the images, the target-files archive and the host tools. A plain `m` builds the images only.
+- Keep `droid`. Without it the target-files archive lacks the vendor SELinux policy, and the checks of `build package` fail.
+- `build package` refuses a target-files archive that lacks files `m` installed after it, or holds other bytes for them. Remove the directory it names and run `m droid target-files-package otatools-package` again.
+- For a build you keep, remove what earlier builds left first, as GrapheneOS's build guide says: `rm -r out` before `m`.
 - `build package` checks that `out/` holds a build of this source with these vendor files, writes the image set and checks it.
 - It runs its tools from the build's own `otatools.zip`.
 - `build.json` marks the set as built by hand.
