@@ -200,11 +200,17 @@ bash flash-all.sh
 
 ### Updates that keep data
 
+The first install is `flash-all.sh` from the image directory, as above. `flash-steps` is for later updates:
+
 ```sh
 tools/diamaneos/bin/diamaneos flash-steps --since ~/diamaneos-build/images/PREVIOUS
 ```
 
 - `PREVIOUS` is the image directory of the build on the phone.
+- `flash-steps` must know which firmware the phone runs, because its bootloader does not report it. Give one of these:
+  - `--since PREVIOUS` after a DiamaneOS install: the firmware that set installed.
+  - `--phone-firmware <stock build number>` for a phone on stock, from Settings > About phone > Build number.
+  - `--no-firmware` to leave the firmware as it is and update only the OS.
 - It prints the fastboot commands for the images that changed. It runs no fastboot command itself.
 - It adds firmware steps only when the new set carries newer firmware. It then needs the phone's bootloader state:
 
