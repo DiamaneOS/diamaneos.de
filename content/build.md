@@ -160,7 +160,7 @@ tools/diamaneos/bin/diamaneos build verify
 
 - It checks the hashes, the verified boot chain, the kernel and its arguments, the vendor files, the firmware and the device rules.
 - It writes its report, `<build>.verify.json`, next to the image directory.
-- For a build that is not official, failed checks do not stop the command. Read the report. It names each failed check and why it exists.
+- A failed check stops the command, and the image set moves aside to `<build>.failed`. The report names each failed check and why it exists.
 - Do not edit recorded hashes, remove checks or mix files from different builds to make a check pass.
 
 ### Reproducing a build
