@@ -288,32 +288,38 @@ rm -rf "$KEY_DIR"
 - `signing command` only prints the signing commands. Read `sign.sh` before you run it.
 - It refuses a plan, source or target files that changed since `signing prepare`.
 
-Make the factory images and sign them:
+Make the factory images in a directory of their own, apart from the public keys in `$SIGN/trust`, and sign them:
 
 ```sh
+mkdir -p "$SIGN/images"
 tools/diamaneos/bin/diamaneos signing factory --plan "$SIGN/plan.json" \
   --build-record "$IMAGES/build.json" --verification-report "$REPORT" \
   --verification-signature "$REPORT.sig" --target-files "$IMAGES/target-files.zip" \
   --resolved-manifest "$IMAGES/resolved-manifest.xml" --signed-target-files "$SIGN/target-files.zip" \
   --otatools "$IMAGES/otatools.zip" --source-root "$PWD" --keys "$SIGN/trust/inventory.json" \
-  --scratch "$SIGN/scratch" --images-archive "$SIGN/images.zip" --output "$SIGN/$DEVICE-factory.zip"
-ssh-keygen -Y sign -n "factory images" -f keys/$DEVICE/id_ed25519 "$SIGN/$DEVICE-factory.zip"
+  --scratch "$SIGN/scratch" --images-archive "$SIGN/images/images.zip" \
+  --output "$SIGN/images/$DEVICE-factory.zip"
+ssh-keygen -Y sign -n "factory images" -f keys/$DEVICE/id_ed25519 "$SIGN/images/$DEVICE-factory.zip"
 ```
 
+- `signing factory` refuses an output directory with the public keys inside it.
 - The `build.json` of the factory images records the signing as `own-keys`.
 - A build of changed source lists its changes there too.
 
 ### Installing and locking
 
-Start with the bootloader unlocked, as for the [first install](#first-install). Then unpack the factory images and run their install script:
+Start with the bootloader unlocked, as for the [first install](#first-install). Check the signature of the factory images, then unpack them and run their install script:
 
 ```sh
-unzip -q "$SIGN/$DEVICE-factory.zip" -d "$SIGN/factory"
+ssh-keygen -Y verify -f "$SIGN/trust/factory.allowed_signers" -I "$CN" -n "factory images" \
+  -s "$SIGN/images/$DEVICE-factory.zip.sig" < "$SIGN/images/$DEVICE-factory.zip"
+unzip -q "$SIGN/images/$DEVICE-factory.zip" -d "$SIGN/factory"
 cd "$SIGN"/factory/*/
 bash flash-all.sh
 ```
 
-- It installs the images and your verified boot key, then stops in the bootloader.
+- The check must print `Good "factory images" signature` with your name.
+- `flash-all.sh` installs the images and your verified boot key, then stops in the bootloader.
 - Lock straight away, as the install guide's [locking steps](/install/cli/#locking-the-bootloader) describe.
 - From then on the warning screen at each start shows the ID of your key. It must match the SHA-256 of your `avb_pkmd.bin`.
 
