@@ -44,7 +44,7 @@ System and app updates check DiamaneOS's download servers.
 
 ## Which other connections can the phone make? {#other-connections}
 
-SUPL is on by default. It speeds up a location fix with data from the mobile network's area, and it connects only when an app asks for a location. The phone's modem sends it through a DiamaneOS relay to Google. Change it or switch it off under Settings > Location.
+SUPL speeds up a location fix with data from the mobile network's area. The phone's modem sends it through a DiamaneOS relay to Google. Change it or switch it off under Settings > Location.
 
 Calls, SMS and mobile data go through your carrier. Adding an eSIM contacts the carrier's eSIM server. The Vanadium browser fetches its components from GrapheneOS.
 
