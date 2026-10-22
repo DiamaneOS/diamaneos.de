@@ -88,7 +88,7 @@
     status = "tested"
   [[groups.items]]
     title = "Clearer privacy indicators"
-    text = "Location gets its own indicator, the camera lens lights up while the front camera is in use, and the lock screen says which sensor is in use."
+    text = "Location gets its own indicator, the camera lens lights up while the front camera is in use, and the lock screen shows which sensor is in use."
     status = "tested"
   [[groups.items]]
     title = "Less location data in logs"
