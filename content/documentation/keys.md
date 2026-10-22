@@ -67,7 +67,7 @@ RWRM77BKHPPXnI2+ijuXz5phnaGpVGZuK8R6GM7uX5Wonc/5YiLsiJF3
 
 ## Attestation release list {#attestation-release-list}
 
-On phones whose maker cannot vouch for the first pairing, Auditor accepts a phone only if its attested values match a release in DiamaneOS's signed release list.
+Where the device maker cannot vouch for the first pairing, Auditor pairs a phone only if it reports exactly the values of a DiamaneOS release from this signed list. A modified build cannot be paired.
 
 - [release-list.pub.pem](/keys/release-list.pub.pem) is the list's P-256 signing key.
 - Each signature in the list names it by `keyId`, the SHA-256 of the key in DER form:
