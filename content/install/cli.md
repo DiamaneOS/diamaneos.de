@@ -86,9 +86,19 @@ fastboot oem device-info
 
 It must show `Device unlocked: true` and `Device critical unlocked: true`.
 
+If the phone was locked with another DiamaneOS build before, such as one signed with other keys, clear the rollback indexes that build left:
+
+```sh
+fastboot oem reset-rollback
+```
+
+Otherwise a build with an older security patch does not start once the bootloader is locked again. The bootloader refuses the command while locked.
+
 ## Getting the factory images
 
 Download the factory images for your device and their signature file, which ends in `.sig`, only from this project.
+
+For a build you signed yourself, the [build guide](/build/#installing-and-locking) says where its factory images are and how to check them with your own key. Use that check instead of the one below.
 
 ### Verifying the factory images
 
@@ -139,7 +149,7 @@ On Windows:
 - It checks that the phone is the device the images are for, in the bootloader with both unlocks done.
 - It erases the phone, writes the device maker's firmware and then DiamaneOS.
 - For the system partitions it restarts the phone into fastbootd, then back into the bootloader. It waits for each restart on its own.
-- It installs DiamaneOS's verified boot key and restarts the phone into the bootloader, ready for the lock. fastboot may warn about a partition size of 0 when it writes the key. That is normal.
+- It installs the verified boot key of the images, DiamaneOS's or your own, and restarts the phone into the bootloader, ready for the lock. fastboot may warn about a partition size of 0 when it writes the key. That is normal.
 - Do not touch the phone or the cable until the script ends.
 - If the phone does not come back within a few minutes of a restart, hold its [bootloader keys](/devices/) until the bootloader screen appears. The script then goes on or stops with a message. Run it again only once it has stopped.
 
@@ -153,7 +163,7 @@ On Windows:
 
 ## Locking the bootloader
 
-Locking turns on full verified boot with DiamaneOS's key. Lock right after the install, before Android first starts. It takes two locks, in the device maker's order: first the critical partitions, then the bootloader.
+Locking turns on full verified boot with the key the install wrote. Lock right after the install, before Android first starts. It takes two locks, in the device maker's order: first the critical partitions, then the bootloader.
 
 - **Finish every lock step before starting Android.** Do them one after another. Android's setup turns OEM unlocking off, and the bootloader can then no longer be locked safely.
 - **Keep verified boot on.** Never install with options that turn it off. Locking without it is pointless.
@@ -200,6 +210,7 @@ From now on, each start shows a yellow warning screen with the ID of the key the
 5c4c94ba54e9f4fe81dcfd77e9b919204f0a493593a2677b50498cbcb6cd8f8d
 ```
 
+- For a build you signed yourself, the ID is the SHA-256 of your `avb_pkmd.bin`.
 - Another ID means the phone runs an OS signed with another key.
 - An orange warning screen means the bootloader is still unlocked. Start the phone in the bootloader, install again and lock straight after.
 
