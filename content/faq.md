@@ -78,7 +78,7 @@ The choice needs eSIM support, which is off by default. Turn it on under Setting
 
 The box appears once an eSIM has been added since DiamaneOS was last installed. Otherwise turn on developer options by tapping **Build number** seven times under Settings > About phone. The box then appears, and it erases every eSIM on the phone.
 
-A duress PIN or password always erases every eSIM, even one added before DiamaneOS was installed and even while eSIM support is off.
+A duress PIN or password always erases every eSIM, also while eSIM support is off.
 
 ## Why do Bluetooth and Wi-Fi stay on in airplane mode? {#airplane-mode}
 
