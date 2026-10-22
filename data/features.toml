@@ -250,5 +250,5 @@
     status = "tested"
   [[groups.items]]
     title = "Lighter camera preview"
-    text = "The 16:9 camera preview is drawn by the display hardware instead of the GPU, and the screen stays at 60 Hz while the Camera app is open."
+    text = "The 16:9 camera preview is drawn by the display hardware instead of the GPU, and the screen runs at 60 Hz while it shows."
     status = "tested"
