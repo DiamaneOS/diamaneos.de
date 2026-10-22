@@ -1,6 +1,5 @@
-# Release day: rename this file to the release number and set version and date.
-version = "YYYYMMDDNN"
-date = 2026-10-21
+version = "2026102203"
+date = 2026-10-22
 channels = ["stable", "beta", "alpha"]
 notes = '''
 DiamaneOS is a privacy and security focused operating system based on GrapheneOS, for the [supported devices](/devices/). This is its first release.
