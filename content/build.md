@@ -13,7 +13,7 @@ lede: "Build DiamaneOS from source, check the result and install it."
 - 64 GB of memory. 32 GB is the minimum.
 - About 500 GB free on an SSD, with a case-sensitive filesystem such as ext4, xfs or btrfs.
 - A fast connection. The first sync downloads 100 to 150 GB.
-- Unprivileged user namespaces and util-linux 2.38 or newer. Compilation runs inside one, without network access. Debian allows them by default. Some systems restrict them, such as Ubuntu 24.04 through AppArmor. The build then stops and says why.
+- Recommended: unprivileged user namespaces and util-linux 2.38 or newer, so that compilation runs without network access. Debian allows them by default. Some systems restrict them, such as Ubuntu 24.04 through AppArmor. The build then stops and says why, and `--allow-network` builds anyway with network access, recorded in `build.json`.
 
 The build checks the host before each step, including the free disk space the step needs.
 
