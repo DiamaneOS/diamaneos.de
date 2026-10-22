@@ -24,7 +24,7 @@ No. The `user` variant turns root debugging off. It does not decide how a build 
 
 ## Can my source build receive project updates? {#source-build-updates}
 
-No. A source build is signed with Android's public test keys and has no Updater, so it cannot install DiamaneOS's updates. Install your next build over it, as the [build guide](/build/#updates-that-keep-data) describes. To switch to DiamaneOS's factory images, follow the [install guide](/install/), which erases the phone.
+No. A source build has no Updater, and it accepts only updates signed with the keys it was built with, Android's public test keys or your own. DiamaneOS's updates are signed with the project's key, so your build cannot install them. Install your next build over it, as the [build guide](/build/#updates-that-keep-data) describes. To switch to DiamaneOS's factory images, follow the [install guide](/install/), which erases the phone.
 
 ## What can the servers see? {#server-privacy}
 
