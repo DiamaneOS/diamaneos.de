@@ -6,7 +6,7 @@ lede: "Install DiamaneOS on a supported device from a browser or from the comman
 
 There are two ways to install DiamaneOS. Both write the same factory images in the same steps and end with a locked bootloader.
 
-- **[Web installation](/install/web/)** is recommended for most people. It needs a Chromium-based browser and a USB cable, but not fastboot.
+- **[Web installation](/install/web/)** is recommended for most people. It needs a Chromium-based browser and a USB cable.
 - **[Command-line installation](/install/cli/)** uses fastboot and the install script of the factory images. It suits people who are at ease in a terminal and want to run each step themselves.
 
 ## Checking the key after the install
