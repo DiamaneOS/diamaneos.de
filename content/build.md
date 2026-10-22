@@ -180,7 +180,7 @@ tools/diamaneos/bin/diamaneos build all --variant user \
 
 ## Installing your build
 
-These commands sign every build with Android's public test keys. Anyone can sign images with them. Keep the bootloader unlocked while such a build is installed, and never lock it. To lock the phone, [sign the build with your own keys](#signing-with-your-own-keys) first.
+These commands sign every build with Android's public test keys. Anyone can sign images with them, so a locked bootloader would still start images made by anyone: locking such a build gives no verified boot protection. To lock the phone with that protection, [sign the build with your own keys](#signing-with-your-own-keys) first.
 
 ### First install
 
