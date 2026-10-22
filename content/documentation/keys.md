@@ -47,6 +47,12 @@ Camera, `app.grapheneos.camera`:
 285a091a913f1485ce16f280f06b2609dc1af6cca786e45b6f5356aa7e86fa61
 ```
 
+Camera processing, `de.diamaneos.camera.processor`, signed with the Camera's key:
+
+```text
+285a091a913f1485ce16f280f06b2609dc1af6cca786e45b6f5356aa7e86fa61
+```
+
 Auditor, `de.diamaneos.auditor`:
 
 ```text
