@@ -32,9 +32,10 @@ The host handling a request can see connection metadata, including your IP addre
 
 ## What does the phone connect to by default? {#default-connections}
 
-Each goes to a DiamaneOS server and can be changed or switched off:
+Each goes to a DiamaneOS server and can be changed or switched off. Some exist only on devices whose hardware uses them, and Settings shows a choice only where it applies:
 
-- Internet connectivity checks, attestation key provisioning, Certificate Transparency downloads and Widevine provisioning: Settings > Network & internet. Widevine only connects when an app plays protected video.
+- Internet connectivity checks and Certificate Transparency downloads: Settings > Network & internet.
+- Attestation key provisioning and Widevine provisioning, on devices whose secure hardware uses them: Settings > Network & internet. Widevine only connects when an app plays protected video.
 - Satellite data (PSDS): Settings > Location.
 - Network time: Settings > System > Date & time > Set time automatically.
 - Network location is off by default: Settings > Location > Location services.
