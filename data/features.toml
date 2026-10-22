@@ -44,7 +44,7 @@
     status = "tested"
   [[groups.items]]
     title = "Encrypted microSD storage"
-    text = "A microSD card can be formatted for internal storage. It is then encrypted, checked before every use, and nothing on it can run. Apps stay on the phone's own storage. Forgetting the card destroys its key. See the [FAQ](/faq/#microsd)."
+    text = "GrapheneOS removes the option to format a microSD card as internal storage, as Pixels have no card slot. DiamaneOS brings it back, hardened: the card is encrypted, checked before every use, and nothing on it can run. Apps stay on the phone's own storage. See the [FAQ](/faq/#microsd)."
     status = "tested"
   [[groups.items]]
     title = "Call volume in 15 steps"
