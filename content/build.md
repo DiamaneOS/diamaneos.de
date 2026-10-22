@@ -238,6 +238,7 @@ cd ../..
 - Give every key the same passphrase. `script/decrypt-keys` expects that.
 - `avb_pkmd.bin` is your verified boot key. Its ID is its SHA-256, from `sha256sum keys/$DEVICE/avb_pkmd.bin`.
 - `id_ed25519` signs the build's check report and the factory images.
+- `make_key` exits with status 1 even when it made the key. Check that each role has its `.pk8` and `.x509.pem` file.
 
 ### Signing a build
 
