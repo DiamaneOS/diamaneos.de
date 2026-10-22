@@ -72,7 +72,7 @@
     status = "tested"
   [[groups.items]]
     title = "Night and Portrait"
-    text = "On phones whose camera offers no Night or Portrait mode of its own, the camera app provides them, processed on the phone without network access. A Portrait photo's blur can be changed or turned off later, also from the gallery."
+    text = "On phones whose camera offers no Night or Portrait mode of its own, the camera app provides them, processed on the phone without network access. Each photo appears in the gallery shortly after the shot. A Portrait photo's blur can be changed or turned off later, also from the gallery."
     status = "tested"
 
 [[groups]]

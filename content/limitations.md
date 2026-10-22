@@ -22,10 +22,6 @@ lede: "What does not work, or is not verified, on the supported devices."
 - **Flash mode by hardware keys.** Someone holding the phone can start Qualcomm's emergency download mode (EDL) with the keys. Using it needs a signed tool.
 - **No head trackers.** Head trackers on paired Bluetooth and USB devices do not work, because their parser is not shipped.
 
-## Camera
-
-- **Night and Portrait photos are finished after the shot.** The camera app processes them on the phone, and each one appears in the gallery about 15 seconds after you take it. You can keep taking photos meanwhile.
-
 ## Updates
 
 - **Behind GrapheneOS.** DiamaneOS follows one GrapheneOS release at a time. The [source manifest](https://github.com/DiamaneOS/platform_manifest/tree/android17) names it.
