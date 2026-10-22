@@ -9,11 +9,11 @@ lede: "Separate service roles, limited access and public configuration source."
 | Role | Purpose | Provider | Location |
 | --- | --- | :---: | :---: |
 | Primary | Website, connectivity checks, time, service relays and downloads | OVHcloud | Germany |
-| Download mirror | Optional OS and app downloads | ServaRICA | Canada |
+| Download mirror | Second server for OS and app downloads, service status page | ServaRICA | Canada |
 | Attestation | Auditor's remote verification service and application state | OVHcloud | France |
 | Staging | Separate website and download test endpoints | Netcup | Germany |
 
-The download mirror is a regional option for OS and app files. It does not replace connectivity checks, time or positioning services. Staging is for tests and is not a download region.
+The download mirror serves the same OS and app files. With the default Automatic setting, the Updater and the App Store pick the faster of the two servers and continue an interrupted download on the other. The download servers setting can also limit them to one server. The mirror does not replace connectivity checks, time or positioning services. Staging is for tests and is not a download region.
 
 Authoritative DNS is provided by INWX. DiamaneOS does not operate its own authoritative nameserver network. The [privacy policy](/legal/#privacy) describes the providers and data involved in requests.
 
@@ -47,7 +47,7 @@ Attestation has a separate stateful service. Its database resides on encrypted s
 
 Staging uses separate publication roots and TLS material. It does not contain the production database or production signing keys. Its public preview is excluded from crawlers. Crawler rules are not access control.
 
-Source configuration can recreate services, but it cannot recreate database history or host secrets. A usable recovery also needs authenticated encrypted backups, independent keys and a restore test. Replicas and source repositories alone are not backups of application state.
+Source configuration can recreate services, but it cannot recreate database history or host secrets. A usable recovery also needs authenticated encrypted backups, independent keys and a restore test. Encrypted copies of server state go to Backblaze B2 every week, and restoring them is tested. Replicas and source repositories alone are not backups of application state.
 
 ## Configuration source
 

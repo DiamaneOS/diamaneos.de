@@ -91,7 +91,7 @@ The data is not used for advertising or profiling. There is no automated decisio
 | Services | Hosting provider | Server location |
 | --- | :---: | :---: |
 | Website, web installer, primary downloads, connectivity checks, time and service relays | [OVHcloud](https://www.ovhcloud.com/de/terms-and-conditions/privacy-policy/) | Germany |
-| Optional OS and app download mirror, service status page | ServaRICA | Canada |
+| Second server for OS and app downloads, service status page | ServaRICA | Canada |
 | Staging copies of the website, the web installer and downloads | netcup | Germany |
 | Attestation | [OVHcloud](https://www.ovhcloud.com/de/terms-and-conditions/privacy-policy/) | France |
 
