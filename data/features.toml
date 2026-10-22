@@ -246,7 +246,7 @@
   title = "Performance and battery"
   [[groups.items]]
     title = "Faster app switching"
-    text = "Memory compression uses lz4: apps reopen faster (median 118 instead of 137 ms) at a slightly lower compression ratio."
+    text = "Memory compression uses lz4: apps reopen faster at a slightly lower compression ratio."
     status = "tested"
   [[groups.items]]
     title = "Lighter camera preview"
