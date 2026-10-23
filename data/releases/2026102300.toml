@@ -1,0 +1,12 @@
+version = "2026102300"
+date = 2026-10-23
+channels = ["beta", "alpha"]
+notes = '''
+Changes since the 2026102203 release:
+
+- Camera 93.7 (9307), also available in the App Store:
+  - The gallery button follows photos and videos deleted in other apps.
+  - The preview comes back by itself when camera access returns, after the Moments switch or the Quick Settings toggle.
+  - A recording stops and is saved when camera access is blocked.
+- Fairphone 6: factory images leave out `super.img`. The install writes each partition on its own, so the download is about 1.9 GB instead of 3.5 GB.
+'''
