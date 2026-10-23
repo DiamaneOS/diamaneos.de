@@ -140,10 +140,10 @@ On Linux and macOS:
 bash flash-all.sh
 ```
 
-On Windows:
+On Windows, in Command Prompt, not PowerShell:
 
-```sh
-.\flash-all.bat
+```bat
+flash-all.bat
 ```
 
 - It checks that the phone is the device the images are for, in the bootloader with both unlocks done.
