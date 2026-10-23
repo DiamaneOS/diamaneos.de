@@ -1,0 +1,54 @@
+{{- /*
+  Download links per device, from data/devices.toml and data/releases/. Each
+  channel shows its newest release, with links on the primary and the mirror
+  (params.releases, params.releasesMirror). File names follow the Updater and
+  the web installer. A channel without a release has no row, and with no
+  release at all nothing renders. Usage: {{< release-downloads >}}
+*/ -}}
+{{- $releases := partial "releases.html" . }}
+{{- $rows := slice }}
+{{- range $channel := slice "Stable" "Beta" "Alpha" }}
+  {{- range first 1 (where $releases "channels" "intersect" (slice $channel)) }}
+    {{- $rows = $rows | append (dict "channel" $channel "version" .version) }}
+  {{- end }}
+{{- end }}
+{{- $files := slice
+  (dict "label" "Factory images" "name" "%s-factory-%s.zip")
+  (dict "label" "Factory images signature" "name" "%s-factory-%s.zip.sig")
+  (dict "label" "Signed update package" "name" "%s-ota_update-%s.zip") }}
+{{- with $rows }}
+<h2 id="devices">Devices</h2>
+<p>Devices are listed by codename. The <a href="{{ "/devices/" | relURL }}">supported devices</a> page shows each device's codename. Each channel shows its newest release. The second link of each file is the <a href="{{ "/documentation/servers/#service-roles" | relURL }}">download mirror</a> in Canada.</p>
+{{- range hugo.Data.devices.devices }}
+{{- $device := .codename }}
+<h3 id="{{ $device }}">{{ $device }}</h3>
+<div class="table-scroll" role="region" aria-label="{{ $device }} downloads" tabindex="0">
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Channel</th>
+      <th scope="col">Version</th>
+      <th scope="col">Downloads</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $rows }}
+    {{- $version := .version }}
+    <tr id="{{ $device }}-{{ lower .channel }}">
+      <td>{{ .channel }}</td>
+      <td><a href="#{{ $version }}">{{ $version }}</a></td>
+      <td>
+        <ul>
+          {{- range $files }}
+          {{- $name := printf .name $device $version }}
+          <li><a href="{{ site.Params.releases }}{{ $name }}">{{ .label }}</a> (<a href="{{ site.Params.releasesMirror }}{{ $name }}" aria-label="{{ .label }} from the mirror">mirror</a>)</li>
+          {{- end }}
+        </ul>
+      </td>
+    </tr>
+    {{- end }}
+  </tbody>
+</table>
+</div>
+{{- end }}
+{{- end }}

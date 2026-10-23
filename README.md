@@ -86,6 +86,7 @@ notes = '''
 ```
 
 - `channels` lists the update channels that offer the release.
+- The releases page links each channel's newest release for every device in `data/devices.toml`, on the hosts in `params.releases` and `params.releasesMirror`.
 - Two releases on one day need a time, such as `YYYY-MM-DDT18:00:00Z`, so feed readers can order them.
 - Each feed entry's id is `https://diamaneos.de/releases/#VERSION`. Never rename or reuse a version.
 - The feed carries the newest 20 releases. The build stops on an entry that does not follow this format.

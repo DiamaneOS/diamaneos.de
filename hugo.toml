@@ -22,6 +22,10 @@ disableHugoGeneratorInject = true
   github = "https://github.com/DiamaneOS"
   matrix = "https://matrix.to/#/#diamaneos-space:matrix.org"
   grapheneos = "https://grapheneos.org/"
+  # Release download hosts: the primary and its mirror. The releases page links
+  # each file on both.
+  releases = "https://releases.diamaneos.de/"
+  releasesMirror = "https://releases-na.diamaneos.de/"
 
 [menus]
   [[menus.main]]

@@ -96,7 +96,7 @@ Otherwise a build with an older security patch does not start once the bootloade
 
 ## Getting the factory images
 
-Download the factory images for your device and their signature file, which ends in `.sig`, only from this project.
+Download the factory images for your device and their signature file, which ends in `.sig`, from the [releases page](/releases/#devices). Use only files from this project.
 
 For a build you signed yourself, the [build guide](/build/#installing-and-locking) says where its factory images are and how to check them with your own key. Use that check instead of the one below.
 
