@@ -1,6 +1,7 @@
 # Supported devices. The only place that names a device: the devices page renders
-# this file through the "devices" shortcode, the build guide lists the codenames
-# through the "codenames" shortcode. Other pages say "supported device" and link to
+# this file through the "devices" shortcode, the releases page through
+# "release-downloads", the build guide lists the codenames through the
+# "codenames" shortcode. Other pages say "supported device" and link to
 # /devices/. Adding a device is one entry here.
 #
 # name      the device's name and its heading on the devices page
