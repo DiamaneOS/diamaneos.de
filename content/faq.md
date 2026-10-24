@@ -26,6 +26,12 @@ No. The `user` variant turns root debugging off. It does not decide how a build 
 
 No. A source build has no Updater, and it accepts only updates signed with the keys it was built with, Android's public test keys or your own. DiamaneOS's updates are signed with the project's key, so your build cannot install them. Install your next build over it, as the [build guide](/build/#updates-that-keep-data) describes. To switch to DiamaneOS's factory images, follow the [install guide](/install/), which erases the phone.
 
+## Where are the release notes for apps? {#app-release-notes}
+
+Apps the App Store takes from GrapheneOS's catalog come unchanged from GrapheneOS, through DiamaneOS's download servers. GrapheneOS's own apps publish their release notes as GitHub releases in [GrapheneOS's repositories](https://github.com/GrapheneOS).
+
+DiamaneOS's own [Camera](https://github.com/DiamaneOS/Camera), [App Store](https://github.com/DiamaneOS/AppStore) and [Auditor](https://github.com/DiamaneOS/Auditor) record their changes in each repository's commit history. Their version tags are signed and named after the version code, such as `9307` for Camera.
+
 ## What can the servers see? {#server-privacy}
 
 The host handling a request can see connection metadata, including your IP address and requested file or service. A VPN substitutes its exit address. DiamaneOS disables request logs. Providers have their own visibility and policies. See the [privacy policy](/legal/#privacy).

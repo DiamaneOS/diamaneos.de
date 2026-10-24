@@ -60,6 +60,30 @@ repo sync --force-sync -j8
 
 `--force-sync` lets `repo` replace a project that now comes from another repository at the same path. DiamaneOS rebases its branches onto new GrapheneOS releases. Rebase your own commits onto the new branch tips.
 
+### A release from its tag
+
+Each release has a signed tag with its number, such as `2026102300`, in the manifest and in every DiamaneOS repository it names. The manifest's tag pins every project at the commit the release was built from. Initialise from the tag instead of the branch:
+
+```sh
+repo init -u https://github.com/DiamaneOS/platform_manifest.git -b refs/tags/2026102300
+repo sync -j8
+```
+
+- The [smaller download](#smaller-download) works the same way.
+- Check the tag as [verifying the source](#verifying-the-source) shows, with `verify-tag 2026102300` in `.repo/manifests` and in `tools/diamaneos`.
+- The kernels come with the source as prebuilts. Their sources carry the release's tag too, in [kernel_qcom-6.1](https://github.com/DiamaneOS/kernel_qcom-6.1) and [kernel_common-6.1](https://github.com/DiamaneOS/kernel_common-6.1).
+- Camera, App Store and Auditor also come as signed prebuilts, built from their own repositories. These are tagged with the app's version code, such as `9307` for Camera. `vendor/diamaneos/apps/<app>/provenance.json` records the version code and source commit of each.
+
+The tools build the manifest's `android17` branch and refuse a checkout of a tag. Give them a copy of your device's build environment with the tag as its manifest branch, outside the source directory. Replace `<codename>` with your device's [codename](#vendor-files), in lower case:
+
+```sh
+sed 's|"branch": "android17"|"branch": "refs/tags/2026102300"|' \
+  tools/diamaneos/config/build-environment-<codename>.json > ~/diamaneos-2026102300.json
+```
+
+- Add `--environment ~/diamaneos-2026102300.json` to `build vendor`, `build package`, `build verify` and `build all`.
+- With it, `build all` keeps the source at the tag.
+
 ## Verifying the source
 
 DiamaneOS's own commits and its release tags are signed with an SSH key. Its fingerprint is `SHA256:OHUN0l/oDXtrLvDWWH/76gM5yjl7JqCx6KdgO7zB62Y`. The key is registered on GitHub, which marks these commits Verified.
