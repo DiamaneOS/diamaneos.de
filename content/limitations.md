@@ -11,7 +11,6 @@ lede: "What does not work, or is not verified, on the supported devices."
 - **Wipes rely on the secure area.** A wipe asks the secure area to destroy the keys. That is no promise against someone who copied the storage first and later breaks the secure area.
 - **Protected video at software level only.** DiamaneOS uses Widevine L3, the software level, for protected video. Streaming apps can limit its quality, often to standard definition.
 - **No Play Integrity verdict.** Google's Play Integrity check gives DiamaneOS no verdict, not even basic integrity. Apps that require it, such as some banking and payment apps, refuse to work or limit features.
-- **No RCS in Google Messages.** Google Messages can set up RCS, but Google's service refuses this phone, so chats fall back to SMS and MMS.
 - **Auditor relies on its first pairing.** Every check is genuine hardware attestation from the phone's secure area. The device maker cannot vouch for the first pairing, so it is only as trustworthy as the phone was at that moment. After a reset, the phone must be paired again.
 - **No memory tagging.** Memory bugs are easier to exploit than on phones that have it.
 - **No virtual machines.** The phone's firmware would start protected virtual machines without the protection they rely on, so DiamaneOS leaves them off. Ordinary ones, such as a Linux terminal, are refused by that firmware.

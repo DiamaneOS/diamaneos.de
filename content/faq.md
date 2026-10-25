@@ -94,6 +94,19 @@ Bluetooth also stays on while headphones or another media device are connected.
 
 To have airplane mode turn them off again, turn on airplane mode and then turn off Bluetooth or Wi-Fi. The phone remembers that too.
 
+## How do I use RCS? {#rcs}
+
+RCS chats work in Google Messages with sandboxed Google Play, in the Owner user.
+
+1. Install Google Play services from the App Store and Google Messages from the Play Store.
+2. Make Google Messages the default SMS app.
+3. Allow **Phone** for Google Play services under Settings > Apps > Google Play services > Permissions.
+4. In Google Messages, turn on RCS under Settings > RCS chats.
+
+Some networks check the SIM before RCS starts and stay on "Connecting" without it. For these, turn on **Allow ICC authentication with device identifiers** under Settings > Apps > Sandboxed Google Play > Play services special permissions. A notification points there when it is needed. Some carriers also need Google's Carrier Services app from the Play Store.
+
+If RCS stayed on "Connecting" before these steps, clear Google Messages' storage and restart the phone, so it tries again.
+
 ## Where should problems be reported? {#reporting-problems}
 
 Send sensitive security reports to [security@diamaneos.de](mailto:security@diamaneos.de). Use the [issue tracker](https://github.com/DiamaneOS/issue-tracker/issues) for ordinary bugs, and [hello@diamaneos.de](mailto:hello@diamaneos.de) or the [contact form](/about/#contact) for general questions. Keep account tokens, private keys and identifying diagnostic data out of public reports.
