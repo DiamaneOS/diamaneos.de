@@ -34,10 +34,10 @@ On Linux and macOS:
 export PATH="$PWD/platform-tools:$PATH"
 ```
 
-On Windows, in PowerShell:
+On Windows, in Command Prompt:
 
-```sh
-$env:Path = "$PWD\platform-tools" + [IO.Path]::PathSeparator + $env:Path
+```bat
+set "PATH=%CD%\platform-tools;%PATH%"
 ```
 
 Use the same terminal for every step below. On Linux, fastboot may need udev rules to reach the phone without root. Debian and Ubuntu ship them in the `android-sdk-platform-tools-common` package.
@@ -115,10 +115,9 @@ ssh-keygen -Y verify -f factory.allowed_signers -I diamaneos -n "factory images"
 ```
 
 - It must print `Good "factory images" signature for diamaneos with ED25519 key SHA256:efhtysP+8Tz5vKgjZT6MEfiK3h3bH2/cjW3w3cg6How`. Stop if it prints anything else.
-- On Windows, run both commands in Command Prompt, not PowerShell.
 - `ssh-keygen` is part of OpenSSH, which macOS and Windows include. On Linux it comes with the OpenSSH client package.
 
-Then unpack the images and open a terminal in the directory that holds `flash-all.sh`. The install scripts, `flash-all.sh` and `flash-all.bat`, check every file against the `SHA256SUMS` file before they write anything.
+Then unpack the images and, in the same terminal, change to the directory that holds `flash-all.sh`. The install scripts, `flash-all.sh` and `flash-all.bat`, check every file against the `SHA256SUMS` file before they write anything.
 
 ### Checking the firmware release
 
@@ -140,7 +139,7 @@ On Linux and macOS:
 bash flash-all.sh
 ```
 
-On Windows, in Command Prompt, not PowerShell:
+On Windows:
 
 ```bat
 flash-all.bat
