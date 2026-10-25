@@ -1,0 +1,18 @@
+version = "2026102500"
+date = 2026-10-25
+channels = ["alpha"]
+notes = '''
+Changes since the 2026102300 release:
+
+- Kernel security fixes:
+  - A use-after-free that a remote host can reach while an app listens for IPv4 TCP connections (CVE-2026-98432).
+  - TCP Fast Open (CVE-2026-98374), Bluetooth and USB input devices (CVE-2026-98499), packet parsing (CVE-2026-98532), TIPC (CVE-2026-98550) and WireGuard (CVE-2026-99059).
+  - Off-path side channels through UDP errors and ICMP rate limits (CVE-2026-99077, CVE-2026-90110).
+- Fix a kernel memory hardening check that could restart the phone when memory ran low.
+- Double tap on an empty part of Home to turn the screen off. It locks the same way the power button does. Off by default, in Home settings.
+- Wi-Fi networks added from a Wi-Fi QR code get a new random MAC address for each connection, like other new networks. Networks added before keep their setting, which the network's Privacy option changes.
+- Erase eSIMs, in Reset options and in the factory reset, works while eSIM support is off. Settings says when an erase fails.
+- The notice suggesting Auditor ends once Auditor has paired with the phone.
+- System UI demo mode: icons added after a theme change get the right colour, and the real battery level returns when demo mode ends.
+- Moments spells aeroplane mode in British, Australian and Indian English.
+'''
