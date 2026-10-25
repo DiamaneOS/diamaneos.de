@@ -55,6 +55,10 @@
     text = "About phone shows which device firmware release the phone runs."
     status = "tested"
   [[groups.items]]
+    title = "Double tap to turn off the screen"
+    text = "A double tap on an empty part of Home turns the screen off and locks the phone as the power button does. Off by default, in Home settings."
+    status = "tested"
+  [[groups.items]]
     title = "Tap to wake"
     text = "On phones whose touch screen supports it, a single tap can wake the screen as well as a double tap. Taps are ignored while the proximity sensor is covered, such as in a pocket."
     status = "tested"

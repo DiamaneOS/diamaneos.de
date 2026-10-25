@@ -80,7 +80,7 @@ The card's key exists only on this phone. Choosing **Forget** for the card, or l
 
 Only when you choose it. In Settings > System > Reset options > Erase all data (factory reset), tick **Erase eSIMs**.
 
-The choice needs eSIM support, which is off by default. Turn it on under Settings > Network & internet. While eSIM support is off, the choice is greyed out and eSIMs stay on the phone.
+The choice works whether eSIM support is on or off. Settings > System > Reset options > Erase eSIMs erases them without a factory reset.
 
 The box appears once an eSIM has been added since DiamaneOS was last installed. Otherwise turn on developer options by tapping **Build number** seven times under Settings > About phone. The box then appears, and it erases every eSIM on the phone.
 
