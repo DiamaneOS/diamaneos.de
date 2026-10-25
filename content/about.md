@@ -7,7 +7,7 @@ lede: "An independent project that builds an operating system from GrapheneOS so
 ## GrapheneOS
 
 - Most of DiamaneOS is the work of [GrapheneOS](https://grapheneos.org/), and we are grateful for it.
-- DiamaneOS is a partial port to [devices](/devices/) GrapheneOS does not support, and it is not as secure as GrapheneOS on GrapheneOS's own devices.
+- DiamaneOS is a separate operating system from a separate project. It is not GrapheneOS or a version of it. It is built on GrapheneOS's source code, and the [known limitations](/limitations/) say where it is less secure than GrapheneOS.
 - Please report DiamaneOS problems to DiamaneOS, not to GrapheneOS.
 
 ## Source code

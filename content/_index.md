@@ -2,8 +2,8 @@
 title: "DiamaneOS"
 description: "DiamaneOS is a privacy and security focused operating system based on GrapheneOS."
 headline: "A privacy and security focused operating system"
-lede: "DiamaneOS is based on GrapheneOS."
+lede: "A separate operating system, built on GrapheneOS's source code."
 ---
 
-- **Built on GrapheneOS.** Most of the system is GrapheneOS's work. DiamaneOS brings it to [phones GrapheneOS does not support](/devices/).
-- **About the hardware.** These phones do not meet GrapheneOS's [device requirements](https://grapheneos.org/faq#future-devices), so they are not as secure as GrapheneOS's own devices. The [known limitations](/limitations/) say exactly where.
+- **Built on GrapheneOS.** DiamaneOS is a separate operating system, not a version of GrapheneOS. It uses GrapheneOS's source code as its base: the repositories of one GrapheneOS release, plus its own changes and support for its [devices](/devices/). Most of that code is GrapheneOS's work.
+- **About the hardware.** How secure DiamaneOS is depends on the phone's hardware. The [known limitations](/limitations/) list what is missing on each [supported device](/devices/).

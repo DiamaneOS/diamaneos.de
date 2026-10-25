@@ -20,7 +20,7 @@
     text = "hold the volume down and power buttons together until the bootloader screen (Fastboot Mode) appears. This works with the phone off and restarts a running or stuck phone into it. While the phone restarts on its own, holding volume down is enough."
   [[devices.facts]]
     label = "Hardware security"
-    text = "it does not meet GrapheneOS's [device requirements](https://grapheneos.org/faq#future-devices). It has no secure element exposed to Android and no memory tagging. Protected video uses Widevine L3, the software level. See the [known limitations](/limitations/)."
+    text = "it has no secure element exposed to Android and no memory tagging. Protected video uses Widevine L3, the software level. See the [known limitations](/limitations/)."
   [[devices.facts]]
     label = "Stock OS"
     text = '''Fairphone's [manual install guide](https://support.fairphone.com/hc/en-us/articles/18896094650513-How-to-manually-install-Android-on-your-Fairphone) links the factory images and their checksums. Its flash script restarts the phone when it ends. To [lock on the stock OS](/install/cli/#locking-on-the-stock-os), hold the bootloader keys during that restart, so the phone comes back to the bootloader before Android starts. Leave the script unchanged: its checksum check covers the script too.'''

@@ -12,8 +12,8 @@
 #                 or the build stops (layouts/_partials/feature-status.html).
 # A group with nostatus = true shows no status tags.
 #
-# GrapheneOS's own features are not listed one by one: DiamaneOS has them all except
-# for the known limitations (content/limitations.md, and content/features.md links both).
+# GrapheneOS's own features are not listed one by one. content/features.md links GrapheneOS's page,
+# and the known limitations (content/limitations.md) list what is confirmed missing or different.
 
 [[groups]]
   id = "additions"
