@@ -121,7 +121,7 @@
   note = "If the phone's secure area were broken and the storage copied, only the lock would protect the data. See the [known limitations](/limitations/)."
   [[groups.items]]
     title = "Passphrase first"
-    text = "Setup recommends a generated passphrase: six words by default, from the EFF word list. A PIN stays possible after you explicitly accept a risk screen in plain language. A long generated PIN counts as strong."
+    text = "Setup recommends a generated passphrase: six words from EFF's large list, or six from its short list typed as their first three letters. A PIN stays possible after you explicitly accept a risk screen in plain language. A long generated PIN counts as strong."
     status = "tested"
   [[groups.items]]
     title = "Help to learn the passphrase"
