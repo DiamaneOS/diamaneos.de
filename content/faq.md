@@ -100,11 +100,11 @@ Auto reboot restarts the phone when it has not been unlocked for 12 hours. The r
 
 Alarms still ring after a restart, but apps and messages wait for the unlock. To change the time or turn auto reboot off, go to Settings > Security & privacy > Exploit protection > Auto reboot.
 
-## Why do Bluetooth and NFC turn off by themselves? {#radio-auto-off}
+## Why does Bluetooth turn off by itself? {#bluetooth-auto-off}
 
-Bluetooth turns off after 10 minutes without a connected device, and NFC after 10 minutes without use. NFC waits while the screen is on, so it does not stop during a payment. A radio that is off cannot be reached, and the chips' firmware gets fixes only from the device maker.
+Bluetooth turns off after 10 minutes without a connected device. Bluetooth that is off cannot be reached, and the chip's firmware gets fixes only from the device maker.
 
-To change this, choose another time or **Never** under Settings > Security & privacy > Exploit protection > Turn off Bluetooth automatically, and Settings > Connected devices > Connection preferences > NFC > Turn off NFC automatically.
+To change this, choose another time or **Never** under Settings > Security & privacy > Exploit protection > Turn off Bluetooth automatically.
 
 ## How do I use RCS? {#rcs}
 
