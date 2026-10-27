@@ -167,6 +167,7 @@ Locking turns on full verified boot with the key the install wrote. Lock right a
 - **Finish every lock step before starting Android.** Do them one after another. Android's setup turns OEM unlocking off, and the bootloader can then no longer be locked safely.
 - **Keep verified boot on.** Never install with options that turn it off. Locking without it is pointless.
 - **Stop if something fails.** Do not repeat a lock command after an error.
+- Images signed with Android's public test keys, such as a build of your own, are meant to stay unlocked. Anyone can sign images for a phone locked with those keys. To lock one for a test, see [installing your build](/build/#installing-your-build).
 
 First check that the bootloader can be unlocked again later:
 

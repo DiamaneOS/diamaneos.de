@@ -221,6 +221,9 @@ bash flash-all.sh
 - For the system partitions it restarts the phone into fastbootd, then back into the bootloader. It waits for each restart on its own.
 - It writes the device maker's firmware of the release the vendor files come from. Do not run it on a phone that already runs a newer stock release.
 - Skip the locking steps of the install guide.
+  - To lock a build like this for a test anyway, run `bash flash-all.sh lock` (`flash-all.bat lock` on Windows). It warns first and goes on only after you type `yes`. Then it installs the public test key and stops in the bootloader for the locking steps.
+  - If the phone ran a locked build before, run `fastboot oem reset-rollback` before the locking steps. Keep OEM unlocking on in the setup.
+  - Afterwards unlock the phone again. To keep it locked, install a release or a build signed with your own keys.
 - Never run `fastboot -w` or `fastboot erase`. The script flashes empty images instead.
 
 ### Updates that keep data
