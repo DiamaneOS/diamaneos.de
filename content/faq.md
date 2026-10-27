@@ -94,6 +94,18 @@ Bluetooth also stays on while headphones or another media device are connected.
 
 To have airplane mode turn them off again, turn on airplane mode and then turn off Bluetooth or Wi-Fi. The phone remembers that too.
 
+## Why did my phone restart by itself? {#auto-reboot}
+
+Auto reboot restarts the phone when it has not been unlocked for 12 hours. The restart puts your data back at rest, encrypted with keys that only your PIN, password or passphrase unlocks. Until the next unlock, the data is far harder to get at, even with an exploit.
+
+Alarms still ring after a restart, but apps and messages wait for the unlock. To change the time or turn auto reboot off, go to Settings > Security & privacy > Exploit protection > Auto reboot.
+
+## Why do Bluetooth and NFC turn off by themselves? {#radio-auto-off}
+
+Bluetooth turns off after 10 minutes without a connected device, and NFC after 10 minutes without use. NFC waits while the screen is on, so it does not stop during a payment. A radio that is off cannot be reached, and the chips' firmware gets fixes only from the device maker.
+
+To change this, choose another time or **Never** under Settings > Security & privacy > Exploit protection > Turn off Bluetooth automatically, and Settings > Connected devices > Connection preferences > NFC > Turn off NFC automatically.
+
 ## How do I use RCS? {#rcs}
 
 RCS chats work in Google Messages with sandboxed Google Play, in the Owner user.
