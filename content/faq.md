@@ -30,7 +30,7 @@ No. A source build has no Updater, and it accepts only updates signed with the k
 
 Apps the App Store takes from GrapheneOS's catalog come unchanged from GrapheneOS, through DiamaneOS's download servers. GrapheneOS's own apps publish their release notes as GitHub releases in [GrapheneOS's repositories](https://github.com/GrapheneOS).
 
-DiamaneOS's own [Camera](https://github.com/DiamaneOS/Camera), [App Store](https://github.com/DiamaneOS/AppStore) and [Auditor](https://github.com/DiamaneOS/Auditor) record their changes in each repository's commit history. Their version tags are signed and named after the version code, such as `9307` for Camera.
+DiamaneOS's own [Camera](https://github.com/DiamaneOS/Camera), [App Store](https://github.com/DiamaneOS/AppStore) and [Auditor](https://github.com/DiamaneOS/Auditor) publish their release notes as GitHub releases in each repository. Their version tags are signed and named after the version code, such as `9308` for Camera.
 
 ## What can the servers see? {#server-privacy}
 
@@ -93,6 +93,18 @@ Airplane mode turns off the mobile network, Bluetooth and Wi-Fi. If you turn Blu
 Bluetooth also stays on while headphones or another media device are connected.
 
 To have airplane mode turn them off again, turn on airplane mode and then turn off Bluetooth or Wi-Fi. The phone remembers that too.
+
+## Why did my phone restart by itself? {#auto-reboot}
+
+Auto reboot restarts the phone when it has not been unlocked for 12 hours. The restart puts your data back at rest, encrypted with keys that only your PIN, pattern, password or passphrase unlocks. Until the next unlock, the data is far harder to get at, even with an exploit.
+
+Alarms still ring after a restart, but apps and messages wait for the unlock. To change the time or turn auto reboot off, go to Settings > Security & privacy > Exploit protection > Auto reboot.
+
+## Why does Bluetooth turn off by itself? {#bluetooth-auto-off}
+
+Bluetooth turns off after 10 minutes without a connected device. Bluetooth that is off cannot be reached, and the chip's firmware gets fixes only from the device maker.
+
+To change this, choose another time or **Never** under Settings > Security & privacy > Exploit protection > Turn off Bluetooth automatically.
 
 ## How do I use RCS? {#rcs}
 

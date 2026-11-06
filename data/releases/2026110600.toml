@@ -1,0 +1,71 @@
+version = "2026110600"
+date = 2026-11-06
+channels = ["stable", "beta", "alpha"]
+notes = '''
+Changes since the 2026102500 release:
+
+- Android security patch level 2026-11-01, based on GrapheneOS 2026110200.
+- Fairphone 6: firmware and vendor files from the device maker's FP6.QREL.16.115.0 release, with its 2026-10-05 security patch level.
+- Fairphone 6: the kernel moves from Linux 6.1 to Linux 6.18. Binder is now the Rust driver, and the kernel no longer has TIPC.
+- Fairphone 6: kernel lockdown runs at the integrity level, as Android's memory statistics need it, and RANDSTRUCT is off because the kernel's Rust code needs it off.
+- Fairphone 6: the new kernel carries 151 backports from newer Linux releases, 91 of them with a CVE, and not all were open on the old kernel. Those that were include blind TCP resets (CVE-2026-68118) and old TCP ACKs (CVE-2026-98255).
+- Fairphone 6: fixes for a rejected Wi-Fi association (CVE-2026-65073) and the display's dynamic metadata (CVE-2026-66114).
+- Fairphone 6: a remote processor can send QRTR messages only as the node it first named, so Wi-Fi or DSP firmware can't pose as a running modem.
+- The widget permission dialog now names the widget for every widget category and for work profiles, and refuses a widget with no name.
+- Fairphone 6: mobile data runs on open code. The Rust daemon `datad` and two open libraries replace the closed `nicmd` and its libraries. A second daemon, `wlantunneld`, holds the keys of the Wi-Fi calling tunnel under its own user.
+- Moments switch:
+  - Camera and microphone off reaches the kernel as soon as you choose it. Taking a sensor out of the block still needs a restart.
+  - While the switch holds Lockdown, every unlock needs your PIN, pattern or password.
+  - With Moments on, Recents and Home's search show only the chosen apps.
+  - With Moments on, Clear all in Recents also clears the apps Moments hides.
+  - Moments now reloads Home and its search, and its first refresh no longer crashes before the first unlock.
+  - A hung camera service no longer freezes touch and the status bar.
+- Lock setup can generate a shorter passphrase: six words from EFF's short list, typed as their first three letters. Six whole words stay the default.
+- Auto reboot now comes after 12 hours instead of 18, and Bluetooth turns off after 10 minutes without a connection. Phones where a value was picked keep it.
+- Turn off NFC automatically, a new choice on the NFC page, off by default. NFC turns off after the chosen time once the screen is off and nothing uses it.
+- Tap to wake:
+  - A Pocket check switch under Tap to wake, on by default. Off, a tap wakes the phone at once and uses less battery with the screen off.
+  - Fairphone 6: taps work right after the screen turns off, and a double tap made before the phone listens is no longer lost.
+  - Turning on a tap setting while the phone sleeps works at once, not after the next screen off.
+  - Fairphone 6: lock screen swipes are no longer taken for pocket touches.
+  - The tap proximity sensor is read five times a second instead of fifty, and only while a tap sensor listens, so the phone reaches its deepest sleep.
+- Fairphone 6: the screen holds at least 30 Hz while it is on, so content that starts moving by itself starts smoothly. Doze, the always-on display and battery saver keep 10 Hz.
+- Dimming before the screen timeout and automatic brightness changes no longer show visible steps.
+- Fairphone 6: USB headsets and USB audio devices play sound.
+- Fairphone 6: flashlight strength levels now change the torch's brightness.
+- Fairphone 6: USB-C port Off also ends a running alternate mode, and a USB function waits for the port's data setting before it connects.
+- Fairphone 6: Wi-Fi suspend requests now reach the driver.
+- Fairphone 6: when a slot switch fails, the rollback restores the slot that was active, so the partition table and the boot disk stay in step.
+- eSIM manager: the confirmation dialog scrolls and shows server text without control, format or invisible characters. A package that changes what the profile can do, or that can't be read, is refused. Profile data, host names and codes are read one strict way only. Each server request has an overall deadline, and Stop closes the connection.
+- eSIM manager: after a download, every notification the carrier asked for is sent, and the one for turning a profile on is retried while the eSIM restarts.
+- Hardening: our own native modules stop on integer overflow, out-of-bounds access and, where the code allows, CFI errors. The modem file server limits what a remote processor can use up. The IMS broker answers invalid requests without keeping a retry. Apps can no longer read live memory and cache frequencies.
+- Network location: Settings and setup say that no adequacy decision covers the transfer to Apple, and that choosing Apple is consent you can withdraw.
+- Fixes:
+  - Home no longer moves its neighbouring icons when an app closes back to it.
+  - The icon of an auto-grouped notification gets the right tint on a light theme.
+  - The screenshot editor adds undo and redo for the marker and highlighter, and strokes stay inside the image.
+  - Window surfaces, input and package installer handles, file drag shadows and Bluetooth metric files are released on every path.
+  - Files no longer piles up idle threads.
+  - Newer Clock, Calculator, Gallery and screenshot editor translations.
+- From the GrapheneOS base: home screen accessibility actions work again, a use-after-free in picture-in-picture is fixed, service restarts for frozen clients work again, and a sandboxed Google Play crash in pay services is fixed.
+- App Store 37.3 (3703):
+  - Updates download as small deltas when the catalog lists one for the installed version, and take the full file when a delta can't be used or doesn't give the right APK.
+  - Packages download as brotli files, and each icon is checked against the size and SHA-256 in the signed catalog before it is decoded.
+  - A signed catalog is taken only in its one valid encoding, and package and APK names in it must be plain file names.
+  - A damaged cached catalog no longer stops the app at start, and a malformed ETag from a server no longer stops later catalog checks.
+- Camera 93.10 (9310), also available in the App Store:
+  - Video can record at 60 fps in 1080p and 720p on the main front and rear cameras, even when the camera doesn't advertise it. Photos can be taken while recording at 60 fps. Each is a copy of a video frame, so it's softer and noisier than a normal photo.
+  - The pause, microphone and shutter buttons turn with the phone while recording, and the video keeps its rotation.
+  - A short note appears when a recording goes on without sound because microphone access is turned off.
+  - Choosing a slow motion rate no longer clears the fps choice in video mode.
+  - A dialog over the Camera, such as the prompt to turn the microphone back on, no longer stops a recording.
+  - With camera access turned off, a press in Photo mode says the camera is off instead of taking the photo once access is back.
+  - In Video mode the lens buttons no longer cover the shutter, and a lens button keeps the zoom slider open.
+  - A capture right after switching between 0.6x and 1x no longer takes a dark photo.
+  - The EXIF time offset is written correctly west of UTC.
+  - The native libraries, CameraProcessor's included, stop on an integer overflow instead of wrapping.
+- Auditor 92.3 (9203), also available in the App Store:
+  - An enrollment link opened from a site now counts only with a one-time code Auditor itself gave the account page. A link without it opens the real account page, where you are logged in. Scanning a QR code works as before.
+  - A QR code or link with a bad user ID or subscribe key is refused, and a bad stored account no longer stops the scheduled verification.
+  - An attestation with a malformed extension, an app version out of range or an empty certificate chain is refused as invalid instead of leaving the screen on Verifying.
+'''

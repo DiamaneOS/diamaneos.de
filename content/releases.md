@@ -9,6 +9,8 @@ Each release is listed here and in an [Atom feed](/releases.atom) for feed reade
 
 Release tags are signed. The [build guide](/build/#verifying-the-source) shows how to check them. Factory images are signed too, and the install guide shows [how to check them](/install/cli/#verifying-the-factory-images).
 
+{{< releases-contents >}}
+
 {{< release-downloads >}}
 
 {{< releases >}}

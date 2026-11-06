@@ -1,0 +1,25 @@
+{{- /* Contents of the releases page, so a device or a release can be linked. Usage: {{< releases-contents >}} */ -}}
+{{- $releases := partial "releases.html" . }}
+<nav class="toc" aria-labelledby="toc-title">
+  <h2 id="toc-title">Contents</h2>
+  <ul>
+    {{- with $releases }}
+    <li>
+      <a href="#devices">Devices</a>
+      <ul>
+        {{- range hugo.Data.devices.devices }}
+        <li><a href="#{{ .codename }}">{{ .name }}</a></li>
+        {{- end }}
+      </ul>
+    </li>
+    <li>
+      <a href="#release-notes">Release notes</a>
+      <ul>
+        {{- range . }}
+        <li><a href="#{{ .version }}">{{ .version }}</a></li>
+        {{- end }}
+      </ul>
+    </li>
+    {{- end }}
+  </ul>
+</nav>

@@ -20,11 +20,11 @@
   title = "DiamaneOS additions"
   [[groups.items]]
     title = "Moments switch"
-    text = "On phones with a side switch, the switch runs one action you pick: Moments (only chosen apps on Home, Do Not Disturb on), Camera and microphone off, Silent, Airplane mode or Lockdown."
+    text = "On phones with a side switch, the switch runs one action you pick: Moments (only chosen apps on Home, in Recents and in Home's search, Do Not Disturb on), Camera and microphone off, Silent, Airplane mode or Lockdown (every unlock needs your PIN, pattern or password while the switch is down)."
     status = "tested"
   [[groups.items]]
     title = "Camera and microphone off"
-    text = "With this switch action, the kernel blocks the built-in cameras and microphones while the switch is down. No Android setting or app can lift the block. It starts with the first restart after you choose the action. Until then Android's own block applies, also on a locked phone. It is not a hardware kill switch."
+    text = "With this switch action, the kernel blocks the built-in cameras and microphones while the switch is down. No Android setting or app can lift the block. It starts as soon as you choose the action. If the kernel can't take it yet, Settings asks for a restart, and until then Android's own block applies, also on a locked phone. After another choice, the kernel keeps its block until the next restart. It is not a hardware kill switch."
     status = "tested"
   [[groups.items]]
     title = "Home search"
@@ -40,7 +40,7 @@
     status = "tested"
   [[groups.items]]
     title = "eSIM manager"
-    text = "Download eSIMs with a carrier's QR or activation code, and turn on, turn off, rename or delete them. Off until you turn on eSIM support. It connects only to the eSIM server you confirm. It has no camera access: the camera app reads QR codes."
+    text = "Download eSIMs with a carrier's QR or activation code, and turn on, turn off, rename or delete them. Off until you turn on eSIM support. It connects only to the eSIM server you confirm. A code can be checked first without using it: the app confirms it points to a genuine eSIM server this phone accepts. It has no camera access: the camera app reads QR codes."
     status = "tested"
   [[groups.items]]
     title = "Encrypted microSD storage"
@@ -59,8 +59,12 @@
     text = "A double tap on an empty part of Home turns the screen off and locks the phone as the power button does. Off by default, in Home settings."
     status = "tested"
   [[groups.items]]
+    title = "NFC turns off by itself"
+    text = "An optional timer on the NFC page turns NFC off after the chosen time once the screen is off and nothing uses it. Off by default."
+    status = "tested"
+  [[groups.items]]
     title = "Tap to wake"
-    text = "On phones whose touch screen supports it, a single tap can wake the screen as well as a double tap. Taps are ignored while the proximity sensor is covered, such as in a pocket."
+    text = "On phones whose touch screen supports it, a single tap can wake the screen as well as a double tap. Taps are ignored while the proximity sensor is covered, such as in a pocket. The Pocket check switch turns that off, which uses less battery with the screen off."
     status = "tested"
   [[groups.items]]
     title = "Brightness measured on the panel"
@@ -121,7 +125,7 @@
   note = "If the phone's secure area were broken and the storage copied, only the lock would protect the data. See the [known limitations](/limitations/)."
   [[groups.items]]
     title = "Passphrase first"
-    text = "Setup recommends a generated passphrase: six words by default, from the EFF word list. A PIN stays possible after you explicitly accept a risk screen in plain language. A long generated PIN counts as strong."
+    text = "Setup recommends a generated passphrase: six words by default from EFF's large list, or six from its short list typed as their first three letters. A PIN stays possible after you explicitly accept a risk screen in plain language. A long generated PIN counts as strong."
     status = "tested"
   [[groups.items]]
     title = "Help to learn the passphrase"
@@ -176,10 +180,6 @@
     text = "Only the phone and Bluetooth system services can change TTY, hearing-aid, HD voice and Bluetooth call settings. Other apps with the audio settings permission cannot."
     status = "tested"
   [[groups.items]]
-    title = "TIPC kept local"
-    text = "Qualcomm's mobile data needs the TIPC protocol, which GrapheneOS removes. DiamaneOS builds it without its network and encryption parts, and only two system services may use it."
-    status = "tested"
-  [[groups.items]]
     title = "Fewer services with root"
     text = "The boot control service runs as its own user with one capability, and the thermal service as the system user with none, instead of as root."
     status = "tested"
@@ -199,6 +199,10 @@
   [[groups.items]]
     title = "Data for VoLTE and Wi-Fi calling"
     text = "Our own Rust service sets up these connections with narrow permissions. It replaces Qualcomm's closed services."
+    status = "tested"
+  [[groups.items]]
+    title = "Mobile data"
+    text = "Our own Rust daemon and two small libraries replace Qualcomm's closed interface manager and the libraries that connect the radio daemon to it. The daemon runs with narrow permissions behind a system call filter. A second small daemon, with its own user, holds the keys of the Wi-Fi calling tunnel."
     status = "tested"
   [[groups.items]]
     title = "Call audio"

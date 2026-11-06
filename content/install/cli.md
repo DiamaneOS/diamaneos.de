@@ -187,6 +187,8 @@ Confirm on the phone with the volume and power buttons. The phone erases all dat
 
 If Android starts, do not lock the bootloader. It stays unlocked. To lock, start the phone in the bootloader and run `flash-all.sh` again, which first asks to unlock the critical partitions. Then lock straight after.
 
+If no confirmation appears on the phone and a lock command does not finish, stop it with Ctrl+C. Restart the phone into the bootloader with its buttons, then run the same command again.
+
 Check that the critical partitions are locked and that unlocking is still allowed:
 
 ```sh

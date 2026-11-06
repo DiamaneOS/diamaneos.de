@@ -82,7 +82,7 @@ repo sync -j8
   ```
 
   Then add `--environment ~/diamaneos-RELEASE.json` to the same commands instead of `--release RELEASE`.
-- The kernels come with the source as prebuilts. Their sources carry the release's tag too, in [kernel_qcom-6.1](https://github.com/DiamaneOS/kernel_qcom-6.1) and [kernel_common-6.1](https://github.com/DiamaneOS/kernel_common-6.1).
+- The kernels come with the source as prebuilts. Their sources carry the release's tag too, in [kernel_qcom-6.18](https://github.com/DiamaneOS/kernel_qcom-6.18) and [kernel_common-6.18](https://github.com/DiamaneOS/kernel_common-6.18). For releases up to 2026102500 they are in [kernel_qcom-6.1](https://github.com/DiamaneOS/kernel_qcom-6.1) and [kernel_common-6.1](https://github.com/DiamaneOS/kernel_common-6.1).
 - Camera, App Store and Auditor also come as signed prebuilts, built from their own repositories. These are tagged with the app's version code. `vendor/diamaneos/apps/<app>/provenance.json` records the version code and source commit of each.
 
 ## Verifying the source
