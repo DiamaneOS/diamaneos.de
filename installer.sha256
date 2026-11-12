@@ -1,4 +1,4 @@
-# DiamaneOS/installer c76fd7011d71c56efa4a03ca7b10f524cc83f27e
+# DiamaneOS/installer 52b9f72c3c3f7c4f726c2e80a4edba9c0fa1ded9
 18bb0c5eafcb8fb9396b7f3cc98064ff6786d448eb759427f617ea5eef1b8090  server/nginx/website-installer-base.conf
 6cd17d4b29816033c48cc629446544d931e7bdfbce9961566e187f3506003ac2  server/nginx/website-installer-general.conf
 0d5ec6e3326e57af2bb97a267124f160b26782b158c0a7e74f15af09b0e984d2  server/nginx/website-installer-page.conf
@@ -10,7 +10,7 @@ dcd0aedaa4f7b473c73bd90af3a6d126f73d9b7b4bed89dc266d549d834bc1c6  static/install
 02e2d12d881ffe3d2264b09d1b8d27105545b2a03f9b45612ef91df03df434c1  static/install/web/js/fastboot/ffe7e270/NOTICE
 fd333be30908394575ad74521a5cc93dbe198c1039d9fcd45b7692ca9c71b707  static/install/web/js/fastboot/ffe7e270/fastboot.min.mjs
 7f8f515a92f57c91135fc1b7434466b0f539357e69beb49efc08ce8b7569295c  static/install/web/js/fastboot/ffe7e270/fastboot.min.mjs.map
-1936b7e1c5a50cdce08706a01e9e52075f6c1ee86491bce17a61e787292c20df  static/install/web/js/flow.js
+ca42a1e8362cb1b8b80a857fcfc40b914ca9b5419f81bd3db98d163be9b0d2c4  static/install/web/js/flow.js
 9c23104f830b8602759e1e9d3e3275757c67d61029774786c26c8cb03f3fcaed  static/install/web/js/hash-worker.js
 567100eeab4dd9ad62258cb9d6902ba1a1373fbee7929ef2efe3edca620c4b9d  static/install/web/js/hash.js
 c2f556e7e3e1e54ab0ef3f3e047be18eb57e05179d96ff0b94ab553fbd298a1a  static/install/web/js/install.js
