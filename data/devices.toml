@@ -25,6 +25,9 @@
     label = "Hardware security"
     text = "it has no secure element exposed to Android and no memory tagging. Protected video uses Widevine L3, the software level. See the [known limitations](/limitations/)."
   [[devices.facts]]
+    label = "Memory in Fastboot Mode"
+    text = "the bootloader does not clear memory when it starts Fastboot Mode. Every restart is a full power reset, also one forced with the bootloader keys, and in our tests nothing that was in memory survived one."
+  [[devices.facts]]
     label = "Stock OS"
     text = '''Fairphone's [manual install guide](https://support.fairphone.com/hc/en-us/articles/18896094650513-How-to-manually-install-Android-on-your-Fairphone) links the factory images and their checksums. Its flash script restarts the phone when it ends. To [lock on the stock OS](/install/cli/#locking-on-the-stock-os), hold the bootloader keys during that restart, so the phone comes back to the bootloader before Android starts. Leave the script unchanged: its checksum check covers the script too.'''
   [[devices.facts]]
