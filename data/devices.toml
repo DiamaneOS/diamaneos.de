@@ -48,7 +48,7 @@
     [[devices.facts.lists]]
       title = "Limits"
       points = [
-        "Front portrait and low-light video show an error, because they would need closed GPU code inside the shared camera service.",
+        "Front portrait and low-light video show an error, because they would need closed GPU code inside the shared camera service. We keep it out on purpose: that service handles the camera for every app, so a bug in this code could be reached by any app that uses the camera.",
       ]
   [[devices.facts]]
     label = "Stock OS"
