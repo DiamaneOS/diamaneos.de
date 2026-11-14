@@ -119,6 +119,14 @@ Some networks check the SIM before RCS starts and stay on "Connecting" without i
 
 If RCS stayed on "Connecting" before these steps, clear Google Messages' storage and restart the phone, so it tries again.
 
+## Which storage choice should I pick for Fairphone Camera? {#fairphone-camera-storage}
+
+Pick Storage Scopes when the app asks for photo access at its first start. Photos, videos and time-lapse then all work, and the app sees only the files it made itself.
+
+With "Allow all", the app can read every photo and video on the phone, and time-lapse recordings are still not saved. For a time-lapse the app first creates a working file that is not a photo or video. Android keeps the shared photo folders for photos and videos only. That way an app with photo access cannot hide other files among your pictures: whatever it stores there shows up in the gallery, where you can see and delete it. Fairphone Camera was built for full file access and needs that working file and Storage Scopes allows creating this working file without giving it full file access.
+
+You can switch later: Settings > Apps > Fairphone Camera > Permissions > Photos and videos > Storage Scopes.
+
 ## Where should problems be reported? {#reporting-problems}
 
 Send sensitive security reports to [security@diamaneos.de](mailto:security@diamaneos.de). Use the [issue tracker](https://github.com/DiamaneOS/issue-tracker/issues) for ordinary bugs, and [hello@diamaneos.de](mailto:hello@diamaneos.de) or the [contact form](/about/#contact) for general questions. Keep account tokens, private keys and identifying diagnostic data out of public reports.
