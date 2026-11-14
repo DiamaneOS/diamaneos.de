@@ -44,7 +44,7 @@ Changes since the 2026110600 release:
   - The sandboxed Google Play compatibility config is updated to version 179.
   - Kernel: a use-after-free fix in FUSE, and SHA-1 is back for IPsec, which Wi-Fi calling needs with some carriers.
 - App Store 37.5 (3705):
-  - On a phone whose OS includes what it needs, the App Store offers the phone maker's own camera app. On the Fairphone 6 that is Fairphone Camera, listed with the source "Fairphone (mirror)".
+  - Fairphone 6: the App Store lists Fairphone Camera, Fairphone's own camera app, with the source "Fairphone (mirror)".
   - Fairphone Camera installs as Fairphone ships it. The App Store accepts it only with the signature it ships with and that signature's key history.
   - Updating the App Store no longer stops other installs. It finishes every other install before it installs its own update.
 - Camera 93.11 (9311), also available in the App Store:
