@@ -34,12 +34,12 @@
     text = "Fairphone's own camera app, from the App Store."
     [[devices.facts.lists]]
       title = "Works"
-      text = "photo, portrait, night, pro, panorama, slow motion and video."
+      text = "photo, portrait, night, pro, panorama, slow motion, time-lapse and video."
     [[devices.facts.lists]]
       title = "How it is kept safe"
       points = [
         "It has no network access, so it cannot send anything out.",
-        "It has no access to all your files. Time-lapse, which writes its file directly, saves to a folder you allow with Storage Scopes.",
+        "It needs no access to all your files. With Storage Scopes it sees only the files it made itself. The [FAQ](/faq/#fairphone-camera-storage) explains the choice.",
         "Its image processing runs in its own confined service, so a bug there stays contained.",
         "Only the app can reach that service, so other apps cannot misuse it.",
         "The closed GPU code it needs runs only in that service, so the camera service every app uses stays without it.",

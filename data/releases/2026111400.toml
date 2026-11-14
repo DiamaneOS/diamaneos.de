@@ -11,14 +11,15 @@ Changes since the 2026110600 release:
 - Fairphone 6: the kernel driver for the phone's secure area rejects bad buffer offsets, which keeps it inside its own buffer.
 - Fairphone 6: the device's kernel drivers build with stricter compiler checks, and the bugs those checks found are fixed.
 - Freed memory waits longer before it is used again, which makes use-after-free bugs harder to exploit. On the Fairphone 6 this uses about 230 MB more memory.
-- Every build now includes 65 extra fixes and library updates until they are available upstream. The [patch repository](https://github.com/DiamaneOS/platform_patches) lists them:
-  - 37 in the Android framework, for example in autofill, content shared between apps, window capture, widgets and notifications. They tighten what one app can do to another app or to the system.
-  - Media: stricter checks in video and image decoding, so malformed input is handled safely.
-  - Also NFC, Wi-Fi Direct, text message storage and Contacts export. Sensitive permission prompts and the photo picker are protected from apps that draw over them.
+- 78 extra fixes and library updates. The [patch repository](https://github.com/DiamaneOS/platform_patches) lists them:
+  - 43 in the Android framework, for example in autofill, content shared between apps, window capture, widgets, notifications, app installs and backups. They tighten what one app can do to another app or to the system.
+  - Media: stricter checks in video and image decoding and in video encoding, so malformed input is handled safely.
+  - Also NFC, Wi-Fi Direct, Bluetooth pairing, distance measuring between nearby devices, text message storage and Contacts export. Sensitive permission prompts and the photo picker are protected from apps that draw over them.
+  - Sharing a Wi-Fi password from the internet panel opens Settings directly, so no other app can receive the password.
   - Updated libraries for RAW photos and PDFs: DNG SDK 1.7.1, and a newer PDFium with Little CMS 2.19. They bring those projects' own fixes.
 - Dynamic System Updates is removed, which frees the memory of two idle processes and takes away a privileged installer. A locked phone could never start the images it downloads. DSU Loader is gone from Developer options.
 - Settings no longer crashes when another app opens one of its pages in the wrong way.
-- Fairphone 6: Fairphone Camera, Fairphone's own camera app, installs from the App Store. It has no network access, and its image processing runs in a separate sandboxed service. The [devices page](/devices/#fairphone-6) lists what works, how it is kept safe and its limits.
+- Fairphone 6: Fairphone Camera, Fairphone's own camera app, installs from the App Store. It has no network access, and its image processing runs in a separate sandboxed service. Pick Storage Scopes when it asks for photo access. The [FAQ](/faq/#fairphone-camera-storage) explains why. The [devices page](/devices/#fairphone-6) lists what works, how it is kept safe and its limits.
 - Fairphone 6: the phone starts 5 to 9 seconds faster. This fixes a delay that hit about half of all starts.
 - Fairphone 6: you can put in or take out a SIM without a restart. The phone asked for one before.
 - Fairphone 6: the install scripts now work on the US model too. They refused it before because it reports another name, `FP6_US`.
