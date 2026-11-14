@@ -119,6 +119,8 @@ Some networks check the SIM before RCS starts and stay on "Connecting" without i
 
 If RCS stayed on "Connecting" before these steps, clear Google Messages' storage and restart the phone, so it tries again.
 
+If RCS shows "Connected" but chats still go out as SMS/MMS and RCS messages do not arrive, restart the phone.
+
 ## Which storage choice should I pick for Fairphone Camera? {#fairphone-camera-storage}
 
 Pick [Storage Scopes](https://grapheneos.org/features#storage-scopes) when the app asks for photo access at its first start. Photos, videos and time-lapse then all work, and the app sees only the files it made itself.
