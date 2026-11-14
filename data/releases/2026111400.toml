@@ -1,6 +1,6 @@
 version = "2026111400"
 date = 2026-11-14
-channels = ["alpha"]
+channels = ["beta", "alpha"]
 notes = '''
 Changes since the 2026110600 release:
 
