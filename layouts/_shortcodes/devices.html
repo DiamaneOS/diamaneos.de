@@ -1,10 +1,34 @@
-{{- /* Renders data/devices.toml: a section per device with its codename and facts. Usage: {{< devices >}} */ -}}
+{{- /*
+  Renders data/devices.toml: a section per device with its codename and facts.
+  A fact may carry lists, shown as a nested list under it: each has a title and
+  either a one-line text or short points. Usage: {{< devices >}}
+*/ -}}
 {{- range hugo.Data.devices.devices }}
 <h2 id="{{ .name | urlize }}">{{ .name }}</h2>
 <ul>
 <li><strong>Codename:</strong> <code>{{ .codename }}</code>, for <a href="{{ "/build/#by-hand" | relURL }}">building DiamaneOS</a>.</li>
 {{- range .facts }}
-<li><strong>{{ .label }}:</strong> {{ $.Page.RenderString .text }}</li>
+{{- $label := .label }}
+<li><strong>{{ .label }}:</strong> {{ $.Page.RenderString .text }}
+{{- with .lists }}
+<ul>
+{{- range . }}
+{{- if not (and .title (or .text .points)) }}
+  {{- errorf "devices: a list of %q needs a title and a text or points" $label }}
+{{- end }}
+<li>{{ .title }}:{{ with .text }} {{ $.Page.RenderString . }}{{ end }}
+{{- with .points }}
+<ul>
+{{- range . }}
+<li>{{ $.Page.RenderString . }}</li>
+{{- end }}
+</ul>
+{{ end -}}
+</li>
+{{- end }}
+</ul>
+{{ end -}}
+</li>
 {{- end }}
 </ul>
 {{- end }}

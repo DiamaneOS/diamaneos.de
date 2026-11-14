@@ -8,6 +8,8 @@
 # codename  the build codename, as in `lunch <codename>-cur-user`
 # facts     what to know before installing and for the stock OS, in Markdown.
 #           Around 45 words each, no semicolons.
+#           A fact may carry lists, shown as a nested list under it. Each list
+#           has a title and either a one-line text or short points.
 
 [[devices]]
   name = "Fairphone 6"
@@ -27,6 +29,28 @@
   [[devices.facts]]
     label = "Memory in Fastboot Mode"
     text = "the bootloader does not clear memory when it starts Fastboot Mode. Every restart is a full power reset, also one forced with the bootloader keys, and in our tests nothing that was in memory survived one."
+  [[devices.facts]]
+    label = "Fairphone Camera"
+    text = "Fairphone's own camera app, from the App Store."
+    [[devices.facts.lists]]
+      title = "Works"
+      text = "photo, portrait, night, pro, panorama, slow motion and video."
+    [[devices.facts.lists]]
+      title = "How it is kept safe"
+      points = [
+        "It has no network access, so it cannot send anything out.",
+        "Its image processing runs in its own confined service, so a bug there stays contained.",
+        "Only the app can reach that service, so other apps cannot misuse it.",
+        "The closed GPU code it needs runs only in that service, so the camera service every app uses stays without it.",
+        "The App Store accepts only the app's original signature, so a tampered copy is refused.",
+      ]
+    [[devices.facts.lists]]
+      title = "Limits"
+      points = [
+        "Front portrait and low-light video show an error, because they would need closed GPU code inside the shared camera service.",
+        "Time-lapse saves to a folder you allow with Storage Scopes, because the app writes its file directly.",
+        "No extra detail processing for faces and 2x zoom, because the stock software lacks the component.",
+      ]
   [[devices.facts]]
     label = "Stock OS"
     text = '''Fairphone's [manual install guide](https://support.fairphone.com/hc/en-us/articles/18896094650513-How-to-manually-install-Android-on-your-Fairphone) links the factory images and their checksums. Its flash script restarts the phone when it ends. To [lock on the stock OS](/install/cli/#locking-on-the-stock-os), hold the bootloader keys during that restart, so the phone comes back to the bootloader before Android starts. Leave the script unchanged: its checksum check covers the script too.'''

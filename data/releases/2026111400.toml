@@ -1,0 +1,55 @@
+version = "2026111400"
+date = 2026-11-14
+channels = ["alpha"]
+notes = '''
+Changes since the 2026110600 release:
+
+- Based on GrapheneOS 2026111300.
+- Fairphone 6: the kernel moves to Linux 6.18.39 and takes 41 more fixes from newer Linux releases, among them CVE-2026-80668 and CVE-2026-72493. Most fix bugs that an app, a network or a Bluetooth or USB device could reach.
+- Fairphone 6: the kernel handles a failed mount or an unmount of an ext4 file system safely. This is our own fix for a memory bug there.
+- Fairphone 6: the kernel has two more protections against memory bugs. It stops if memory is mapped into a process in a way that must never happen, and it clears leftover values when a function returns. Cold app starts take about 3 % longer.
+- Fairphone 6: the kernel driver for the phone's secure area rejects bad buffer offsets, which keeps it inside its own buffer.
+- Fairphone 6: the device's kernel drivers build with stricter compiler checks, and the bugs those checks found are fixed.
+- Freed memory waits longer before it is used again, which makes use-after-free bugs harder to exploit. On the Fairphone 6 this uses about 230 MB more memory.
+- Every build now includes 65 extra fixes and library updates until they are available upstream. The [patch repository](https://github.com/DiamaneOS/platform_patches) lists them:
+  - 37 in the Android framework, for example in autofill, content shared between apps, window capture, widgets and notifications. They tighten what one app can do to another app or to the system.
+  - Media: stricter checks in video and image decoding, so malformed input is handled safely.
+  - Also NFC, Wi-Fi Direct, text message storage and Contacts export. Sensitive permission prompts and the photo picker are protected from apps that draw over them.
+  - Updated libraries for RAW photos and PDFs: DNG SDK 1.7.1, and a newer PDFium with Little CMS 2.19. They bring those projects' own fixes.
+- Dynamic System Updates is removed, which frees the memory of two idle processes and takes away a privileged installer. A locked phone could never start the images it downloads. DSU Loader is gone from Developer options.
+- Settings no longer crashes when another app opens one of its pages in the wrong way.
+- Fairphone 6: Fairphone Camera, Fairphone's own camera app, installs from the App Store. It has no network access, and its image processing runs in a separate sandboxed service. The [devices page](/devices/#fairphone-6) lists what works, how it is kept safe and its limits.
+- Fairphone 6: the phone starts 5 to 9 seconds faster. This fixes a delay that hit about half of all starts.
+- Fairphone 6: you can put in or take out a SIM without a restart. The phone asked for one before.
+- Fairphone 6: the install scripts now work on the US model too. They refused it before because it reports another name, `FP6_US`.
+- The phone saves battery in standby on Wi-Fi networks that give it no IPv4 address. It now ignores ARP requests there after the first minute.
+- eSIM manager: Check a code can now scan a QR code, so you can check a carrier's code without typing it.
+- Fixes:
+  - Files reports a copy as failed when the SD card is pulled out. It showed the copy as running forever before.
+  - The "Serial console enabled" notification shows only when a serial console is on.
+  - With two SIMs, the notification shade shows both carrier names. For some carriers one was missing.
+  - In light mode, the signal, status icons and battery text at the top of the notification shade are readable. They were white on a light background.
+  - In light mode, the ring that lights up around the camera lens has a black edge. It showed a white one before.
+  - A bug report taken right after a restart no longer crashes the report service.
+- From the GrapheneOS base:
+  - Emergency numbers are chosen by country, category and SIM, and the emergency dialer keeps every shortcut reachable.
+  - A new system API gives apps coarse locations. Sandboxed Google Play uses it instead of its own coarsening code.
+  - Secure spawning again sets groups and NoNewPrivs for native zygote processes, which Chromium-based browsers such as Vanadium use.
+  - Home's search hides work profile apps while the profile is locked or paused.
+  - Time zone data is updated to 2026f.
+  - The keyboard works better in apps built with Compose text fields. Backspace no longer deletes the spaces between words, and corrections come back after deleting.
+  - A bug that crashed WebView is fixed.
+  - 27 root certificates are no longer trusted: the last one of eMudhra and 26 obsolete ones.
+  - Vanadium is updated to 157.0.8103.78.0.
+  - The sandboxed Google Play compatibility config is updated to version 179.
+  - Kernel: a use-after-free fix in FUSE, and SHA-1 is back for IPsec, which Wi-Fi calling needs with some carriers.
+- App Store 37.5 (3705):
+  - On a phone whose OS includes what it needs, the App Store offers the phone maker's own camera app. On the Fairphone 6 that is Fairphone Camera, listed with the source "Fairphone (mirror)".
+  - Fairphone Camera installs as Fairphone ships it. The App Store accepts it only with the signature it ships with and that signature's key history.
+  - Updating the App Store no longer stops other installs. It finishes every other install before it installs its own update.
+- Camera 93.11 (9311), also available in the App Store:
+  - The mode strip scrolls with your finger and glides on after a flick. A drag ended one mode further before.
+  - Changing the mode or the aspect ratio no longer shows a black band or misplaced lens buttons for a moment.
+  - Night mode takes the photo when focus does not settle, for example on the front camera while the phone moves. It failed with an error before.
+  - Night mode no longer shows a time estimate while taking the photo, because the estimate was too short. It still counts the frames.
+'''
