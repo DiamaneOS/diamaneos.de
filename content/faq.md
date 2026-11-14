@@ -121,7 +121,7 @@ If RCS stayed on "Connecting" before these steps, clear Google Messages' storage
 
 ## Which storage choice should I pick for Fairphone Camera? {#fairphone-camera-storage}
 
-Pick Storage Scopes when the app asks for photo access at its first start. Photos, videos and time-lapse then all work, and the app sees only the files it made itself.
+Pick [Storage Scopes](https://grapheneos.org/features#storage-scopes) when the app asks for photo access at its first start. Photos, videos and time-lapse then all work, and the app sees only the files it made itself.
 
 With "Allow all", the app can read every photo and video on the phone, and time-lapse recordings are still not saved. For a time-lapse the app first creates a working file that is not a photo or video. Android keeps the shared photo folders for photos and videos only. That way an app with photo access cannot hide other files among your pictures: whatever it stores there shows up in the gallery, where you can see and delete it. Fairphone Camera was built for full file access and needs that working file and Storage Scopes allows creating this working file without giving it full file access.
 
