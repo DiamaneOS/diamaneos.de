@@ -48,7 +48,7 @@ Changes since the 2026110600 release:
   - Fairphone Camera installs as Fairphone ships it. The App Store accepts it only with the signature it ships with and that signature's key history.
   - Updating the App Store no longer stops other installs. It finishes every other install before it installs its own update.
 - Camera 93.11 (9311), also available in the App Store:
-  - The mode strip scrolls with your finger and glides on after a flick. A drag ended one mode further before.
+  - You can swipe through the camera modes smoothly and pass several in one swipe. Before, each swipe moved only one mode on.
   - Changing the mode or the aspect ratio no longer shows a black band or misplaced lens buttons for a moment.
   - Night mode takes the photo when focus does not settle, for example on the front camera while the phone moves. It failed with an error before.
   - Night mode no longer shows a time estimate while taking the photo, because the estimate was too short. It still counts the frames.
