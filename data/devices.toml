@@ -48,8 +48,7 @@
       title = "Limits"
       points = [
         "Front portrait and low-light video show an error, because they would need closed GPU code inside the shared camera service.",
-        "Time-lapse saves to a folder you allow with Storage Scopes, because the app writes its file directly.",
-        "No extra detail processing for faces and 2x zoom, because the stock software lacks the component.",
+        "Time-lapse can only save after you allow a folder for the app with Storage Scopes, because the app writes its file directly.",
       ]
   [[devices.facts]]
     label = "Stock OS"
