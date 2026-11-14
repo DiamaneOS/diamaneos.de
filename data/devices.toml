@@ -39,6 +39,7 @@
       title = "How it is kept safe"
       points = [
         "It has no network access, so it cannot send anything out.",
+        "It has no access to all your files. Time-lapse, which writes its file directly, saves to a folder you allow with Storage Scopes.",
         "Its image processing runs in its own confined service, so a bug there stays contained.",
         "Only the app can reach that service, so other apps cannot misuse it.",
         "The closed GPU code it needs runs only in that service, so the camera service every app uses stays without it.",
@@ -48,7 +49,6 @@
       title = "Limits"
       points = [
         "Front portrait and low-light video show an error, because they would need closed GPU code inside the shared camera service.",
-        "Time-lapse can only save after you allow a folder for the app with Storage Scopes, because the app writes its file directly.",
       ]
   [[devices.facts]]
     label = "Stock OS"
