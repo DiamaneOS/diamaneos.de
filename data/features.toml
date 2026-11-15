@@ -181,7 +181,7 @@
     status = "tested"
   [[groups.items]]
     title = "Hardware video decoding off for ordinary video"
-    text = "Ordinary video plays on Android's sandboxed software decoders by default, so a malicious video cannot reach the closed hardware decoders, their driver and their firmware. Where the phone has hardware-protected video, only protected (DRM) video may use them by default. You can allow hardware decoding for all video under Security & privacy > Exploit protection, from the next restart, which saves battery and plays high-resolution video more smoothly. If the codec setup is not what start-up allowed, apps get none."
+    text = "Ordinary video plays on Android's sandboxed software decoders by default, so a malicious video cannot reach the closed hardware decoders, their driver and their firmware. Where the phone has hardware-protected video, only protected (DRM) video may use them by default. You can allow hardware decoding under Security & privacy > Exploit protection, from the next restart, for all video or only for the apps you select there or in each app's App info. It saves battery and plays high-resolution video more smoothly. Apps you did not select keep the software decoders, and so does video played through the system media player. If the codec setup is not what start-up allowed, apps get none."
     status = "tested"
   [[groups.items]]
     title = "Guarded modem messaging"
