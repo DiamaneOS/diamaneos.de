@@ -130,6 +130,30 @@ main { display: block; padding: 2.5rem 0 3rem; }
 .service-destinations span, .diagram-note { color: var(--muted); }
 .diagram-note { font-size: 0.92rem; }
 
+/* Step diagrams (layouts/_shortcodes/diagram.html). Boxes in the
+ * line colour, arrows in the outline colour, the lamp only where something is on. */
+.diagram { margin: 1.75rem 0; }
+.diagram figcaption { font-weight: 560; }
+.prose .diagram-steps { list-style: none; margin: 0.9rem 0 0; padding: 0; }
+.diagram-step { position: relative; padding: 0.6rem 0.85rem; border: 1px solid var(--line); border-radius: 8px; }
+.diagram-step strong, .diagram-step span { display: block; }
+.diagram-step span { color: var(--muted); font-size: 0.95rem; line-height: 1.45; }
+.diagram-step.is-lit { border-color: var(--lamp); }
+.diagram-step.is-lit strong::before {
+  content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 0.45rem;
+  border-radius: 50%; background: var(--lamp); vertical-align: 0.1em;
+}
+.prose .diagram-flow .diagram-step + .diagram-step { margin-top: 1.75rem; }
+.diagram-flow .diagram-step + .diagram-step::before {
+  content: ""; position: absolute; left: 1.5rem; top: calc(-1.75rem - 1px); height: calc(1.75rem - 6px);
+  border-left: 1px solid var(--outline);
+}
+.diagram-flow .diagram-step + .diagram-step::after {
+  content: ""; position: absolute; left: calc(1.5rem - 5px); top: -7px;
+  border: 5px solid transparent; border-top: 6px solid var(--outline); border-bottom: 0;
+}
+.diagram .diagram-note { margin-top: 0.7rem; }
+
 /* Long commands and reference tables stay inside small screens. */
 .prose pre { max-width: 100%; overflow-x: auto; padding: 1rem; background: var(--code-bg); border-radius: 4px; }
 .prose pre code { padding: 0; background: transparent; }

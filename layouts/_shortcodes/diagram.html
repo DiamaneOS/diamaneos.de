@@ -1,0 +1,24 @@
+{{- /*
+  A simple diagram from data/diagrams/NAME.toml, drawn with HTML and CSS only,
+  so it follows the light and dark theme and keeps its reading order without
+  styles. Usage: {{< diagram "signing" >}}
+
+  kind = "flow": steps from top to bottom, joined by arrows.
+  A step with lit = true is drawn with the lamp colour (something is on).
+*/ -}}
+{{- $name := .Get 0 -}}
+{{- $d := index site.Data.diagrams $name -}}
+{{- if not $d }}{{ errorf "diagram: data/diagrams/%s.toml not found" $name }}{{ end -}}
+{{- $kind := $d.kind | default "flow" -}}
+{{- if not (in (slice "flow") $kind) }}{{ errorf "diagram %s: unknown kind %q" $name $kind }}{{ end -}}
+<figure class="diagram diagram-{{ $kind }}">
+  <figcaption>{{ $d.caption }}</figcaption>
+  <ol class="diagram-steps">
+    {{- range $d.steps }}
+    <li class="diagram-step{{ if .lit }} is-lit{{ end }}"><strong>{{ .title }}</strong>{{ with .text }}<span>{{ . | markdownify }}</span>{{ end }}</li>
+    {{- end }}
+  </ol>
+  {{- with $d.note }}
+  <p class="diagram-note">{{ . | markdownify }}</p>
+  {{- end }}
+</figure>

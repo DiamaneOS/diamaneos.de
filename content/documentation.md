@@ -10,12 +10,16 @@ lede: "How DiamaneOS is built and served."
 
 [Public keys](/documentation/keys/) lists the keys that factory images, phones and apps can be checked against.
 
+[How releases are signed](/documentation/signing/) shows where the release keys live, what each one signs and what your phone checks before an update.
+
 ## Servers
 
-[Servers and service boundaries](/documentation/servers/) describes the public services, hosting regions, isolation and data handling. It links the configuration source of each service.
+[Servers and service boundaries](/documentation/servers/) describes the public services, hosting regions, isolation, monitoring and data handling. It links the configuration source of each service.
 
 ## Device security
 
 [Attestation explained](/documentation/attestation/) describes independent verification, pairing and the limits of a successful result.
+
+[Screen lock explained](/documentation/screen-lock/) shows why the lock matters so much on this phone and how the generated passphrase works.
 
 The [known limitations](/limitations/) describe the hardware and firmware boundaries. [Security](/security/) explains how to report a vulnerability privately.

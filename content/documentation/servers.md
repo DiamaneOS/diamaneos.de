@@ -49,6 +49,34 @@ Staging uses separate publication roots and TLS material. It does not contain th
 
 Source configuration can recreate services, but it cannot recreate database history or host secrets. A usable recovery also needs authenticated encrypted backups, independent keys and a restore test. Encrypted copies of server state go to Backblaze B2 every week, and restoring them is tested. Replicas and source repositories alone are not backups of application state.
 
+## Monitoring
+
+A second server keeps an eye on the services, and the first one keeps an eye on it.
+
+{{< diagram "monitoring" >}}
+
+A check fails on:
+
+- no answer, or not the expected answer
+- any redirect
+- TLS older than 1.3, or a certificate that does not verify
+- a certificate that expires within 14 days
+- a relay that cannot reach its upstream service
+- a server clock more than 30 seconds off
+
+Each host also reports its own health over the management tunnel: services running, disks mounted with room to spare, no swap. Traffic and load are counted on the host itself, and only a pass or fail leaves it.
+
+Alerts go out by mail, with a reminder every day until the problem is fixed and a notice when it clears. They carry only a service name and a fixed failure line, never addresses or device details.
+
+## Domain and mail security
+
+- **DNSSEC.** The diamaneos.de zone is signed, so resolvers that check can tell a forged answer.
+- **Certificates.** Only Let's Encrypt may issue certificates for these names, only to the account of the server that uses each name, and never wildcard certificates.
+- **HTTPS only.** The website and the download and attestation services tell browsers to use HTTPS only, for at least a year.
+- **Mail in.** Mail servers must deliver to diamaneos.de over verified TLS (MTA-STS in enforce mode).
+- **Mail out.** Receiving servers are asked to reject mail that pretends to come from diamaneos.de (DMARC). diamane.de sends no mail and says so.
+- **Security contact.** [security.txt](https://diamaneos.de/.well-known/security.txt) is signed and names the contact for reports.
+
 ## Configuration source
 
 - [Infrastructure](https://github.com/DiamaneOS/infrastructure) contains the Debian host and service adapters.

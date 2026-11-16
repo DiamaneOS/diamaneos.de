@@ -1,0 +1,20 @@
+caption = "What stands between someone with your phone and your data"
+kind = "flow"
+note = "If the secure area were ever broken, only the first two would be left."
+
+[[steps]]
+title = "Your lock"
+text = "The passphrase or PIN you type."
+
+[[steps]]
+title = "Costly guesses"
+text = "Each try needs 256 MiB of memory, which makes guessing slow even on big computers."
+lit = true
+
+[[steps]]
+title = "Secure area"
+text = "Limits wrong tries and holds the keys. The FP6 has no separate security chip for this."
+
+[[steps]]
+title = "Your data"
+text = "Stays encrypted after every restart until the lock is entered."

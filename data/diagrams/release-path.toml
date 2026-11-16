@@ -1,0 +1,24 @@
+caption = "From source code to your phone"
+kind = "flow"
+note = "Only the offline computer ever holds the release keys."
+
+[[steps]]
+title = "Source"
+text = "Every commit and tag is signed."
+
+[[steps]]
+title = "Build"
+text = "A build machine makes the release. It has no release keys."
+
+[[steps]]
+title = "Offline signing"
+text = "A computer with no network checks the build, then signs it."
+lit = true
+
+[[steps]]
+title = "Download servers"
+text = "Two servers hand out the same signed files. Changing a file would break its signature."
+
+[[steps]]
+title = "Your phone"
+text = "Checks every signature itself before it installs or starts anything."

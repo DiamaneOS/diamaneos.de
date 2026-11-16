@@ -1,0 +1,24 @@
+caption = "What your phone checks before an update"
+kind = "flow"
+note = "Any failed check stops the update. The servers' list of updates is only a hint."
+
+[[steps]]
+title = "Signed by DiamaneOS?"
+text = "The whole package is checked against the keys built into your system."
+
+[[steps]]
+title = "Meant for this phone?"
+text = "Right device, right type of update, and exactly the build the server announced."
+
+[[steps]]
+title = "Newer than what you run?"
+text = "Older builds are refused."
+
+[[steps]]
+title = "Installed to the spare slot"
+text = "The system you are running stays untouched."
+
+[[steps]]
+title = "First start"
+text = "If the new system fails to start, the phone goes back to the old one by itself."
+lit = true

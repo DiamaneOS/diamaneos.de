@@ -1,0 +1,16 @@
+caption = "Who watches whom"
+kind = "flow"
+note = "Each box is watched by the one below it. The two sides send their alerts separately."
+
+[[steps]]
+title = "Public services"
+text = "Website, downloads, relays, attestation and staging."
+
+[[steps]]
+title = "Download mirror"
+text = "Checks every public service every five minutes, from outside."
+lit = true
+
+[[steps]]
+title = "Primary"
+text = "Checks that the mirror and its monitor are still running."
