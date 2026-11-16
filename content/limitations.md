@@ -13,7 +13,7 @@ lede: "What does not work, or is not verified, on the supported devices."
 - **No Play Integrity verdict.** Google's Play Integrity check gives DiamaneOS no verdict, not even basic integrity. Apps that require it, such as some banking and payment apps, refuse to work or limit features.
 - **Auditor relies on its first pairing.** Every check is genuine hardware attestation from the phone's secure area. The device maker cannot vouch for the first pairing, so it is only as trustworthy as the phone was at that moment. After a reset, the phone must be paired again.
 - **No memory tagging.** Memory bugs are easier to exploit than on phones that have it.
-- **No virtual machines.** The phone's firmware would start protected virtual machines without the protection they rely on, so DiamaneOS leaves them off. Ordinary ones, such as a Linux terminal, are refused by that firmware.
+- **No virtual machines.** The phone's firmware refuses ordinary virtual machines, such as a Linux terminal. DiamaneOS leaves protected ones off.
 - **Firmware fixes come from the device maker.** The bootloader, modem and other firmware are closed and come from the device maker and Qualcomm. DiamaneOS cannot fix them. Fixes arrive with the device maker's releases.
 
 ## Security
