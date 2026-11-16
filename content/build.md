@@ -85,6 +85,47 @@ repo sync -j8
 - The kernels come with the source as prebuilts. Their sources carry the release's tag too, in [kernel_qcom-6.18](https://github.com/DiamaneOS/kernel_qcom-6.18) and [kernel_common-6.18](https://github.com/DiamaneOS/kernel_common-6.18). For releases up to 2026102500 they are in [kernel_qcom-6.1](https://github.com/DiamaneOS/kernel_qcom-6.1) and [kernel_common-6.1](https://github.com/DiamaneOS/kernel_common-6.1).
 - Camera, App Store and Auditor also come as signed prebuilts, built from their own repositories. These are tagged with the app's version code. `vendor/diamaneos/apps/<app>/provenance.json` records the version code and source commit of each.
 
+### Building the kernel (optional)
+
+The kernel comes with the source as prebuilts. This section is only for building it from its source instead.
+
+```sh
+tools/diamaneos/bin/diamaneos build kernel
+```
+
+- It fetches the kernel sources and toolchain at the commits the tools pin. It then builds the kernel, its modules and device trees without network access.
+- It works in `~/diamaneos-build/kernel`. There `current` points to the newest build that passed every check.
+
+Name that build and the kernel prebuilts in the source. Replace `<codename>` with your device's [codename](#vendor-files):
+
+```sh
+RUN=$(dirname "$(readlink -f ~/diamaneos-build/kernel/current)")
+KERNEL=$(ls -d device/*/<codename>-kernel)
+```
+
+To check the published prebuilts against your build, compare them first:
+
+```sh
+tools/diamaneos/bin/diamaneos kernel compare --run "$RUN" --reference "$KERNEL" \
+  --dtc ~/diamaneos-build/kernel/toolchain/kernel-build-tools/linux_musl-x86/bin/dtc
+```
+
+- It compares the modules and the metadata that decides how they load, the module lists and their order, and the device trees.
+- Its report ends with `"status": "PASS"` when they match.
+- Your build differs from the prebuilts only in the module signatures and the kernel's certificate. Each kernel build makes a new key to sign its modules.
+
+To use your kernel, copy it into the source and commit it:
+
+```sh
+tools/diamaneos/bin/diamaneos kernel publish --run "$RUN" --to "$KERNEL"
+git -C "$KERNEL" add -A
+git -C "$KERNEL" commit -m "Kernel built from source"
+```
+
+- `kernel publish` checks every file against the build's record and replaces the prebuilts. It does not commit.
+- Then make the [vendor files](#vendor-files) and [build by hand](#building-a-user-build). Do not use `build all`. Its sync puts the published kernel back.
+- The [build reference](https://github.com/DiamaneOS/diamaneos-tools/blob/main/docs/BUILD.md#building-the-kernel) and the [kernel reference](https://github.com/DiamaneOS/diamaneos-tools/blob/main/docs/FP6-KERNEL.md) describe the sources, the build, its checks and publishing.
+
 ## Verifying the source
 
 DiamaneOS's own commits and its release tags are signed with an SSH key. Its fingerprint is `SHA256:OHUN0l/oDXtrLvDWWH/76gM5yjl7JqCx6KdgO7zB62Y`. The key is registered on GitHub, which marks these commits Verified.
