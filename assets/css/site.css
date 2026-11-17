@@ -153,6 +153,7 @@ main { display: block; padding: 2.5rem 0 3rem; }
   border: 5px solid transparent; border-top: 6px solid var(--outline); border-bottom: 0;
 }
 .diagram .diagram-note { margin-top: 0.7rem; }
+.prose .diagram-list .diagram-step + .diagram-step { margin-top: 0.75rem; }
 
 /* Long commands and reference tables stay inside small screens. */
 .prose pre { max-width: 100%; overflow-x: auto; padding: 1rem; background: var(--code-bg); border-radius: 4px; }

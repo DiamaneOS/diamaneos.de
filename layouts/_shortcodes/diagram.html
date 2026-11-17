@@ -4,20 +4,21 @@
   styles. Usage: {{< diagram "signing" >}}
 
   kind = "flow": steps from top to bottom, joined by arrows.
+  kind = "list": boxes side by side in meaning, with no arrows and no order.
   A step with lit = true is drawn with the lamp colour (something is on).
 */ -}}
 {{- $name := .Get 0 -}}
 {{- $d := index site.Data.diagrams $name -}}
 {{- if not $d }}{{ errorf "diagram: data/diagrams/%s.toml not found" $name }}{{ end -}}
 {{- $kind := $d.kind | default "flow" -}}
-{{- if not (in (slice "flow") $kind) }}{{ errorf "diagram %s: unknown kind %q" $name $kind }}{{ end -}}
+{{- if not (in (slice "flow" "list") $kind) }}{{ errorf "diagram %s: unknown kind %q" $name $kind }}{{ end -}}
 <figure class="diagram diagram-{{ $kind }}">
   <figcaption>{{ $d.caption }}</figcaption>
-  <ol class="diagram-steps">
+  {{ if eq $kind "list" }}<ul class="diagram-steps">{{ else }}<ol class="diagram-steps">{{ end }}
     {{- range $d.steps }}
     <li class="diagram-step{{ if .lit }} is-lit{{ end }}"><strong>{{ .title }}</strong>{{ with .text }}<span>{{ . | markdownify }}</span>{{ end }}</li>
     {{- end }}
-  </ol>
+  {{ if eq $kind "list" }}</ul>{{ else }}</ol>{{ end }}
   {{- with $d.note }}
   <p class="diagram-note">{{ . | markdownify }}</p>
   {{- end }}

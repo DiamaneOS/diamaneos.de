@@ -51,7 +51,7 @@ Source configuration can recreate services, but it cannot recreate database hist
 
 ## Monitoring
 
-A second server keeps an eye on the services, and the first one keeps an eye on it.
+Two servers watch the public services and each other.
 
 {{< diagram "monitoring" >}}
 

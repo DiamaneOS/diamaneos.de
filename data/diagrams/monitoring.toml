@@ -1,15 +1,10 @@
 caption = "Who watches whom"
-kind = "flow"
-note = "Each box is watched by the one below it. The two sides send their alerts separately."
-
-[[steps]]
-title = "Public services"
-text = "Website, downloads, relays, attestation and staging."
+kind = "list"
+note = "The two servers watch each other, and each sends its own alerts. If either one goes down, the other notices."
 
 [[steps]]
 title = "Download mirror"
-text = "Checks every public service every five minutes, from outside."
-lit = true
+text = "Every five minutes, checks every public service from outside, everything on the primary included, and the health of each server."
 
 [[steps]]
 title = "Primary"
