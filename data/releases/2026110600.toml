@@ -38,7 +38,7 @@ Changes since the 2026102500 release:
 - Fairphone 6: when a slot switch fails, the rollback restores the slot that was active, so the partition table and the boot disk stay in step.
 - eSIM manager: the confirmation dialog scrolls and shows server text without control, format or invisible characters. A package that changes what the profile can do, or that can't be read, is refused. Profile data, host names and codes are read one strict way only. Each server request has an overall deadline, and Stop closes the connection.
 - eSIM manager: after a download, every notification the carrier asked for is sent, and the one for turning a profile on is retried while the eSIM restarts.
-- Hardening: our own native modules stop on integer overflow, out-of-bounds access and, where the code allows, CFI errors. The modem file server limits what a remote processor can use up. The IMS broker answers invalid requests without keeping a retry. Apps can no longer read live memory and cache frequencies.
+- Hardening: DiamaneOS's own native modules stop on integer overflow, out-of-bounds access and, where the code allows, CFI errors. The modem file server limits what a remote processor can use up. The IMS broker answers invalid requests without keeping a retry. Apps can no longer read live memory and cache frequencies.
 - Network location: Settings and setup say that no adequacy decision covers the transfer to Apple, and that choosing Apple is consent you can withdraw.
 - Fixes:
   - Home no longer moves its neighbouring icons when an app closes back to it.

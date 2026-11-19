@@ -1,13 +1,13 @@
 ---
 title: "Screen lock explained"
-description: "Why the lock matters so much on the Fairphone 6, how the generated passphrase works, and the numbers behind it."
-lede: "On this phone, your lock is what keeps your data safe."
+description: "Why your screen lock matters, how the generated passphrase works, and the numbers behind it."
+lede: "Without a separate security chip, your lock is what keeps your data safe."
 ---
 
 In short:
 
-- The FP6 has no separate security chip.
-- If its secure area were ever broken, only your lock would stand between someone and your data.
+- A phone with a separate security chip uses it to limit guesses at your lock. Without one, the secure area of the main chip does this alone. Each phone's entry under [supported devices](/devices/) says which it has, under Hardware security.
+- If that secure area were ever broken, only your lock would stand between someone and your data.
 - A generated passphrase holds even then. A PIN does not.
 
 {{< diagram "lock-path" >}}
@@ -32,7 +32,7 @@ These numbers only hold for a lock the phone generated. One you make up is much 
 Android turns your lock into the key for your data in three steps:
 
 1. **Stretching.** Your lock goes through scrypt, a function built to be slow and to need a lot of memory.
-2. **The secure area.** The result must pass the secure area. It limits wrong tries and holds a key the next step is wrapped with. Phones with a security chip also mix in a secret from that chip (Weaver). The FP6 has none.
+2. **The secure area.** The result must pass the secure area. It limits wrong tries and holds a key the next step is wrapped with. Phones with a security chip also mix in a secret from that chip (Weaver).
 3. **Your data.** That opens Android's synthetic password, which opens the file encryption keys of your data.
 
 If the secure area were broken, step 1 would be the only cost left for each guess. So DiamaneOS makes it expensive:

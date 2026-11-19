@@ -60,7 +60,7 @@ No. It checks supported hardware-backed identity and boot-state properties again
 
 ## Why publish advertising opt-out files if the site has no ads? {#advertising-opt-out}
 
-Someone could falsely claim to sell advertising for our domain or apps. Our [ads.txt](/ads.txt) and [app-ads.txt](/app-ads.txt) declare that no seller is authorised. Advertising systems that check these files can reject that falsely labelled inventory.
+Someone could falsely claim to sell advertising for the DiamaneOS domain or apps. The site's [ads.txt](/ads.txt) and [app-ads.txt](/app-ads.txt) declare that no seller is authorised. Advertising systems that check these files can reject that falsely labelled inventory.
 
 These files do not block ads in your browser. GrapheneOS's [sitewide advertising industry opt-out article](https://grapheneos.org/articles/sitewide-advertising-industry-opt-out) explains the purpose and limits of the standard.
 

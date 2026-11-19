@@ -6,7 +6,7 @@ Changes since the 2026110600 release:
 
 - Based on GrapheneOS 2026111300.
 - Fairphone 6: the kernel moves to Linux 6.18.39 and takes 41 more fixes from newer Linux releases, among them CVE-2026-80668 and CVE-2026-72493. Most fix bugs that an app, a network or a Bluetooth or USB device could reach.
-- Fairphone 6: the kernel handles a failed mount or an unmount of an ext4 file system safely. This is our own fix for a memory bug there.
+- Fairphone 6: the kernel handles a failed mount or an unmount of an ext4 file system safely. This is a DiamaneOS fix for a memory bug there.
 - Fairphone 6: the kernel has two more protections against memory bugs. It stops if memory is mapped into a process in a way that must never happen, and it clears leftover values when a function returns. Cold app starts take about 3 % longer.
 - Fairphone 6: the kernel driver for the phone's secure area rejects bad buffer offsets, which keeps it inside its own buffer.
 - Fairphone 6: the device's kernel drivers build with stricter compiler checks, and the bugs those checks found are fixed.

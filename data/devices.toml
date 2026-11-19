@@ -25,10 +25,10 @@
     text = "hold the volume down and power buttons together until the bootloader screen (Fastboot Mode) appears. This works with the phone off and restarts a running or stuck phone into it. While the phone restarts on its own, holding volume down is enough."
   [[devices.facts]]
     label = "Hardware security"
-    text = "it has no secure element exposed to Android and no memory tagging. Protected video uses Widevine L3, the software level. See the [known limitations](/limitations/)."
+    text = "it has no separate security chip (secure element) exposed to Android and no memory tagging. Protected video uses Widevine L3, the software level. See the [known limitations](/limitations/)."
   [[devices.facts]]
     label = "Memory in Fastboot Mode"
-    text = "the bootloader does not clear memory when it starts Fastboot Mode. Every restart is a full power reset, also one forced with the bootloader keys, and in our tests nothing that was in memory survived one."
+    text = "the bootloader does not clear memory when it starts Fastboot Mode. Every restart is a full power reset, also one forced with the bootloader keys, and in tests nothing that was in memory survived one."
   [[devices.facts]]
     label = "Fairphone Camera"
     text = "Fairphone's own camera app, from the App Store."
@@ -48,7 +48,7 @@
     [[devices.facts.lists]]
       title = "Limits"
       points = [
-        "Front portrait and low-light video show an error, because they would need closed GPU code inside the shared camera service. We keep it out on purpose: that service handles the camera for every app, so a bug in this code could be reached by any app that uses the camera.",
+        "Front portrait and low-light video show an error, because they would need closed GPU code inside the shared camera service. DiamaneOS keeps it out on purpose: that service handles the camera for every app, so a bug in this code could be reached by any app that uses the camera.",
       ]
   [[devices.facts]]
     label = "Stock OS"

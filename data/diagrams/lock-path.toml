@@ -1,6 +1,6 @@
 caption = "What stands between someone with your phone and your data"
 kind = "flow"
-note = "If the secure area were ever broken, only the first two would be left."
+note = "Without a separate security chip, a broken secure area would leave only the first two."
 
 [[steps]]
 title = "Your lock"
@@ -13,7 +13,7 @@ lit = true
 
 [[steps]]
 title = "Secure area"
-text = "Limits wrong tries and holds the keys. The FP6 has no separate security chip for this."
+text = "Limits wrong tries and holds the keys. A separate security chip, where a phone has one, adds a secret of its own."
 
 [[steps]]
 title = "Your data"

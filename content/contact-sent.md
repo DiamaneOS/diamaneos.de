@@ -5,6 +5,6 @@ url: "/contact/sent/"
 noindex: true
 ---
 
-The mail service has accepted your message for delivery. We will reply to the email address you supplied.
+The mail service has accepted your message for delivery. The reply goes to the email address you supplied.
 
 [Return to About](/about/#contact)

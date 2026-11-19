@@ -6,7 +6,7 @@ lede: "An independent project that builds an operating system from GrapheneOS so
 
 ## GrapheneOS
 
-- Most of DiamaneOS is the work of [GrapheneOS](https://grapheneos.org/), and we are grateful for it.
+- Most of DiamaneOS is the work of [GrapheneOS](https://grapheneos.org/), and the project is grateful for it.
 - DiamaneOS is a separate operating system from a separate project. It is not GrapheneOS or a version of it. It is built on GrapheneOS's source code, and the [known limitations](/limitations/) say where it is less secure than GrapheneOS.
 - Please report DiamaneOS problems to DiamaneOS, not to GrapheneOS.
 

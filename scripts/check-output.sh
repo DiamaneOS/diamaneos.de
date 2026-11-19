@@ -14,6 +14,8 @@
 #   - the releases feed: Atom with stable entry ids and absolute links, linked
 #     from the releases page
 #   - the public keys in keys/: exact copies, with the IDs the pages print
+#   - device names only in data/devices.toml and the per-device lines of the
+#     release notes: other pages say "supported device" and link to /devices/
 # Links (<a href>) to other sites are allowed and listed, because following a
 # link is the reader's choice, not a request the page makes.
 #
@@ -65,6 +67,13 @@ else
 fi
 # Print matches (file:line: text), cut to 160 characters, at most 20 lines.
 show() { cut -c1-160 | head -n 20 | sed 's/^/        /'; }
+
+# 0. Device names, a source check: adding a device must stay one entry in data/devices.toml.
+sed -n -E 's/^ *(name|codename) = "([^"]*)".*/\2/p' data/devices.toml >"$tmp/devices"
+if [ -s "$tmp/devices" ] && grep -rnwF -f "$tmp/devices" content layouts data \
+    | grep -v -e '^data/devices\.toml:' -e '^data/releases/' >"$tmp/m"; then
+  bad "a device is named outside data/devices.toml (pages say \"supported device\" and link to /devices/):"; show <"$tmp/m"
+else ok "devices are named only in data/devices.toml and the release notes"; fi
 
 echo "Checking $OUT/ ($(find "$OUT" -type f | wc -l | tr -d ' ') files)"
 

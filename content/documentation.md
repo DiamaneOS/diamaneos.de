@@ -20,6 +20,6 @@ lede: "How DiamaneOS is built and served."
 
 [Attestation explained](/documentation/attestation/) describes independent verification, pairing and the limits of a successful result.
 
-[Screen lock explained](/documentation/screen-lock/) shows why the lock matters so much on this phone and how the generated passphrase works.
+[Screen lock explained](/documentation/screen-lock/) shows why your screen lock matters and how the generated passphrase works.
 
 The [known limitations](/limitations/) describe the hardware and firmware boundaries. [Security](/security/) explains how to report a vulnerability privately.

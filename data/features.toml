@@ -6,7 +6,7 @@
 # two short, plain sentences.
 #
 # status:
-#   "tested"      passed testing on a supported device (our records show a phone check). No tag.
+#   "tested"      passed testing on a supported device (the project's records show a phone check). No tag.
 #   "shipped"     only when the item is in a public release AND has passed testing. No tag.
 #                 A shipped item must also set tested = true and release = "<version>",
 #                 or the build stops (layouts/_partials/feature-status.html).
@@ -173,7 +173,7 @@
     status = "tested"
   [[groups.items]]
     title = "Sandboxed Bluetooth"
-    text = "Our own small service runs Qualcomm's closed Bluetooth code in a sandbox that stops the service on any system call outside an allowed list, and unused libraries are gone. A bug in that code, which nearby devices can reach, gives an attacker much less to work with."
+    text = "DiamaneOS's own small service runs Qualcomm's closed Bluetooth code in a sandbox that stops the service on any system call outside an allowed list, and unused libraries are gone. A bug in that code, which nearby devices can reach, gives an attacker much less to work with."
     status = "tested"
   [[groups.items]]
     title = "Sandboxed camera service"
@@ -214,11 +214,11 @@
   note = "Closed parts of the stock software that DiamaneOS replaces with open code or drops. The modem firmware, the radio daemon and the IMS app stay closed."
   [[groups.items]]
     title = "Data for VoLTE and Wi-Fi calling"
-    text = "Our own service, written in the memory-safe language Rust, sets up these connections with narrow permissions. It replaces Qualcomm's closed services, so anyone can check what it does and a bug in it can do less."
+    text = "DiamaneOS's own service, written in the memory-safe language Rust, sets up these connections with narrow permissions. It replaces Qualcomm's closed services, so anyone can check what it does and a bug in it can do less."
     status = "tested"
   [[groups.items]]
     title = "Mobile data"
-    text = "Our own Rust daemon and two small libraries replace Qualcomm's closed interface manager and the libraries that connect the radio daemon to it. The daemon runs with narrow permissions behind a system call filter, so a bug in it can do little. A second small daemon, with its own user, holds the keys of the Wi-Fi calling tunnel, so the data daemon never handles them."
+    text = "A Rust daemon written for DiamaneOS and two small libraries replace Qualcomm's closed interface manager and the libraries that connect the radio daemon to it. The daemon runs with narrow permissions behind a system call filter, so a bug in it can do little. A second small daemon, with its own user, holds the keys of the Wi-Fi calling tunnel, so the data daemon never handles them."
     status = "tested"
   [[groups.items]]
     title = "Call audio"
@@ -226,7 +226,7 @@
     status = "tested"
   [[groups.items]]
     title = "Clock keeping"
-    text = "Our own service keeps the time across reboots, in place of Qualcomm's closed one. The clock is right after a restart even without a network, and the service runs with minimal rights."
+    text = "A DiamaneOS service keeps the time across reboots, in place of Qualcomm's closed one. The clock is right after a restart even without a network, and the service runs with minimal rights."
     status = "tested"
   [[groups.items]]
     title = "Audio system"
@@ -242,7 +242,7 @@
     status = "tested"
   [[groups.items]]
     title = "IMEIs and hardware addresses"
-    text = "Our own small tool gives the modem its IMEIs and Bluetooth and Wi-Fi their factory addresses. It replaces a closed root service and logs no identifiers, so less closed code runs as root and these numbers stay out of the logs."
+    text = "A small DiamaneOS tool gives the modem its IMEIs and Bluetooth and Wi-Fi their factory addresses. It replaces a closed root service and logs no identifiers, so less closed code runs as root and these numbers stay out of the logs."
     status = "tested"
   [[groups.items]]
     title = "Unused services and interfaces"
